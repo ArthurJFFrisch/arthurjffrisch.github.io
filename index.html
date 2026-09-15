@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Satirische Geldhergabestelle. Freiwillige Zuwendungen an eine Privatperson — offen, ehrlich, unnötig würdevoll.">
 <title>GIB MIR DEIN GELD — die würdevollste Geldhergabestelle im Netz</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23146645'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23F2EDE2' font-family='serif' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E">
 <style>
@@ -14,18 +15,15 @@
   --green:#146645;
   --green-dark:#0E4E34;
   --red:#C33A20;
-  /* Systemschriften — keine externen Requests */
+  --gold:#C9B98A;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
   --serif: Georgia, 'Times New Roman', 'Palatino Linotype', serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--mono);
-  font-size:15px;
-  line-height:1.6;
+  background:var(--paper);color:var(--ink);
+  font-family:var(--mono);font-size:15px;line-height:1.6;
   overflow-x:hidden;
 }
 body::after{
@@ -43,28 +41,18 @@ i[data-icon]{display:inline-flex}
 
 /* ============ MARQUEE ============ */
 .marquee{
-  background:var(--ink);color:var(--paper);
-  border-bottom:2px solid var(--ink);
-  overflow:hidden;white-space:nowrap;
-  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  padding:9px 0;
+  background:var(--ink);color:var(--paper);border-bottom:2px solid var(--ink);
+  overflow:hidden;white-space:nowrap;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;padding:9px 0;
 }
 .marquee-track{display:inline-block;animation:mq 38s linear infinite}
 .marquee-track span{margin:0 1.4em}
 .marquee-track b{color:var(--paper);font-weight:400}
-.marquee-track em{font-style:normal;color:#C9B98A}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ============ NAVIGATION ============ */
-nav{
-  position:sticky;top:0;z-index:900;
-  background:var(--paper);
-  border-bottom:2px solid var(--ink);
-}
-.nav-inner{
-  max-width:1180px;margin:0 auto;padding:14px 24px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
+/* ============ NAV ============ */
+nav{position:sticky;top:0;z-index:900;background:var(--paper);border-bottom:2px solid var(--ink)}
+.nav-inner{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .wordmark{font-family:var(--serif);font-weight:900;font-size:22px;letter-spacing:-.02em;text-decoration:none}
 .wordmark i{color:var(--green);font-style:italic;font-weight:600}
 .nav-links{display:flex;gap:22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
@@ -76,10 +64,8 @@ nav{
   display:inline-flex;align-items:center;gap:10px;
   font-family:var(--mono);font-size:13px;font-weight:700;
   text-transform:uppercase;letter-spacing:.1em;
-  padding:15px 26px;text-decoration:none;
-  border:2px solid var(--ink);
-  background:var(--paper);color:var(--ink);
-  box-shadow:5px 5px 0 var(--ink);
+  padding:15px 26px;text-decoration:none;border:2px solid var(--ink);
+  background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 var(--ink);
   transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
 }
 .btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
@@ -91,31 +77,23 @@ nav{
 
 /* ============ SEKTIONEN ============ */
 section.sec{border-top:2px solid var(--ink);padding:72px 0 88px}
-.sec-head{
-  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  margin-bottom:48px;
-}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:48px}
 .sec-head .num{font-weight:700}
 .sec-head .num b{color:var(--red)}
-.sec-head .meta{color:#6b6257;font-style:italic}
+.sec-head .meta{color:#6b6257;font-style:italic;text-align:right}
 
 /* ============ HERO ============ */
 header.hero{padding:88px 0 96px;position:relative}
-.kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .kicker::before{content:"";width:44px;height:2px;background:var(--red)}
-h1{
-  font-family:var(--serif);font-weight:900;
-  font-size:clamp(52px,9.5vw,124px);
-  line-height:.96;letter-spacing:-.03em;
-  max-width:12ch;
-}
+.satire-tag{display:inline-block;border:2px solid var(--ink);padding:3px 10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(52px,9.5vw,124px);line-height:.96;letter-spacing:-.03em;max-width:12ch}
 h1 em{font-style:italic;font-weight:400;color:var(--green)}
-.hero-sub{
-  max-width:56ch;margin-top:30px;font-size:16px;
-}
+.hero-sub{max-width:58ch;margin-top:30px;font-size:16px}
 .hero-sub b{color:var(--red)}
 .hero-cta{display:flex;gap:18px;margin-top:42px;flex-wrap:wrap}
+.hero-fine{margin-top:18px;font-size:11px;color:#6b6257;font-style:italic;max-width:64ch}
+.hero-fine b{color:var(--green);font-style:normal}
 .hero-stats{
   margin-top:52px;padding-top:20px;border-top:1px dashed var(--ink);
   display:flex;gap:36px;flex-wrap:wrap;
@@ -123,46 +101,33 @@ h1 em{font-style:italic;font-weight:400;color:var(--green)}
 }
 .hero-stats b{font-family:var(--serif);font-size:24px;font-weight:900;display:block;letter-spacing:0;text-transform:none}
 .hero-stats .r{color:var(--red)}
+.stat-mood-face{width:22px;height:22px;vertical-align:-4px;margin-right:6px}
 .stamp{
-  position:absolute;right:4%;top:64px;
-  border:3px solid var(--red);color:var(--red);
-  font-family:var(--mono);font-weight:700;font-size:13px;
-  letter-spacing:.18em;text-transform:uppercase;text-align:center;
-  padding:14px 20px;line-height:1.7;
-  transform:rotate(9deg);
-  mix-blend-mode:multiply;
+  position:absolute;right:4%;top:64px;border:3px solid var(--red);color:var(--red);
+  font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.18em;
+  text-transform:uppercase;text-align:center;padding:14px 20px;line-height:1.7;
+  transform:rotate(9deg);mix-blend-mode:multiply;
   box-shadow:inset 0 0 0 2px var(--paper), inset 0 0 0 3px var(--red);
-  opacity:.9;
-  user-select:none;
+  opacity:.9;user-select:none;
 }
 .stamp small{display:block;font-weight:400;font-size:10px;letter-spacing:.12em}
 
-/* ============ BEGRÜNDUNG (§1) ============ */
-.reasons{display:grid;gap:0;counter-reset:reason}
-.reason{
-  display:grid;grid-template-columns:120px 1fr;gap:36px;
-  padding:34px 0;border-bottom:1px dashed #b8ad99;
-  align-items:start;
-}
+/* ============ §1 BEGRÜNDUNG ============ */
+.reasons{counter-reset:reason}
+.reason{display:grid;grid-template-columns:120px 1fr;gap:36px;padding:34px 0;border-bottom:1px dashed #b8ad99;align-items:start}
 .reason:first-child{border-top:1px dashed #b8ad99}
 .reason:nth-child(even){padding-left:8%}
-.reason .rn{
-  font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:76px;line-height:1;color:var(--green);
-}
+.reason .rn{font-family:var(--serif);font-style:italic;font-weight:400;font-size:76px;line-height:1;color:var(--green)}
 .reason h3{font-family:var(--serif);font-weight:900;font-size:26px;letter-spacing:-.01em;margin-bottom:10px}
 .reason p{max-width:60ch;color:#3d362d}
 .reason p b{color:var(--red)}
 
-/* ============ DANKESKATALOG (§2) ============ */
+/* ============ §2 KATALOG ============ */
 .catalog{border-top:2px solid var(--ink)}
 .cat-row{
-  display:grid;
-  grid-template-columns:110px 1fr auto minmax(150px,auto);
-  gap:28px;align-items:baseline;
-  padding:30px 12px;border-bottom:1px dashed #b8ad99;
-  cursor:pointer;position:relative;
-  transition:background .15s ease;
+  display:grid;grid-template-columns:110px 1fr auto minmax(150px,auto);
+  gap:28px;align-items:baseline;padding:30px 12px;border-bottom:1px dashed #b8ad99;
+  cursor:pointer;transition:background .15s ease;
 }
 .cat-row:hover{background:var(--paper-2)}
 .cat-row .cz{font-family:var(--serif);font-style:italic;font-weight:400;font-size:64px;line-height:1;color:#b8ad99;transition:color .15s}
@@ -173,14 +138,11 @@ h1 em{font-style:italic;font-weight:400;color:var(--green)}
 .cat-row .dots{border-bottom:2px dotted #b8ad99;transform:translateY(-8px)}
 .cat-row .cprice{font-family:var(--serif);font-weight:900;font-size:32px;white-space:nowrap}
 .cat-row .cprice sup{font-size:16px;font-weight:400}
-.cat-row .cgo{
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  opacity:0;transition:opacity .15s;white-space:nowrap;color:var(--green);font-weight:700;
-}
+.cat-row .cgo{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:0;transition:opacity .15s;white-space:nowrap;color:var(--green);font-weight:700}
 .cat-row:hover .cgo{opacity:1}
 .catalog-foot{margin-top:22px;font-size:12px;color:#6b6257;font-style:italic}
 
-/* ============ SCHALTER (§3) ============ */
+/* ============ §3 SCHALTER ============ */
 .switch-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
 .form-side{padding:40px;background:var(--paper)}
 .receipt-side{padding:40px;background:var(--ink);color:var(--paper);border-left:2px solid var(--ink)}
@@ -189,18 +151,11 @@ h1 em{font-style:italic;font-weight:400;color:var(--green)}
 .chip-row{display:flex;flex-wrap:wrap;gap:10px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
-.chip span{
-  display:inline-block;padding:9px 16px;border:2px solid var(--ink);
-  font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
-  background:var(--paper);transition:all .12s;cursor:pointer;
-}
+.chip span{display:inline-block;padding:9px 16px;border:2px solid var(--ink);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;background:var(--paper);transition:all .12s;cursor:pointer}
 .chip input:checked + span{background:var(--green);color:var(--paper);border-color:var(--green-dark)}
 .chip span:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
 .chip input:focus-visible + span{outline:2px dashed var(--red);outline-offset:2px}
-.amount-input{
-  width:100%;font-family:var(--serif);font-weight:900;font-size:34px;
-  padding:10px 14px;border:2px solid var(--ink);background:var(--paper);
-}
+.amount-input{width:100%;font-family:var(--serif);font-weight:900;font-size:34px;padding:10px 14px;border:2px solid var(--ink);background:var(--paper)}
 .amount-input:focus{outline:none;border-color:var(--green)}
 input[type=text],input[type=email]{
   font-family:var(--mono);font-size:14px;padding:12px 14px;
@@ -208,90 +163,76 @@ input[type=text],input[type=email]{
 }
 input[type=text]:focus,input[type=email]:focus{outline:none;border-color:var(--green)}
 .form-note{margin-top:14px;font-size:11px;color:#6b6257;font-style:italic}
-/* Beleg */
-.receipt-title{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#C9B98A;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.receipt-title{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:10px}
 .receipt-amount{font-family:var(--serif);font-weight:900;font-size:58px;line-height:1;margin-bottom:6px}
 .receipt-amount sup{font-size:24px;font-weight:400}
 .receipt-sub{font-size:12px;color:#b0a488;font-style:italic;margin-bottom:28px;padding-bottom:24px;border-bottom:1px dashed #4a4438}
 .receipt-line{display:flex;justify-content:space-between;gap:18px;font-size:13px;padding:9px 0;border-bottom:1px dotted #4a4438}
 .receipt-line span:last-child{font-weight:700;text-align:right}
-.receipt-line .hl{color:#C9B98A}
-.receipt-vibe{margin-top:24px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--paper)}
-.receipt-vibe b{color:#C9B98A}
+.receipt-line .hl{color:var(--gold)}
+.receipt-vibe{margin-top:24px;font-family:var(--serif);font-style:italic;font-size:18px}
+.receipt-vibe b{color:var(--gold)}
 
-/* ============ WERBUNG (§4) ============ */
-.ad-section-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
-.ad-copy h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4vw,48px);letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
-.ad-copy h2 em{font-style:italic;font-weight:400;color:var(--red)}
-.ad-copy p{max-width:52ch;color:#3d362d;margin-bottom:14px}
-.ad-fineprint{font-size:12px;color:#6b6257;font-style:italic;margin-top:18px}
-.ad-visual{
-  width:280px;height:280px;border:2px solid var(--ink);
-  background:var(--paper-2);display:flex;align-items:center;justify-content:center;
-  box-shadow:8px 8px 0 var(--ink);transform:rotate(2deg);
-  position:relative;flex-shrink:0;
+/* ============ §4 AUSREDEN ============ */
+.excuse-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.excuse-copy h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4vw,48px);letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
+.excuse-copy h2 em{font-style:italic;font-weight:400;color:var(--red)}
+.excuse-copy p{max-width:50ch;color:#3d362d;margin-bottom:14px}
+.excuse-fine{font-size:12px;color:#6b6257;font-style:italic;margin-top:18px}
+.excuse-box{
+  border:2px solid var(--ink);background:var(--paper-2);
+  box-shadow:8px 8px 0 var(--ink);padding:44px 40px;position:relative;
 }
-.ad-visual .tag{
-  position:absolute;top:-14px;left:-14px;background:var(--red);color:var(--paper);
-  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  padding:6px 12px;transform:rotate(-4deg);
+.excuse-box .qmark{position:absolute;top:-6px;left:20px;font-family:var(--serif);font-style:italic;font-size:90px;line-height:1;color:var(--gold);user-select:none}
+#excuseText{
+  font-family:var(--serif);font-style:italic;font-weight:900;
+  font-size:clamp(20px,2.6vw,30px);line-height:1.4;min-height:130px;
+  margin:24px 0 26px;animation:excuseIn .35s ease;
 }
+@keyframes excuseIn{from{opacity:0;transform:translateY(10px)}}
+.excuse-actions{display:flex;gap:14px;flex-wrap:wrap}
+.excuse-meta{margin-top:20px;font-size:11px;color:#6b6257;font-style:italic;border-top:1px dashed #b8ad99;padding-top:12px}
 
-/* ============ PROTOKOLL (§5) ============ */
-.protocol-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
-.goal-box{border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:32px;background:var(--paper)}
-.goal-box h3{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6b6257;margin-bottom:14px}
-.goal-sum{font-family:var(--serif);font-weight:900;font-size:46px;line-height:1;margin-bottom:4px}
-.goal-sum sup{font-size:20px;font-weight:400}
-.goal-pct{font-size:13px;color:var(--red);font-weight:700;margin-bottom:22px}
-.goal-bar{height:26px;border:2px solid var(--ink);position:relative;background:repeating-linear-gradient(45deg,transparent 0 6px,#00000008 6px 7px)}
-.goal-fill{height:100%;background:var(--green);min-width:3px;transition:width .8s cubic-bezier(.2,.8,.2,1);position:relative}
-.goal-fill::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 5px,#ffffff22 5px 7px)}
-.goal-cap{margin-top:12px;font-size:12px;color:#6b6257;font-style:italic}
-.ad-meter{margin-top:28px;padding-top:22px;border-top:1px dashed #b8ad99}
-.ad-meter .receipt-line{border-color:#d8cfbc;color:var(--ink)}
-.ad-meter strong{font-family:var(--serif);font-size:20px}
-.feed{border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
-.feed-head{padding:14px 20px;border-bottom:2px solid var(--ink);background:var(--green);color:var(--paper);font-size:11px;letter-spacing:.18em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
-.feed-head .live-dot{width:8px;height:8px;background:var(--paper);border-radius:50%;display:inline-block;margin-right:8px;animation:blink 1.4s infinite}
-@keyframes blink{50%{opacity:.25}}
-.feed-list{list-style:none;max-height:380px;overflow:hidden;background:var(--paper)}
-.feed-list li{
-  display:flex;justify-content:space-between;gap:14px;align-items:baseline;
-  padding:13px 20px;border-bottom:1px dashed #d8cfbc;font-size:13px;
-  animation:feedIn .4s ease;
+/* ============ §5 DIE LAGE ============ */
+.lage-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.lage-box{border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:32px;background:var(--paper)}
+.lage-box h3{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6b6257;margin-bottom:18px}
+.mood-stage{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+#moodSvg{width:130px;height:130px;flex-shrink:0}
+.mood-label{font-family:var(--serif);font-weight:900;font-size:26px;line-height:1.15;margin-bottom:8px}
+.mood-note{font-size:13px;color:#57503f;font-style:italic;max-width:34ch}
+.mood-foot{margin-top:22px;padding-top:16px;border-top:1px dashed #b8ad99;font-size:12px;color:#6b6257;font-style:italic}
+.journal-list{list-style:none}
+.journal-list li{
+  padding:14px 0 14px 26px;border-bottom:1px dashed #d8cfbc;
+  font-size:13.5px;color:#3d362d;position:relative;
 }
-.feed-list li:last-child{border-bottom:none}
-.feed-list .who{font-weight:700}
-.feed-list .msg{color:#6b6257;font-style:italic;flex:1;text-align:right;font-size:12px}
-.feed-list .amt{font-family:var(--serif);font-weight:900;font-size:17px;white-space:nowrap}
-.feed-list li.me{background:#e7efe9}
-.feed-list li.me .who{color:var(--green)}
-@keyframes feedIn{from{opacity:0;transform:translateY(-10px)}}
+.journal-list li:last-child{border-bottom:none}
+.journal-list li::before{
+  content:"✦";position:absolute;left:0;top:14px;color:var(--green);font-size:12px;
+}
+.joke-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.joke-card{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:20px;background:var(--paper-2)}
+.joke-card b{font-family:var(--serif);font-weight:900;font-size:30px;display:block;line-height:1.1;margin-bottom:4px}
+.joke-card span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6b6257}
+.joke-foot{margin-top:18px;font-size:12px;color:#6b6257;font-style:italic;max-width:80ch}
 
-/* ============ ZWEIFEL (§6) ============ */
-.doubt-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.doubt-text h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4vw,50px);letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
-.doubt-text p{color:#3d362d;max-width:46ch}
-.dodge-zone{
-  position:relative;height:230px;border:2px dashed var(--ink);
-  background:var(--paper-2);overflow:hidden;
+/* ============ §6 ZWEI WEGE ============ */
+.paths-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.paths-text h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4vw,50px);letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
+.paths-text p{color:#3d362d;max-width:46ch}
+.paths-box{
+  border:2px dashed var(--ink);background:var(--paper-2);
+  padding:40px 32px;display:flex;flex-direction:column;gap:16px;align-items:stretch;
 }
-.dodge-status{
-  position:absolute;bottom:12px;left:16px;font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:#6b6257;
-}
-#dodgeBtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:left .3s cubic-bezier(.3,1.4,.5,1), top .3s cubic-bezier(.3,1.4,.5,1);white-space:nowrap}
+.paths-box .btn{justify-content:center}
+.paths-foot{font-size:12px;color:#6b6257;font-style:italic;text-align:center;margin-top:6px}
 
-/* ============ FAQ (§7) ============ */
+/* ============ §7 FAQ ============ */
 .faq{max-width:820px}
 details{border-bottom:1px dashed #b8ad99}
 details:first-child{border-top:1px dashed #b8ad99}
-summary{
-  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;
-  padding:24px 4px;cursor:pointer;
-  font-family:var(--serif);font-weight:900;font-size:21px;letter-spacing:-.01em;
-}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4px;cursor:pointer;font-family:var(--serif);font-weight:900;font-size:21px;letter-spacing:-.01em}
 summary::-webkit-details-marker{display:none}
 summary:hover{color:var(--green)}
 summary .pl{flex-shrink:0;width:34px;height:34px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .25s, background .2s, color .2s}
@@ -300,118 +241,91 @@ details[open] summary .pl{transform:rotate(45deg);background:var(--red);border-c
 details[open] summary{color:var(--green)}
 .faq-a{padding:0 4px 26px;color:#3d362d;max-width:62ch;animation:feedIn .3s ease}
 .faq-a b{color:var(--red)}
+@keyframes feedIn{from{opacity:0;transform:translateY(-8px)}}
 
-/* ============ NEWSLETTER + FOOTER ============ */
+/* ============ BAND + FOOTER ============ */
 .band{background:var(--ink);color:var(--paper);padding:80px 0;border-top:2px solid var(--ink)}
 .band h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.5vw,54px);letter-spacing:-.02em;margin-bottom:14px}
-.band h2 em{font-style:italic;font-weight:400;color:#C9B98A}
+.band h2 em{font-style:italic;font-weight:400;color:var(--gold)}
 .band p{color:#b0a488;max-width:52ch;margin-bottom:30px}
-.news-form{display:flex;gap:14px;max-width:520px;flex-wrap:wrap}
-.news-form input{flex:1;min-width:220px;background:var(--paper);color:var(--ink)}
+.complaint-form{display:flex;gap:14px;max-width:560px;flex-wrap:wrap}
+.complaint-form input{flex:1;min-width:220px;background:var(--paper);color:var(--ink)}
 .btn-paper{background:var(--paper);color:var(--ink)}
 .band .fine{margin-top:22px;font-size:11px;font-style:italic;color:#8b8271}
 footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px solid #3a332a}
 .foot-flex{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:11.5px;line-height:1.8}
 .foot-flex .big{font-family:var(--serif);font-weight:900;font-size:22px;color:var(--paper);margin-bottom:8px}
-.foot-flex .legal{max-width:62ch}
+.foot-flex .legal{max-width:64ch}
 .foot-flex b{color:var(--red);font-weight:700}
 .legal-links{display:flex;gap:8px 22px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px dashed #3a332a;font-size:11.5px}
-.legal-links button{background:none;border:none;color:#C9B98A;text-decoration:underline;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:0;display:inline-flex;align-items:center;gap:6px}
+.legal-links button{background:none;border:none;color:var(--gold);text-decoration:underline;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:0;display:inline-flex;align-items:center;gap:6px}
 .legal-links button:hover{color:var(--paper)}
 
-/* ============ OVERLAYS & TOASTS ============ */
-.overlay{
-  position:fixed;inset:0;z-index:1000;display:none;
-  align-items:center;justify-content:center;padding:20px;
-  background:rgba(24,20,16,.78);backdrop-filter:blur(3px);
-}
+/* ============ OVERLAYS ============ */
+.overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(24,20,16,.78);backdrop-filter:blur(3px)}
 .overlay.open{display:flex}
-.panel{
-  background:var(--paper);border:2px solid var(--ink);
-  box-shadow:10px 10px 0 rgba(0,0,0,.45);
-  max-width:640px;width:100%;max-height:92vh;overflow-y:auto;
-  position:relative;animation:panelIn .3s cubic-bezier(.2,1.2,.4,1);
-}
+.panel{background:var(--paper);border:2px solid var(--ink);box-shadow:10px 10px 0 rgba(0,0,0,.45);max-width:680px;width:100%;max-height:92vh;overflow-y:auto;position:relative;animation:panelIn .3s cubic-bezier(.2,1.2,.4,1)}
 @keyframes panelIn{from{opacity:0;transform:translateY(26px) scale(.97)}}
-.panel-x{
-  position:absolute;top:12px;right:12px;width:38px;height:38px;
-  border:2px solid var(--ink);background:var(--paper);
-  display:flex;align-items:center;justify-content:center;z-index:5;
-}
+.panel-x{position:absolute;top:12px;right:12px;width:38px;height:38px;border:2px solid var(--ink);background:var(--paper);display:flex;align-items:center;justify-content:center;z-index:5}
 .panel-x:hover{background:var(--red);border-color:var(--red);color:var(--paper)}
-/* Impressum */
-.legal-body{padding:38px 42px 44px;font-size:13.5px;line-height:1.8}
-.legal-body h4{font-family:var(--serif);font-weight:900;font-size:19px;margin:26px 0 10px}
+/* Abschied */
+.bye-body{padding:48px 46px;text-align:center}
+.bye-body .ic-big{width:56px;height:56px;color:var(--green);margin:0 auto 20px;display:block}
+.bye-body h3{font-family:var(--serif);font-weight:900;font-size:30px;margin-bottom:14px}
+.bye-body p{color:#3d362d;max-width:44ch;margin:0 auto 30px}
+.bye-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* Rechtstexte */
+.legal-tabs{display:flex;gap:0;border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:4}
+.legal-tabs button{flex:1;background:var(--paper);border:none;border-right:2px solid var(--ink);padding:14px 8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.legal-tabs button:last-child{border-right:none}
+.legal-tabs button.active{background:var(--green);color:var(--paper)}
+.legal-body{padding:34px 38px 44px;font-size:13.5px;line-height:1.8}
+.legal-body h4{font-family:var(--serif);font-weight:900;font-size:17px;margin:26px 0 8px}
 .legal-body h4:first-child{margin-top:0}
 .legal-body p{margin-bottom:10px;color:#3d362d}
-.legal-body .ph{color:var(--red);font-weight:700;background:rgba(195,58,32,.08);padding:0 3px}
-.imp-warn{
-  display:none;margin-bottom:20px;padding:12px 14px;
-  border:2px dashed var(--red);color:var(--red);
-  font-size:12px;font-weight:700;letter-spacing:.04em;
-}
-/* Werbe-Panel */
-.ad-head{
-  display:flex;justify-content:space-between;align-items:center;gap:14px;
-  padding:12px 20px;border-bottom:2px solid var(--ink);
-  background:var(--paper-2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-}
-.ad-head .t{font-weight:700;color:var(--red)}
-.ad-head .clock{font-weight:700}
-.ad-body{padding:36px 40px;display:grid;grid-template-columns:150px 1fr;gap:32px;align-items:center}
-.flask{width:150px}
-.ad-brand{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:8px}
-.ad-name{font-family:var(--serif);font-weight:900;font-style:italic;font-size:34px;line-height:1;margin-bottom:12px}
-.ad-notes{font-size:13px;margin-bottom:14px;color:#3d362d}
-.ad-notes b{color:var(--green)}
-.ad-claim{font-size:13px;color:#57503f;margin-bottom:16px}
-.ad-price{font-family:var(--serif);font-weight:900;font-size:24px;margin-bottom:6px}
-.ad-price small{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--red);display:block;margin-top:2px}
-.ad-cut{font-size:10px;color:#6b6257;font-style:italic;margin-top:14px;border-top:1px dashed #b8ad99;padding-top:10px}
-.ad-skip{padding:16px 20px;border-top:2px solid var(--ink);display:flex;justify-content:center}
-#skipBtn:disabled{cursor:not-allowed;opacity:.75;box-shadow:none;transform:none}
-/* Spenden-Verarbeitung */
+.legal-body ol{margin:0 0 12px 20px}
+.legal-body ol li{margin-bottom:10px}
+.ph{background:rgba(195,58,32,.1);color:var(--red);font-weight:700;padding:0 4px}
+.imp-warn{display:none;margin-bottom:20px;padding:12px 14px;border:2px dashed var(--red);color:var(--red);font-size:12px;font-weight:700;letter-spacing:.04em}
+/* Zahlung */
 .process{padding:52px 44px}
 .process h3{font-family:var(--serif);font-weight:900;font-size:26px;margin-bottom:26px}
 .pline{display:flex;gap:12px;align-items:center;font-size:14px;padding:10px 0;opacity:0;transform:translateX(-8px);transition:all .35s}
 .pline.show{opacity:1;transform:none}
 .pline .ok{color:var(--green);font-weight:700;margin-left:auto;font-size:12px;letter-spacing:.08em}
 .pline .ic{width:18px;height:18px;color:var(--green)}
+.payview{padding:44px}
+.payview h3{font-family:var(--serif);font-weight:900;font-size:28px;margin-bottom:6px}
+.payview .sub{font-size:13px;color:#6b6257;font-style:italic;margin-bottom:24px}
+.pay-note{font-size:13px;color:#3d362d;margin:22px 0;padding:14px 16px;border:1px dashed #b8ad99;background:var(--paper-2)}
+.pay-note b{color:var(--green)}
+.pay-actions{display:flex;flex-direction:column;gap:14px}
+.pay-actions .btn{justify-content:center}
+.iban-box{border:2px dashed var(--ink);padding:18px;font-size:13px;line-height:2}
+.iban-box b{letter-spacing:.06em}
+.pay-foot{margin-top:20px;font-size:11px;color:#6b6257;font-style:italic}
+.pay-foot button{background:none;border:none;text-decoration:underline;color:var(--red);font-size:11px;font-style:italic;padding:0}
 /* Urkunde */
 .cert{padding:44px 46px;text-align:center;position:relative}
 .cert-border{border:2px solid var(--ink);outline:2px solid var(--ink);outline-offset:5px;padding:40px 32px 34px;position:relative}
 .cert-orn{color:var(--green);letter-spacing:12px;font-size:13px;margin-bottom:16px}
 .cert-title{font-family:var(--serif);font-weight:900;font-size:30px;letter-spacing:.02em;text-transform:uppercase;line-height:1.15;margin-bottom:6px}
 .cert-sub{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6b6257;margin-bottom:26px}
-.cert-body{font-family:var(--serif);font-size:17px;line-height:1.75;max-width:44ch;margin:0 auto 8px}
-.cert-body b{font-style:italic;font-size:1.35em;color:var(--green);font-weight:900}
+.cert-body{font-family:var(--serif);font-size:17px;line-height:1.75;max-width:46ch;margin:0 auto 8px}
+.cert-body b{font-style:italic;font-size:1.3em;color:var(--green);font-weight:900}
 .cert-meta{margin-top:22px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#6b6257;line-height:2.1}
-.cert-stamp{
-  position:absolute;bottom:26px;right:-10px;
-  border:3px solid var(--red);color:var(--red);font-weight:700;font-size:11px;
-  letter-spacing:.14em;text-transform:uppercase;padding:10px 14px;transform:rotate(-11deg);
-  box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px var(--red);
-  mix-blend-mode:multiply;user-select:none;
-}
+.cert-stamp{position:absolute;bottom:26px;right:-10px;border:3px solid var(--red);color:var(--red);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 14px;transform:rotate(-11deg);box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px var(--red);mix-blend-mode:multiply;user-select:none}
 .cert-actions{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
-/* Konfetti */
+/* Konfetti + Toasts */
 .confetto{position:fixed;top:-20px;width:9px;height:14px;z-index:1001;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(105vh) rotate(var(--rot));opacity:.9}}
-/* Toasts */
 .toasts{position:fixed;bottom:24px;right:24px;z-index:1200;display:flex;flex-direction:column;gap:12px;max-width:min(380px,90vw)}
-.toast{
-  display:flex;gap:12px;align-items:flex-start;
-  background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);
-  padding:14px 18px;font-size:13px;line-height:1.5;
-  animation:toastIn .3s cubic-bezier(.2,1.2,.4,1);
-}
+.toast{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:14px 18px;font-size:13px;line-height:1.5;animation:toastIn .3s cubic-bezier(.2,1.2,.4,1)}
 .toast .ic{width:18px;height:18px;flex-shrink:0;color:var(--green);margin-top:1px}
 .toast.warn .ic{color:var(--red)}
 @keyframes toastIn{from{opacity:0;transform:translateX(30px)}}
 .toast.out{animation:toastOut .3s forwards}
 @keyframes toastOut{to{opacity:0;transform:translateX(30px)}}
-
-/* Scroll-Reveal */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -420,13 +334,13 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
   .nav-links{display:none}
   .switch-grid{grid-template-columns:1fr}
   .receipt-side{border-left:none;border-top:2px solid var(--ink)}
-  .protocol-grid{grid-template-columns:1fr}
+  .lage-grid{grid-template-columns:1fr}
+  .joke-stats{grid-template-columns:repeat(2,1fr)}
+  .excuse-grid{grid-template-columns:1fr}
   .reason{grid-template-columns:70px 1fr;gap:20px}
   .reason .rn{font-size:48px}
   .reason:nth-child(even){padding-left:0}
-  .ad-section-grid{grid-template-columns:1fr}
-  .ad-visual{transform:rotate(0)}
-  .doubt-grid{grid-template-columns:1fr}
+  .paths-grid{grid-template-columns:1fr}
   .stamp{position:static;display:inline-block;margin-top:34px}
   .cat-row{grid-template-columns:64px 1fr;grid-template-rows:auto auto}
   .cat-row .cz{font-size:40px}
@@ -434,10 +348,11 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
   .cat-row .cprice{grid-column:2;font-size:26px}
   .cat-row .cgo{display:none}
   .cat-row p{grid-column:2}
-  .ad-body{grid-template-columns:1fr;text-align:center}
-  .flask{margin:0 auto}
   .cert{padding:28px 18px}
   .legal-body{padding:26px 20px 36px}
+  .payview{padding:28px 20px}
+  .process{padding:40px 24px}
+  .bye-body{padding:36px 22px}
 }
 </style>
 </head>
@@ -448,7 +363,7 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
   <div class="marquee-track" id="mqTrack"></div>
 </div>
 
-<!-- ═══════════ NAVIGATION ═══════════ -->
+<!-- ═══════════ NAV ═══════════ -->
 <nav>
   <div class="nav-inner">
     <a class="wordmark" href="#top">Gib&nbsp;mir&nbsp;<i>dein</i>&nbsp;Geld</a>
@@ -456,8 +371,8 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
       <a href="#warum">Warum</a>
       <a href="#katalog">Katalog</a>
       <a href="#schalter">Schalter</a>
-      <a href="#werbung">Werbung</a>
-      <a href="#protokoll">Protokoll</a>
+      <a href="#ausreden">Ausreden</a>
+      <a href="#lage">Die Lage</a>
       <a href="#faq">FAQ</a>
     </div>
     <a href="#schalter" class="btn btn-primary btn-sm">Geld abgeben</a>
@@ -467,21 +382,24 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
 <!-- ═══════════ HERO ═══════════ -->
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="kicker">Ein soziales Experiment mit Kontoverbindung</p>
+    <p class="kicker"><span class="satire-tag">Satire</span> Ein Finanzprojekt mit voller Transparenz</p>
     <h1>Gib mir <em>dein</em> Geld.</h1>
     <p class="hero-sub">
-      Kein Projekt. Kein Nutzen. Kein Plan. Nur ich — und dein auffällig stabiles Konto.
-      Andere bitten höflich. Ich biete dir hier die <b>Ehre</b>, an etwas Größerem mitzuwirken: meiner Kaffeepause.
+      Kein Projekt. Kein Verein. Kein Gimmick. Nur ich — Arthur — und dein auffällig stabiles Konto.
+      Andere bitten höflich. Ich biete dir die <b>Ehre</b>, eine Privatperson ohne Zwischenschritte direkt zu unterstützen.
+      Das Geld geht <b>zu 100&thinsp;% an mich</b>. Das ist kein Versteckspiel — das ist der ganze Punkt. Jede Aussage hier, die größer klingt, ist Übertreibung. Nur dieser Satz nicht.
     </p>
     <div class="hero-cta">
       <a href="#schalter" class="btn btn-primary"><i data-icon="banknote"></i>Jetzt Geld abgeben</a>
-      <a href="#werbung" class="btn"><i data-icon="megaphone"></i>Ich bin arm — Werbung ansehen</a>
+      <a href="#ausreden" class="btn"><i data-icon="door"></i>Ich brauche eine Ausrede</a>
     </div>
-    <div class="stamp">Geprüft &amp; würdig<small>unabhängig von mir selbst</small></div>
+    <p class="hero-fine"><b>Zahlen bitte:</b> Freiwillige Zuwendung an eine Privatperson — keine Spende im steuerlichen Sinne, keine Gegenleistung, nichts absetzbar. Die Abwicklung läuft über PayPal bzw. Banküberweisung, ich sehe deine Zahlungsdaten nie.</p>
+    <div class="stamp">Selbst ernannt<small>geprüft wurde nie — es gab keinen Prüfer</small></div>
     <div class="hero-stats">
-      <div><b>3</b>Zahlungseingänge heute</div>
-      <div><b>1</b>davon mit Stil</div>
-      <div><b class="r">8.412</b>Besucher, die nichts gaben <span style="color:#6b6257">(du folgst noch)</span></div>
+      <div><b id="heroMood"></b>Kontostimmung (gefühlsmäßig, von Hand)</div>
+      <div><b><span id="heroDoner">?</span> Tage</b>seit letztem Döner</div>
+      <div><b><span id="heroConf">?</span>&thinsp;%</b>Selbstvertrauen <span style="color:#6b6257">(kontounabhängig, zum Glück)</span></div>
+      <div><b class="r">100&thinsp;%</b>dieses Geldes gehen an: mich</div>
     </div>
   </div>
 </header>
@@ -491,7 +409,7 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
   <div class="wrap">
     <div class="sec-head">
       <span class="num">§ 1 <b>/</b> Die offizielle Begründung</span>
-      <span class="meta">rechtlich unverbindlich, moralisch bindend</span>
+      <span class="meta">künstlerisch übertrieben, finanziell offengelegt</span>
     </div>
     <div class="reasons">
       <div class="reason reveal">
@@ -512,14 +430,14 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
         <div class="rn">III.</div>
         <div>
           <h3>Irgendjemand hat immer zu viel.</h3>
-          <p>Vielleicht du. Ich urteile nicht — ich biete eine Lösung an, keine Fragen. Deine Geldbörse wird es dir danken. Leiser, aber danken.</p>
+          <p>Vielleicht du. Ich urteile nicht — ich biete eine Lösung an, keine Fragen. Kein Verein, keine Verwaltungskostenquote, kein Verwaltungsrat: <b>Der komplette Betrag erreicht die Person, für die er bestimmt ist.</b> Effizienter wird Philanthropie nicht.</p>
         </div>
       </div>
       <div class="reason reveal">
         <div class="rn">IV.</div>
         <div>
           <h3>Zukunft.</h3>
-          <p>Mit deinem Geld kann ich endlich der Mensch werden, den dein Geld mir ermöglicht. Ein Kreislauf. <b>Ein schöner.</b> Hauptsächlich für mich.</p>
+          <p>Mit deinem Geld kann ich endlich der Mensch werden, den dein Geld mir ermöglicht. Ein Kreislauf. <b>Ein schöner.</b> Hauptsächlich für mich — und das sage ich hier offen, was man von den meisten Empfangsstationen des Universums nicht behaupten kann.</p>
         </div>
       </div>
     </div>
@@ -531,7 +449,7 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
   <div class="wrap">
     <div class="sec-head">
       <span class="num">§ 2 <b>/</b> Der Dankeskatalog</span>
-      <span class="meta">Leistungen laut &sect;4 Abs. Nirgends</span>
+      <span class="meta">Beträge echt, Gegenleistungen literarisch</span>
     </div>
     <div class="catalog reveal">
       <div class="cat-row" data-amount="5">
@@ -545,7 +463,7 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
       <div class="cat-row" data-amount="20">
         <div class="cz">ii.</div>
         <div><h3><small>Stufe Zwei</small>Der leise Unterstützer</h3>
-        <p>Dein Name wandert in eine Textdatei namens „gute_menschen.txt". Ich öffne sie nie. Sie existiert ausschließlich für dich.</p></div>
+        <p>Dein Name wandert in eine Textdatei namens „gute_menschen.txt“. Ich öffne sie nie. Sie existiert ausschließlich für dich.</p></div>
         <div class="dots"></div>
         <div class="cprice"><sup>EUR</sup> 20</div>
         <div class="cgo">Stufe wählen →</div>
@@ -576,23 +494,23 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
       </div>
       <div class="cat-row" data-amount="10000">
         <div class="cz">vi.</div>
-        <div><h3><small>Stufe Sechs</small>Namesgeber:in</h3>
-        <p>Ein zukünftiges Haustier, ein Kanu oder ein sehr kleines Boot bekommt deinen Namen. Du wirst gerufen. Jeden Tag. Von etwas, das dein Geld gekauft hat.</p></div>
+        <div><h3><small>Stufe Sechs</small>Der Ehrentitel</h3>
+        <p>Du darfst dich ab sofort „Gönner:in des Jahres“ nennen. Jedes Jahr. Ohne Prüfung, ohne Ausweis, ohne Ablaufdatum. Ein Titel, den kein Beamter dir nehmen kann.</p></div>
         <div class="dots"></div>
         <div class="cprice"><sup>EUR</sup> 10.000</div>
         <div class="cgo">Stufe wählen →</div>
       </div>
     </div>
-    <p class="catalog-foot">Alle Stufen sind klickbar und verdrahtet mit dem Schalter. Wie alles hier: stipendienfrei, rückwirkend, großzügig — für mich.</p>
+    <p class="catalog-foot">Alle Stufen sind klickbar und verdrahtet mit dem Schalter. Zur Klarheit: Es handelt sich um freiwillige Zuwendungen ohne Warencharakter — die „Leistungen" oben sind Witze, und zwar ausdrücklich.</p>
   </div>
 </section>
 
-<!-- ═══════════ §3 DER SCHALTER ═══════════ -->
+<!-- ═══════════ §3 SCHALTER ═══════════ -->
 <section class="sec" id="schalter">
   <div class="wrap">
     <div class="sec-head">
       <span class="num">§ 3 <b>/</b> Der Schalter</span>
-      <span class="meta">Schlangenfrei seit Eröffnung</span>
+      <span class="meta">Zahlung läuft beim Anbieter — ich sehe nichts</span>
     </div>
     <div class="switch-grid reveal">
       <div class="form-side">
@@ -602,128 +520,133 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
           <label class="chip"><input type="radio" name="qa" value="20" checked><span>20 &euro;</span></label>
           <label class="chip"><input type="radio" name="qa" value="50"><span>50 &euro;</span></label>
           <label class="chip"><input type="radio" name="qa" value="250"><span>250 &euro;</span></label>
-          <label class="chip"><input type="radio" name="qa" value="5000"><span>Kanu (5.000 &euro;)</span></label>
+          <label class="chip"><input type="radio" name="qa" value="5000"><span>Kanu-Niveau (5.000 &euro;)</span></label>
         </div>
 
         <label class="field-label">oder freihändig</label>
         <input class="amount-input" id="amountInput" type="number" min="1" step="1" value="20" inputmode="decimal">
 
-        <label class="field-label">Zahlungsrhythmus</label>
+        <label class="field-label">Stil dieser Zahlung</label>
         <div class="chip-row">
-          <label class="chip"><input type="radio" name="rhythm" value="once" checked><span>einmalig</span></label>
-          <label class="chip"><input type="radio" name="rhythm" value="month"><span>monatlich</span></label>
-          <label class="chip"><input type="radio" name="rhythm" value="forever"><span>für immer</span></label>
+          <label class="chip"><input type="radio" name="style" value="plain" checked><span>einmalig, schnörkellos</span></label>
+          <label class="chip"><input type="radio" name="style" value="felt"><span>einmalig, aber mit Gefühl</span></label>
+          <label class="chip"><input type="radio" name="style" value="remember"><span>einmalig, aber ich denke später daran</span></label>
+        </div>
+        <p class="form-note">Alle drei Stile bedeuten technisch dasselbe: eine einzige Zahlung, kein Abo. Die Auswahl ist Deko — aber stilvolles Dekor.</p>
+
+        <label class="field-label">Weg</label>
+        <div class="chip-row">
+          <label class="chip"><input type="radio" name="method" value="paypal" checked><span>PayPal</span></label>
+          <label class="chip"><input type="radio" name="method" value="sepa"><span>Überweisung</span></label>
+          <label class="chip"><input type="radio" name="method" value="mind"><span>Gedanklich (kostenlos)</span></label>
         </div>
 
-        <label class="field-label">Zahlungsweg</label>
-        <div class="chip-row">
-          <label class="chip"><input type="radio" name="method" value="transfer" checked><span>Überweisung ins Blaue</span></label>
-          <label class="chip"><input type="radio" name="method" value="cash"><span>Bar im Umschlag</span></label>
-          <label class="chip"><input type="radio" name="method" value="mind"><span>Gedanklich</span></label>
-        </div>
-
-        <label class="field-label">Name (für die Urkunde — Ruhm ist dauerkostenlos)</label>
+        <label class="field-label">Name (für die Urkunde — Ruhm ist gratis)</label>
         <input type="text" id="nameInput" placeholder="Anonymus Maximus" maxlength="40">
 
         <button class="btn btn-red" id="submitBtn" style="margin-top:30px;width:100%;justify-content:center">
-          <i data-icon="banknote"></i>Geld abgeben — endgültig
+          <i data-icon="banknote"></i>Weiter zum letzten Halt
         </button>
-        <p class="form-note">Mit dem Klick bestätigst du, dass du diesen Satz gelesen hast. Mehr verlangt niemand hier. Bezahlt wird übrigens nirgends — dieser Schalter ist reines Theater.</p>
+        <p class="form-note">Freiwillige Zuwendung an eine Privatperson. Keine Ware, kein Abo, keine Spendenbescheinigung. Die Abwicklung läuft beim Zahlungsanbieter — dort gelten dessen Bedingungen.</p>
       </div>
 
       <div class="receipt-side">
         <div class="receipt-title"><i data-icon="receipt"></i>Beleg — Vorschau</div>
         <div class="receipt-amount"><sup>EUR</sup>&nbsp;<span id="rAmount">20</span></div>
-        <div class="receipt-sub" id="rRhythm">einmalig, geradlinig, vorbildlich</div>
+        <div class="receipt-sub" id="rStyle">einmalig, schnörkellos, vorbildlich</div>
         <div id="rLines"></div>
-        <div class="receipt-vibe">Rückfluss: keine. <b>Vibe: enorm.</b></div>
+        <div class="receipt-vibe">Rückfluss: keine. <b>Wirkung: direkt spürbar (bei mir).</b></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ §4 WERBUNG ═══════════ -->
-<section class="sec" id="werbung">
+<!-- ═══════════ §4 AUSREDEN ═══════════ -->
+<section class="sec" id="ausreden">
   <div class="wrap">
     <div class="sec-head">
-      <span class="num">§ 4 <b>/</b> Plan B für Arme</span>
-      <span class="meta">10 Sekunden Lebenszeit = Centbruchteile meiner Zukunft</span>
+      <span class="num">§ 4 <b>/</b> Der Ausreden-Generator</span>
+      <span class="meta">wasserdicht, kostenlos, wirkungslos</span>
     </div>
-    <div class="ad-section-grid reveal">
-      <div class="ad-copy">
-        <h2>Kein Geld? <em>Schade um dich.</em> Aber redlich.</h2>
-        <p>Du kannst nichts geben, was du nicht hast — das respektiere ich fast. Dafür gibt es Plan B: Du schaust Werbung. Deine Aufmerksamkeit wird in Währung umgerechnet, wie es sich gehört.</p>
-        <p>Zehn Sekunden. Kapitalismus funktioniert hervorragend, wenn man ihn nicht hinterfragt.</p>
-        <button class="btn btn-primary" id="adOpenBtn"><i data-icon="tv"></i>10 Sekunden opfern</button>
-        <p class="ad-fineprint">Ertrag pro Anzeige: 0,00 &euro; (die Anzeige ist erfunden, das ist der Witz). Meine Würde: steht nicht zum Verkauf (steht aber auch nicht gut da).</p>
+    <div class="excuse-grid">
+      <div class="excuse-copy reveal">
+        <h2>Kein Geld? <em>Völlig legal.</em></h2>
+        <p>Behalten ist erlaubt, verbreitet und historisch überaus bewährt. Damit du diese Seite trotzdem mit erhobenem Haupt verlässt, hält dieser Abschnitt Ausreden für dich bereit — fachlich geprüft von niemandem, dafür mit Herz.</p>
+        <p>Einfach auf „Neue Ausrede“ klicken, die gefällt, mitnehmen, fertig. Die Ausrede ist deine. Ich will sie nicht zurück, ich will nur, dass du gut dastehst.</p>
+        <p class="excuse-fine">Alle Ausreden sind virenfrei, fettarm und haben keinerlei Auswirkung auf deinen Kontostand. Nebenwirkungen: gelegentliches Nicken deiner Mitmenschen.</p>
       </div>
-      <div class="ad-visual">
-        <div class="tag">Echte Anzeige. Ehrlich.</div>
-        <!-- Handgezeichneter Flakon -->
-        <svg class="flask" viewBox="0 0 120 200" fill="none" stroke="#181410" stroke-width="2.5">
-          <rect x="48" y="6" width="24" height="16" fill="#146645"/>
-          <path d="M50 22 L50 44 L34 60 L34 186 L86 186 L86 60 L70 44 L70 22" fill="#F2EDE2"/>
-          <rect x="42" y="88" width="36" height="60" fill="#fff" stroke="#146645"/>
-          <text x="60" y="116" text-anchor="middle" font-family="serif" font-style="italic" font-size="26" fill="#146645" stroke="none">R</text>
-          <text x="60" y="134" text-anchor="middle" font-family="monospace" font-size="7" fill="#181410" stroke="none">RESPONSIBILITÉ</text>
-          <line x1="34" y1="160" x2="86" y2="160"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ §5 PROTOKOLL ═══════════ -->
-<section class="sec" id="protokoll">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="num">§ 5 <b>/</b> Live-Protokoll der Großzügigkeit</span>
-      <span class="meta">Echtzeit-ish</span>
-    </div>
-    <div class="protocol-grid">
       <div class="reveal">
-        <div class="goal-box">
-          <h3>Offizielles Sammlungsziel</h3>
-          <div class="goal-sum"><sup>EUR</sup>&nbsp;<span id="goalCurrent">84,21</span></div>
-          <div class="goal-pct"><span id="goalPct">0,0084</span> % von 1.000.000 &euro; (für ein bescheidenes Kanu)</div>
-          <div class="goal-bar"><div class="goal-fill" id="goalFill" style="width:0.5%"></div></div>
-          <p class="goal-cap">Stand: technisch gesehen „angefangen". Kein Druck. Doch. Doch Druck.</p>
-          <div class="ad-meter">
-            <div class="receipt-line"><span>Meine Werbe-Einnahmen (kumuliert)</span><strong id="adRevenue">0,000 &euro;</strong></div>
-            <div class="receipt-line"><span>Noch nötig für ein Döner-Topping</span><strong id="adToGo">249.999 Anzeigen</strong></div>
+        <div class="excuse-box">
+          <div class="qmark">„</div>
+          <div id="excuseText">Klicke auf „Neue Ausrede“. Ich habe welche. Gute sogar. Nachweislich — na gut, behauptungsweise.</div>
+          <div class="excuse-actions">
+            <button class="btn btn-primary" id="newExcuseBtn"><i data-icon="flame"></i>Neue Ausrede</button>
+            <button class="btn" id="copyExcuseBtn"><i data-icon="copy"></i>Ausrede kopieren</button>
           </div>
+          <p class="excuse-meta">Lagerbestand: unbegrenzt. Regressansprüche: keiner. Anwendung: mündlich, schriftlich oder mit Blickkontakt.</p>
         </div>
       </div>
-      <div class="feed reveal">
-        <div class="feed-head"><span><span class="live-dot"></span>Protokollführung aktiv</span><span id="feedCount">0 Einträge</span></div>
-        <ul class="feed-list" id="feedList"></ul>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ §6 ZWEIFEL ═══════════ -->
-<section class="sec" id="zweifel">
+<!-- ═══════════ §5 DIE LAGE ═══════════ -->
+<section class="sec" id="lage">
   <div class="wrap">
     <div class="sec-head">
-      <span class="num">§ 6 <b>/</b> Zweifel? Gesund.</span>
-      <span class="meta">genau zwei Wege, einer führt zur Ehre</span>
+      <span class="num">§ 5 <b>/</b> Die Lage</span>
+      <span class="meta">links: gefühlsecht · rechts: erzählt</span>
     </div>
-    <div class="doubt-grid">
-      <div class="doubt-text reveal">
-        <h2>Zwei Sorten Mensch. <em style="font-style:italic;font-weight:400;color:var(--green)">Eine davon gewinnt.</em></h2>
-        <p>Links entscheidest du dich für Charakterstärke. Rechts steht der bequemere Knopf — allerdings einer mit eigenem Willen. Er weiß, was du vorhattest. Er war selbst schon mal an deiner Stelle.</p>
+    <div class="lage-grid">
+      <div class="lage-box reveal">
+        <h3>Amtliche Kontostimmung</h3>
+        <div class="mood-stage">
+          <div id="moodSvg" aria-label="Aktuelle Kontostimmung als Smiley"></div>
+          <div>
+            <div class="mood-label" id="moodLabel">—</div>
+            <div class="mood-note" id="moodNote">—</div>
+          </div>
+        </div>
+        <p class="mood-foot">Der Kontostand selbst bleibt geheim — auch vor dieser Website, die ihn nicht prüfen könnte. Die Stimmung ist eine Einschätzung, von Hand aktualisiert. Optimismus ist schließlich teuer.</p>
       </div>
-      <div class="dodge-zone reveal" id="dodgeZone">
-        <a href="#schalter" class="btn btn-primary" id="braveBtn" style="position:absolute;left:8%;top:38%">Ich spende</a>
-        <button class="btn" id="dodgeBtn">Ich spende nicht</button>
-        <span class="dodge-status">Ausweichmanöver: <b id="dodgeCount">0</b> / 5</span>
+      <div class="lage-box reveal">
+        <h3>Zustandsbericht — geführt wie ein Kapitänslogbuch, nur unregelmäßiger</h3>
+        <ul class="journal-list" id="journalList"></ul>
+        <p class="mood-foot">Diese Einträge sind erzählte Selbstironie. Es gibt hier bewusst keine Zahlen zu Geld: Nichts auf dieser Seite protokolliert Zahlungen — dazu hat jeder Zahlungsanbieter seine eigenen Belege, nicht ich.</p>
+      </div>
+    </div>
+    <div class="joke-stats reveal">
+      <div class="joke-card"><b><span id="wDoner">?</span> Tage</b><span>seit letztem Döner</span></div>
+      <div class="joke-card"><b><span id="wNoodles">?</span></b><span>Packungen Trockennudeln im Vorrat</span></div>
+      <div class="joke-card"><b><span id="wConf">?</span>&thinsp;%</b><span>Selbstvertrauen (kontounabhängig)</span></div>
+      <div class="joke-card"><b><span id="wRaids">?</span></b><span>Kassenstürze heute (ergebnislos)</span></div>
+    </div>
+    <p class="joke-foot">Rechtlich relevante Info, unfreiwillig witzig: Diese vier Karten sind Witze. Die seriöseste Aussage dieser Sektion lautet: Es gibt hier keine Zahl, die irgendetwas über Zahlungen aussagt. Wer trotzdem bis hier gelesen hat, verdient eine Ausrede — siehe § 4.</p>
+  </div>
+</section>
+
+<!-- ═══════════ §6 ZWEI WEGE ═══════════ -->
+<section class="sec" id="zweiwege">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">§ 6 <b>/</b> Zwei Sorten Mensch</span>
+      <span class="meta">beide Wege legal — nur einer hat Folgen (für mich)</span>
+    </div>
+    <div class="paths-grid">
+      <div class="paths-text reveal">
+        <h2>Entscheiden. <em style="font-style:italic;font-weight:400;color:var(--green)">Endgültig.</em> Würdevoll.</h2>
+        <p>Rechts stehen beide Möglichkeiten nebeneinander — gleich groß, gleich respektiert, keiner versteckt sich hinter dem anderen. Das ist hier die Politik: volle Transparenz bei der Auswahl, volle Dramatik bei der Verabschiedung.</p>
+      </div>
+      <div class="paths-box reveal">
+        <a href="#schalter" class="btn btn-primary" id="supportBtn"><i data-icon="banknote"></i>Ich unterstütze</a>
+        <button class="btn" id="byeBtn"><i data-icon="door"></i>Ich behalte alles</button>
+        <p class="paths-foot">Beide Entscheidungen sind legal und endgültig. Einer der beiden Wege hat nur bessere Musik.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ FAQ (§7) ═══════════ -->
+<!-- ═══════════ §7 FAQ ═══════════ -->
 <section class="sec" id="faq">
   <div class="wrap">
     <div class="sec-head">
@@ -733,46 +656,46 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
     <div class="faq reveal">
       <details>
         <summary>Ist das seriös?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Definieren Sie seriös. … <b>Nein.</b> Aber die Seite ist charmant, und Charme hat noch nie jemand angezahlt. Außer mir — an mich.</div>
+        <div class="faq-a">Definieren Sie seriös. … <b>Nein.</b> Aber es ist ehrlich: Impressum unten, Datenschutzhinweise unten, und dass das Geld an mich geht, steht nicht in Fußnoten, sondern überall — inklusive dieses Satzes.</div>
+      </details>
+      <details>
+        <summary>Ist das eine Spende?<span class="pl"><i data-icon="plus"></i></span></summary>
+        <div class="faq-a">Nein. „Spende" ist ein Begriff mit steuerlicher Aura und gehört einem guten Zweck. Das hier ist eine <b>freiwillige Zuwendung an eine Privatperson</b> — Trinkgeld, aber würdevoll. Nicht absetzbar, keine Bescheinigung, dafür ein Zertifikat mit Goldrahmen-Feeling.</div>
+      </details>
+      <details>
+        <summary>Wohin geht mein Geld wirklich?<span class="pl"><i data-icon="plus"></i></span></summary>
+        <div class="faq-a">An mich. Arthur. Zu 100&thinsp;%. Abzüglich der Gebühren, die der Zahlungsanbieter sich nimmt, bleibt alles bei einer einzigen Person, die das hier betreibt. Ich habe versucht, das schöner zu formulieren, aber <b>es gibt keine schönere Wahrheit als eine kurze</b>.</div>
       </details>
       <details>
         <summary>Kriege ich irgendetwas zurück?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Erfahrung. Und ein Zertifikat, das in keinem System existiert, aber dauerhaft in deinem Herzen anonym gespeichert wird. Löschen ist dort übrigens nicht vorgesehen.</div>
+        <div class="faq-a">Erfahrung. Und eine Urkunde, die in keinem Register existiert, aber dauerhaft in deinem Herzen zwischengespeichert wird. Löschen ist dort nicht vorgesehen.</div>
       </details>
       <details>
-        <summary>Kann ich meine „Spende" zurückfordern?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Rechtlich: frag jemanden mit Aktenkoffer. <b>Emotional: nein.</b> Praktisch: Es kann gar nichts zurückgegeben werden, weil technisch nichts ankommt. Der komplette Zahlungsverkehr dieser Seite findet in deiner Vorstellung statt.</div>
-      </details>
-      <details>
-        <summary>Warum ausgerechnet DU mein Geld?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Das ist keine Gegenfrage. <b>Das ist die Antwort.</b></div>
-      </details>
-      <details>
-        <summary>Sollte das Geld nicht Besserem dienen?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Besser wovon? Von Geparden-Patenschaften? Ich bin mindestens so real wie dein Fitnessstudio-Vertrag — und ich täusche dich ebenfalls täglich, nur ehrlicher.</div>
+        <summary>Kann ich zurückbuchen?<span class="pl"><i data-icon="plus"></i></span></summary>
+        <div class="faq-a">Eine einmal getätigte Zuwendung ist erbracht. <b>Im Härtefall trotzdem melden</b> — die E-Mail-Adresse steht im Impressum, und wir finden eine menschliche Lösung statt einer automatischen. PayPal bietet für Probleme übrigens eigene Verfahren an.</div>
       </details>
       <details>
         <summary>Wird mein Geld sinnvoll eingesetzt?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Ja. <b>Sinnvoll für mich.</b> Die Definition von „sinnvoll" habe ich großzügig an mich selbst vergeben. Ein Akt radikaler Selbstfürsorge.</div>
+        <div class="faq-a">Ja. <b>In mich.</b> Die Zuständigkeit ist eindeutig, die Wege sind kurz, die Verwaltungskosten nähern sich null. Andere Organisationen können das nicht behaupten, ohne zu lügen.</div>
       </details>
       <details>
         <summary>Was, wenn ich einfach nichts tue?<span class="pl"><i data-icon="plus"></i></span></summary>
-        <div class="faq-a">Dann bleibt alles, wie es ist: Ich bin großartig, du bist unentschlossen. Einer von uns beiden sollte langsam mutiger werden, und das bin laut Umfrage (n = ich) nicht ich.</div>
+        <div class="faq-a">Dann bleibt alles, wie es ist: Ich bin großartig, du bist unentschlossen. Für den Weg nach draußen hält § 4 eine Ausrede bereit — nimm sie mit, sie kostet nichts und hält länger als ein Gewissen.</div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ NEWSLETTER-BAND ═══════════ -->
+<!-- ═══════════ BESCHWERDE-EXPRESS ═══════════ -->
 <div class="band">
   <div class="wrap">
-    <h2>Der Bedarfs-<em>Express.</em></h2>
-    <p>Trag dich ein und erfahre als Erste:r, wann ich wieder Geld brauche. Hinweis: Ich brauche immer Geld. Diese E-Mails werden also häufig, pünktlich und emotional wichtig sein.</p>
-    <form class="news-form" id="newsForm">
-      <input type="email" id="newsMail" placeholder="deine@mail.de" required>
-      <button type="submit" class="btn btn-paper"><i data-icon="mail"></i>Eintragen</button>
+    <h2>Der Beschwerde-<em>Express.</em></h2>
+    <p>Etwas zu meckern? Lob, Wut, Kanu-Unterstützungswünsche? Schreib direkt eine E-Mail. Kein Formular, kein Abo, kein Newsletter — nur ein Postfach und ich.</p>
+    <form class="complaint-form" id="complaintForm">
+      <input type="text" id="complaintSubject" placeholder="Betreff (z. B. ‚Ich habe Fragen zum Kanu‘)" maxlength="80">
+      <button type="submit" class="btn btn-paper"><i data-icon="send"></i>Aufsetzen &amp; Losschreiben</button>
     </form>
-    <p class="fine">Abmeldung möglich — theoretisch. Praktisch gibt es nur Echo.</p>
+    <p class="fine">Kein Abo, keine Speicherung, kein Echo. Außer meinem.</p>
   </div>
 </div>
 
@@ -782,71 +705,67 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
     <div class="foot-flex">
       <div>
         <div class="big">Denk dran: Geld.</div>
-        Geldhergabestelle Nr. 1<br>selbst ernannt, selbst geprüft, selbst bewundert
+        Geldhergabestelle Nr. 1<br>selbst ernannt, offengelegt, satirisch
       </div>
       <div class="legal">
-        <b>Satire-Hinweis:</b> Diese Website ist Satire. Es gibt hier keine echte Zahlungsmöglichkeit, keine echte Organisation und sonst fast nichts Echtes — außer der Vollkommenheit des Designs. Es werden keine Daten gesendet, keine Cookies gesetzt und keine externen Ressourcen geladen; alles passiert in deinem Browser. Wenn du bis hier gelesen hast, hättest du in der Zeit auch schon dreimal spenden können. Nur so als Beobachtung.
+        <b>Zwei Sätze ohne Witz:</b> 1) Diese Website ist Satire — Übertreibungen sind Stil, keine Tatsachenbehauptungen; erfunden sind insbesondere die Witz-Statistiken, die Kontostimmung, der Ausreden-Generator und die „Gegenleistungen" des Dankeskatalogs. 2) Zahlen hier ist eine <b>freiwillige Zuwendung an den Betreiber, Arthur John Fritz Frisch, privat</b> — es gibt keine Gegenleistung, keine Spendenbescheinigung und keine Steuerabsetzbarkeit; 100&thinsp;% der Beträge (abzüglich Gebühren des Zahlungsanbieters) gehen an ihn. Details unter „Hinweise".
       </div>
     </div>
     <div class="legal-links">
-      <button id="impressumBtn"><i data-icon="filetext"></i>Impressum</button>
-      <a href="#top" style="text-decoration:none;color:#C9B98A">↑ Nach oben (subventionsfrei)</a>
+      <button data-legal="impressum"><i data-icon="filetext"></i>Impressum</button>
+      <button data-legal="datenschutz">Datenschutz</button>
+      <button data-legal="hinweise">Unterstützungs-Hinweise</button>
+      <a href="#top" style="text-decoration:none;color:var(--gold)">↑ Nach oben (subventionsfrei)</a>
     </div>
   </div>
 </footer>
 
-<!-- ═══════════ OVERLAY: WERBUNG ═══════════ -->
-<div class="overlay" id="adOverlay">
-  <div class="panel">
-    <button class="panel-x" id="adX" title="Noch nicht."><i data-icon="x"></i></button>
-    <div class="ad-head">
-      <span class="t">Anzeige</span>
-      <span>du zahlst mit deiner Lebenszeit</span>
-      <span class="clock">Noch <span id="adClock">10</span> s</span>
-    </div>
-    <div class="ad-body">
-      <svg class="flask" viewBox="0 0 120 200" fill="none" stroke="#181410" stroke-width="2.5">
-        <rect x="48" y="6" width="24" height="16" fill="#146645"/>
-        <path d="M50 22 L50 44 L34 60 L34 186 L86 186 L86 60 L70 44 L70 22" fill="#F2EDE2"/>
-        <rect x="42" y="88" width="36" height="60" fill="#fff" stroke="#146645"/>
-        <text x="60" y="116" text-anchor="middle" font-family="serif" font-style="italic" font-size="26" fill="#146645" stroke="none">R</text>
-        <text x="60" y="134" text-anchor="middle" font-family="monospace" font-size="7" fill="#181410" stroke="none">RESPONSIBILITÉ</text>
-        <line x1="34" y1="160" x2="86" y2="160"/>
-      </svg>
-      <div>
-        <div class="ad-brand">Eau de Verantwortung · 50 ml</div>
-        <div class="ad-name">Responsibilité™</div>
-        <p class="ad-notes"><b>Kopfnote:</b> Schuld · <b>Herznote:</b> roher Kakao · <b>Basisnote:</b> Konsequenzen</p>
-        <p class="ad-claim">Für Menschen, die aufräumen wollen — aber erst morgen. Vier von fünf Testpersonen riechen jetzt nach Verantwortung. Die fünfte Person wurde nicht wiedergesehen.</p>
-        <div class="ad-price">129,99 &euro;<small>davon fließen 0,004 &euro; an den Betreiber dieser Seite. Endlich Geschäftsmodelle mit Rückgrat.</small></div>
-        <p class="ad-cut">Nicht geeignet für Personen ohne Nase. Übernommene Verantwortung wird nicht zurückgegeben.</p>
+<!-- ═══════════ OVERLAY: WÜRDVOLLER ABSCHIED ═══════════ -->
+<div class="overlay" id="byeOverlay">
+  <div class="panel" style="max-width:560px">
+    <button class="panel-x" id="byeX"><i data-icon="x"></i></button>
+    <div class="bye-body">
+      <i data-icon="door" class="ic-big"></i>
+      <h3>Der würdevolle Abschied</h3>
+      <p>Dein Geld bleibt bei dir. Eine fürsorgliche Entscheidung, die ich aus naheliegenden Gründen respektiere. Diese Seite speichert nichts, bewertet nichts und sendet nichts — dein Abschied ist technisch gesehen nicht mal passiert.</p>
+      <div class="bye-actions">
+        <a href="#schalter" class="btn btn-primary" id="byeBrowse"><i data-icon="eye"></i>Trotzdem kurz den Schalter anschauen</a>
+        <button class="btn" id="byeClose"><i data-icon="flame"></i>Endgültig gehen</button>
       </div>
     </div>
-    <div class="ad-skip"><button class="btn btn-sm" id="skipBtn" disabled>Nö.</button></div>
   </div>
 </div>
 
-<!-- ═══════════ OVERLAY: SPENDEN ═══════════ -->
+<!-- ═══════════ OVERLAY: ZAHLUNG + URKUNDE ═══════════ -->
 <div class="overlay" id="donOverlay">
   <div class="panel">
-    <!-- Verarbeitungs-Ansicht -->
+    <!-- Vorbereitung -->
     <div class="process" id="procView">
-      <h3>Gelder werden verbucht…</h3>
-      <div class="pline" id="p1"><i data-icon="checkcircle"></i>Kontowürde wird geprüft<span class="ok">übertroffen</span></div>
-      <div class="pline" id="p2"><i data-icon="sparkle"></i>Gewissensentlastung wird vorbereitet<span class="ok">fertig</span></div>
-      <div class="pline" id="p3"><i data-icon="lock"></i>Betrag wird seelisch verbucht<span class="ok">endgültig</span></div>
+      <h3>Vorkehrungen werden getroffen…</h3>
+      <div class="pline" id="p1"><i data-icon="checkcircle"></i>Würde wird geprüft<span class="ok">übertroffen</span></div>
+      <div class="pline" id="p2"><i data-icon="lock"></i>Zahlungsanbieter wird angebahnt<span class="ok">dort passiert die Zahlung</span></div>
+      <div class="pline" id="p3"><i data-icon="shield"></i>Deine Zahlungsdaten<span class="ok">sehen mich nie</span></div>
     </div>
-    <!-- Urkunden-Ansicht -->
+    <!-- Letzter Halt -->
+    <div class="payview" id="payView" style="display:none">
+      <h3>Letzter Halt vor meiner Finanzen</h3>
+      <p class="sub">Zahlung extern, bei PayPal bzw. deiner Bank. Drama bleibt hier.</p>
+      <div id="paySummary"></div>
+      <p class="pay-note"><b>Zur Klarheit, ohne Witz:</b> Freiwillige Zuwendung an eine Privatperson (mich). 100&thinsp;% des Betrags gehen an Arthur John Fritz Frisch — abzüglich Gebühren des Zahlungsanbieters. Keine Gegenleistung, keine Spendenbescheinigung, nicht steuerlich absetzbar. <b>Ich erhalte keine Konto- oder Kartendaten.</b></p>
+      <div class="pay-actions" id="payActions"></div>
+      <p class="pay-foot">Bedingungen: siehe „Unterstützungs-Hinweise" in der Fußzeile. <button data-legal="hinweise">→ Hinweise lesen</button></p>
+    </div>
+    <!-- Urkunde -->
     <div class="cert" id="certView" style="display:none">
       <div class="cert-border">
         <div class="cert-orn">✦ ✦ ✦</div>
-        <div class="cert-title">Zertifikat über<br>Herausrücken</div>
+        <div class="cert-title">Zertifikat über<br>Unterstützung</div>
         <div class="cert-sub">ausgestellt ohne Instanz, in hoher Auflage: 1</div>
-        <p class="cert-body">Hiermit wird feierlich bescheinigt, dass <b id="certName">Anonymus Maximus</b> dem Inhaber dieser Website <b id="certAmount">20 €</b> übergeben und dafür außer diesem Dokument, einem warmen Gefühl und weltverändernder Stille nichts erhalten hat.</p>
+        <p class="cert-body" id="certBody"></p>
         <p class="cert-body" id="certExtra" style="font-size:13px;font-family:var(--mono);color:#6b6257"></p>
         <div class="cert-meta">
-          Aussteller: Ich · Gegenwert: dieses PDF-Gefühl<br>
-          Erstattung: gerne nie · Gültigkeit: unbegrenzt · Tragweite: gering
+          Aussteller: Ich · Zahlungsdienstleister: extern · Meine Dateneinsicht: null<br>
+          Steuerlich absetzbar: nein · Erstattung: im Härtefall per E-Mail, menschlich · Gültigkeit: unbegrenzt
         </div>
         <div class="cert-stamp">Nicht steuerlich<br>absetzbar</div>
       </div>
@@ -858,13 +777,22 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
   </div>
 </div>
 
-<!-- ═══════════ OVERLAY: IMPRESSUM ═══════════ -->
-<div class="overlay" id="impressumOverlay">
-  <div class="panel">
-    <button class="panel-x" id="impressumX"><i data-icon="x"></i></button>
-    <div class="legal-body">
-      <div class="imp-warn" id="impWarn">⚠ Vor Veröffentlichung die Platzhalter unten im Script-Block (IMPRESSUM) ersetzen!</div>
+<!-- ═══════════ OVERLAY: RECHTLICHES ═══════════ -->
+<div class="overlay" id="legalOverlay">
+  <div class="panel" style="max-width:760px">
+    <button class="panel-x" id="legalX"><i data-icon="x"></i></button>
+    <div class="legal-tabs">
+      <button data-tab="impressum" class="active">Impressum</button>
+      <button data-tab="datenschutz">Datenschutz</button>
+      <button data-tab="hinweise">Hinweise</button>
+    </div>
+
+    <div class="legal-body" id="tab-impressum">
+      <div class="imp-warn" id="impWarn">⚠ Es fehlen noch Angaben (PLZ/Ort)! Ohne ladungsfähige Anschrift ist das Impressum unvollständig. Ergänzen im CONFIG-Block oben im Script.</div>
       <h4>Angaben gemäß § 5 DDG</h4>
+      <p id="impTelLine" style="display:none">
+        <b>Telefon:</b> <span class="ph" id="impTel"></span>
+      </p>
       <p>
         <b>Betreiber:</b> <span class="ph" id="impName"></span><br>
         <b>Anschrift:</b> <span class="ph" id="impAddr"></span><br>
@@ -872,9 +800,32 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
         <b>Verantwortlich i. S. d. § 18 Abs. 2 MStV:</b> <span class="ph" id="impResp"></span> (Anschrift wie oben)
       </p>
       <h4>Charakter dieser Website</h4>
-      <p>Diese Website ist <b>Satire</b> und rein privat, nicht-kommerziell und ohne Erwerbszweck. Sämtliche Beträge, Protokolle, Statistiken, „Spenden" und „Werbeerlöse" sind frei erfunden. Es existiert keine Zahlungsmöglichkeit: Alle Schalter und Buttons dienen ausschließlich der Unterhaltung und lösen ausschließlich Animationen in deinem Browser aus.</p>
-      <h4>Datenschutz in einem Absatz</h4>
-      <p>Diese Seite überträgt <b>keine Daten</b>. Es gibt keine Cookies, kein Tracking, keine Analyse-Tools und keine externen Verbindungen — nicht einmal Schriften werden nachgeladen. Eingaben (z. B. der Urkunden-Name) bleiben ausschließlich lokal in deinem Browser und verschwinden beim Schließen der Seite.</p>
+      <p>Diese Website ist <b>Satire</b>. Sie wird privat betrieben. Übertriebene Selbstbeschreibungen, Witz-Statistiken, Kontostimmungen, der Ausreden-Generator und die Gegenleistungen des Dankeskatalogs sind ausdrücklich erfunden und dienen der Unterhaltung. Diese Seite enthält <b>keine Werbung</b>, bindet keine Werbedienste ein und verfolgt keinen Zweck der Nutzerbeeinflussung durch versteckte Mechanismen. Was ohne jeden Ironiewert gilt: Zahlen auf dieser Seite ist eine freiwillige Zuwendung an den Betreiber (privat), zu 100&thinsp;% — abzüglich Gebühren des jeweiligen Zahlungsanbieters. Es handelt sich um keine Spende im steuerrechtlichen Sinn; Spendenbescheinigungen werden nicht ausgestellt, Zuwendungen sind nicht steuerlich absetzbar.</p>
+      <p><b>Streitbeilegung:</b> Ich bin nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Beschwerden nehme ich dafür persönlich und ohne Schlichtungsstelle entgegen — per E-Mail, mit Tassen Tee.</p>
+    </div>
+
+    <div class="legal-body" id="tab-datenschutz" style="display:none">
+      <h4>Datenschutzerklärung</h4>
+      <p><b>Verantwortlicher:</b> <span class="ph" id="dsName"></span>, <span class="ph" id="dsAddr"></span>, E-Mail: <span class="ph" id="dsEmail"></span></p>
+      <ol>
+        <li><b>Hosting (GitHub Pages):</b> Diese Website wird über GitHub Pages gehostet (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Aufruf verarbeitet GitHub automatisch technische Daten wie IP-Adresse, Zeitpunkt und abgerufene Seite (Server-Logs). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer, wirtschaftlicher Betrieb). Daten können in die USA übertragen werden; hierfür bestehen Garantien (EU-US Data Privacy Framework bzw. Standardvertragsklauseln). <i>Wird die Seite woanders gehostet, ist dieser Absatz anzupassen.</i></li>
+        <li><b>Keine Cookies, kein Tracking, keine externen Inhalte:</b> Diese Seite setzt keine Cookies, nutzt keine Analyse-Tools, lädt keine externen Schriften, Werbenetzwerke oder Statistikdienste. Es gibt kein Login, kein Nutzerkonto und keine Speicherung in deinem Browser. Eingaben (z. B. der Urkunden-Name) existieren nur solange die Seite geöffnet ist.</li>
+        <li><b>Kontaktaufnahme:</b> Schreibst du mir eine E-Mail, verarbeite ich deine Angaben zur Beantwortung (Art. 6 Abs. 1 lit. f DSGVO). Sie werden nicht an Dritte weitergegeben, kein Newsletter, kein Abo.</li>
+        <li><b>Zahlungen:</b> Zahlungen laufen ausschließlich über PayPal (Europe) S.à r.l. et Cie, S.C.A. (Luxemburg) bzw. deine Bank. Für die Zahlungsabwicklung gelten die Datenschutzhinweise des Anbieters; mir werden im Rahmen der Transaktion Name, Betrag und ggf. Mitteilung des Zahlers angezeigt (wie bei jeder Überweisung). Auskunfts- und Löschanfragen zu Zahlungsdaten richte bitte zunächst an PayPal, ansonsten an mich.</li>
+        <li><b>Deine Rechte:</b> Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch, Datenübertragbarkeit sowie Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Für Anfragen: E-Mail oben.</li>
+      </ol>
+    </div>
+
+    <div class="legal-body" id="tab-hinweise" style="display:none">
+      <h4>Unterstützungs-Hinweise — das Kleingedruckte, groß</h4>
+      <ol>
+        <li><b>Freiwilligkeit:</b> Alles hier ist eine Satire-Verpackung um eine freiwillige Zuwendung an eine Privatperson. Es entsteht kein Vertrag, kein Anspruch, kein Abo. Die „Stufen" des Dankeskatalogs sind augenzwinkernde Beträge, keine Waren oder Leistungen.</li>
+        <li><b>Keine Spende:</b> Rechtlich und steuerlich handelt es sich nicht um eine Spende. Es gibt keine Zuwendungsbestätigung, nichts ist absetzbar, und es gibt keinen steuerbegünstigten Zweck — nur eine Person mit Geschäftssinn und einem Kanu-Traum.</li>
+        <li><b>Zahlungsabwicklung:</b> ausschließlich über externe Anbieter (PayPal, Banküberweisung). Der Betreiber sieht keine Karten- oder Bankdaten; es gelten die Bedingungen des jeweiligen Anbieters. Diese Seite führt selbst kein Protokoll über Zahlungen — Belege liefert dein Zahlungsanbieter.</li>
+        <li><b>Erstattung:</b> Zuwendungen sind erbracht, sobald sie erbracht sind. Im Härtefall trotzdem melden — es wird eine menschliche Lösung gesucht.</li>
+        <li><b>Fiktion:</b> Kontostimmung, Zustandsbericht, Witz-Statistiken, der Ausreden-Generator, Urkundentexte und sämtliche Aussagen über die Größe des Betreibers sind Übertreibung oder Erfindung. Einzig deine eigene Zahlung beim Anbieter ist real — und die willkommen.</li>
+        <li><b>Ausreden:</b> Alle generierten Ausreden sind erfunden, wirkungslos und kostenlos. Übernahme auf eigenes Risiko. Funktioniert erfahrungsgemäß am besten mit Blickkontakt.</li>
+      </ol>
     </div>
   </div>
 </div>
@@ -882,68 +833,70 @@ footer{background:var(--ink);color:#8b8271;padding:44px 0 56px;border-top:1px so
 <div class="toasts" id="toasts"></div>
 
 <script>
-/* ═══════════════════════ IMPRESSUM — BITTE AUSFÜLLEN ═══════════════════════ */
-const IMPRESSUM = {
-  name:    '',   // z. B. 'Max Mustermann'
-  strasse: '',   // z. B. 'Musterstraße 1'
-  ort:     '',   // z. B. '12345 Musterstadt'
-  email:   ''    // z. B. 'max@mustermann.de'
+/* ═════════════ KONFIGURATION ═════════════
+   Die folgenden Felder pflegst du von Hand.
+   PFLICHT (sonst Warnung im Impressum):  plzOrt
+   PFLICHT für Zahlungen:                 paypalMe (oder iban)      */
+const CONFIG = {
+  // ── Impressum ──
+  name:    'Arthur John Fritz Frisch',
+  strasse: 'Hinter der Kirche 18',
+  plzOrt:  '',                             // ← NOCH ERGÄNZEN, z. B. '12345 Musterstadt'
+  email:   'arthurfrisch.contact@gmail.com',
+  telefon: '',                             // optional — Impressum braucht keine Telefonnummer; leer lassen = Zeile bleibt weg
+
+  // ── Zahlung (mindestens ein Weg, sonst bleibt der Schalter zu) ──
+  paypalMe: '',                            // ← NUR der Name aus deinem paypal.me-Link, z. B. 'ArthurFrisch'
+  kofi:     '',                            // optional: Ko-Fi-Name
+  iban:     '',                            // optional: 'DE00 0000 0000 0000 0000 00'
+  ibanHolder: '',                          // optional: Kontoinhaber
+
+  // ── Witz-Statistiken — nach Lust und Laune von Hand aktualisieren ──
+  daysSinceDoner: 3,
+  noodlePacks: 2,
+  confidence: 82,                          // in %
+  counterRaids: 2,                         // ergebnislose Kassenstürze heute
+  mood: 'traurig',                         // 'traurig' | 'hoffnungsvoll' | 'gluecklich' | 'existenziell'
+
+  // ── Zustandsbericht (§ 5) — Einträge nach Belieben ergänzen/ändern ──
+  journal: [
+    'Kühlschrank inspiziert. Das Licht geht. Bestes Ereignis der Woche, solide Beleuchtung.',
+    'Die Monstera wurde gegossen. Sie hat sich nicht bedankt, aber auch nichts gesagt — insgesamt ein Erfolg.',
+    'Fitnessstudio-Werbung gelesen und archiviert. Kategoriengleich mit Fantasy-Romanen.',
+    'Wäsche gewaschen. Die Lage bleibt, aber sie riecht jetzt besser.',
+    'Buchhaltung geführt: Es gab nichts zu führen. Protokoll daher bemerkenswert kurz.'
+  ]
 };
 
-function applyImpressum(){
-  const set = (id, val, ph) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val || ph;
-  };
-  const addr = [IMPRESSUM.strasse, IMPRESSUM.ort].filter(Boolean).join(', ');
-  set('impName', IMPRESSUM.name, '[BITTE ERSETZEN: Vor- und Nachname]');
-  set('impAddr', addr, '[BITTE ERSETZEN: Straße Hausnummer, PLZ Ort]');
-  set('impEmail', IMPRESSUM.email, '[BITTE ERSETZEN: E-Mail-Adresse]');
-  set('impResp', IMPRESSUM.name, '[BITTE ERSETZEN: Vor- und Nachname]');
-  const complete = IMPRESSUM.name && IMPRESSUM.strasse && IMPRESSUM.ort && IMPRESSUM.email;
-  document.getElementById('impWarn').style.display = complete ? 'none' : 'block';
-}
-
-/* ═══════════════════════ ZENTRALER STATE ═══════════════════════ */
-const state = {
-  amount: 20,
-  rhythm: 'once',
-  method: 'transfer',
-  fonds: 84.21,          // aktueller "Fondsstand"
-  adRevenue: 0,          // Werbe-Einnahmen in EUR
-  adsWatched: 0,
-  dodges: 0,
-  donated: false
-};
-const GOAL = 1000000;
+/* ═════════════ HELPERS ═════════════ */
 const fmtEUR = n => new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
 const fmtInt = n => new Intl.NumberFormat('de-DE').format(n);
-const $ = s => document.querySelector(s);
+const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
-/* ═══════════════════════ INLINE-ICONS (kein CDN, keine externen Requests) ═══════════════════════ */
+/* ═════════════ INLINE-ICONS (keine externen Requests) ═════════════ */
 const ICONS = {
   x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
   plus:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
   info:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
   alert:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
-  megaphone:'<path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
   banknote:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><line x1="6" y1="12" x2="6.01" y2="12"/><line x1="18" y1="12" x2="18.01" y2="12"/>',
-  tv:'<rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/>',
+  eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
   receipt:'<path d="M4 2v20l2-1.5L8 22l2-1.5L12 22l2-1.5L16 22l2-1.5L20 22V2l-2 1.5L16 2l-2 1.5L12 2l-2 1.5L8 2 6 3.5 4 2z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/>',
   checkcircle:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
-  sparkle:'<path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/>',
   lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
   shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-  shieldalert:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
   award:'<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
   flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
-  move:'<polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/>',
   mail:'<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
   thumbsup:'<path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>',
+  heart:'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+  filetext:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+  card:'<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>',
   brain:'<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.04z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.04z"/>',
-  eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
-  filetext:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>'
+  send:'<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>',
+  door:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+  copy:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'
 };
 function renderIcons(root){
   (root||document).querySelectorAll('i[data-icon]').forEach(el=>{
@@ -953,50 +906,78 @@ function renderIcons(root){
   });
 }
 
-/* ═══════════════════════ MARQUEE BEFÜLLEN ═══════════════════════ */
+/* ═════════════ MARQUEE ═════════════ */
 (() => {
   const items = [
-    'Amtlich beste Gelegenheit, mir Geld zu geben',
-    '100 % würdig (selbst geprüft)',
-    'Keine Steuer, keine Sinnfrage, kein Rückgaberecht',
-    'Werbung anschauen zählt auch',
+    'Die beste Gelegenheit, mir Geld zu geben (laut mir)',
+    'Selbst ernannt würdig — Auskunft erteilt: der Antragsteller',
+    'Keine Spende im steuerlichen Sinn — Trinkgeld, aber würdevoll',
+    'Kontostimmung: siehe § 5 (nicht gut)',
     'Dankeskatalog ab 5 €',
-    'Kanu-Fortschritt: Sichtbar'
+    'Bezahlung läuft bei PayPal, Drama läuft hier'
   ];
-  const half = items.map(t => `<span>✦ <b>${t}</b></span>`).join('');
-  $('#mqTrack').innerHTML = half + half; // doppelt für nahtlosen Loop
+  const half = items.map(t => '<span>✦ <b>'+t+'</b></span>').join('');
+  $('#mqTrack').innerHTML = half + half;
 })();
 
-/* ═══════════════════════ TOAST-SYSTEM ═══════════════════════ */
+/* ═════════════ TOASTS ═════════════ */
 function toast(msg, icon = 'info', warn = false) {
   const el = document.createElement('div');
   el.className = 'toast' + (warn ? ' warn' : '');
-  el.innerHTML = `<i data-icon="${icon}"></i><span>${msg}</span>`;
+  el.innerHTML = '<i data-icon="'+icon+'"></i><span>'+msg+'</span>';
   $('#toasts').appendChild(el);
   renderIcons(el);
   setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 320); }, 5200);
 }
 
-/* ═══════════════════════ BELEG / UMMRECHNER ═══════════════════════ */
+/* ═════════════ IMPRESSUM + DATENSCHUTZ BEFÜLLEN ═════════════ */
+function applyLegal(){
+  const addr = [CONFIG.strasse, CONFIG.plzOrt].filter(Boolean).join(', ');
+  const set = (id, val, ph) => { const el = document.getElementById(id); if (el) el.textContent = val || ph; };
+  set('impName', CONFIG.name, '[BITTE ERSETZEN: Name]');
+  set('impAddr', addr, '[BITTE ERSETZEN: Straße + PLZ Ort]');
+  set('impEmail', CONFIG.email, '[BITTE ERSETZEN: E-Mail]');
+  set('impResp', CONFIG.name, '[BITTE ERSETZEN: Name]');
+  set('dsName', CONFIG.name, '[BITTE ERSETZEN: Name]');
+  set('dsAddr', addr, '[BITTE ERSETZEN: Anschrift]');
+  set('dsEmail', CONFIG.email, '[BITTE ERSETZEN: E-Mail]');
+  // Telefonzeile nur einblenden, wenn hinterlegt
+  if (CONFIG.telefon) {
+    document.getElementById('impTelLine').style.display = '';
+    set('impTel', CONFIG.telefon, '');
+  }
+  const complete = CONFIG.name && CONFIG.strasse && CONFIG.plzOrt && CONFIG.email;
+  document.getElementById('impWarn').style.display = complete ? 'none' : 'block';
+}
+
+/* ═════════════ STATE ═════════════ */
+const state = {
+  amount: 20,
+  style: 'plain',
+  method: 'paypal',
+  lastExcuse: ''
+};
+
+/* ═════════════ BELEG ═════════════ */
 function updateReceipt() {
   const a = state.amount;
   $('#rAmount').textContent = fmtInt(a);
-  const rhythmTxt = { once: 'einmalig, geradlinig, vorbildlich',
-                      month: 'monatlich — Verpflichtung inklusive',
-                      forever: 'für immer — vererbbar an meine Erben' }[state.rhythm];
-  $('#rRhythm').textContent = rhythmTxt;
+  $('#rStyle').textContent = {
+    plain:   'einmalig, schnörkellos, vorbildlich',
+    felt:    'einmalig, aber mit spürbarem Gefühl',
+    remember:'einmalig, wird später in Erinnerung gerührt'
+  }[state.style];
 
-  const lines = [];
-  lines.push(['Das entspricht', `${(a/8.5).toLocaleString('de-DE',{maximumFractionDigits:1})} Döner (für mich)`]);
-  lines.push(['Oder', `${fmtInt(Math.floor(a/0.007))} Gummibärchen (Preis pro Bärchen: egal)`]);
-  lines.push(['Oder', `${(a/12.99).toLocaleString('de-DE',{maximumFractionDigits:1})} Monate Streaming-Verzicht (deiner, nicht meiner)`]);
-  lines.push(['Anteil an meinem Traumkajak', `${(a/899*100).toFixed(2)} %`]);
-  if (state.rhythm === 'month') lines.push(['In 12 Monaten', `${fmtEUR(a*12)} € — dann kann ich Versicherungen fast ignorieren`]);
-  if (state.rhythm === 'forever') lines.push(['Laufzeit', 'bis ans Ende der Zinseszins-Ära']);
-  lines.push(['Zahlungsweg', {transfer:'Überweisung ins Blaue', cash:'Bar im Umschlag (Adresse: nie)', mind:'rein mental'}[state.method]]);
-
+  const lines = [
+    ['Das entspricht', (a/8.5).toLocaleString('de-DE',{maximumFractionDigits:1})+' Döner (fachlich verrechnet)'],
+    ['Oder', fmtInt(Math.floor(a/0.007))+' Gummibärchen (Preis pro Bärchen: egal)'],
+    ['Anteil am Traumkajak', (a/899*100).toFixed(2)+' %'],
+    ['Empfänger', 'Arthur J. F. Frisch — 100 %, privat'],
+    ['Gegenleistung', 'keine. Ein Gefühl. Ein Zertifikat.'],
+    ['Abwicklung', {paypal:'PayPal (extern)', sepa:'Überweisung (extern)', mind:'rein mental'}[state.method]]
+  ];
   $('#rLines').innerHTML = lines.map(([k,v],i) =>
-    `<div class="receipt-line" style="${i===lines.length-1?'border-bottom:none':''}"><span>${k}</span><span class="${i<3?'hl':''}">${v}</span></div>`
+    '<div class="receipt-line" style="'+(i===lines.length-1?'border-bottom:none':'')+'"><span>'+k+'</span><span class="'+(i>=3?'hl':'')+'">'+v+'</span></div>'
   ).join('');
 }
  $('#amountInput').addEventListener('input', e => {
@@ -1009,111 +990,125 @@ function updateReceipt() {
   $('#amountInput').value = state.amount;
   updateReceipt();
 }));
- $$('input[name=rhythm]').forEach(r => r.addEventListener('change', e => { state.rhythm = e.target.value; updateReceipt(); }));
+ $$('input[name=style]').forEach(r => r.addEventListener('change', e => { state.style = e.target.value; updateReceipt(); }));
  $$('input[name=method]').forEach(r => r.addEventListener('change', e => { state.method = e.target.value; updateReceipt(); }));
 updateReceipt();
 
-/* Katalog-Zeilen wählen den Betrag vor und springen zum Schalter */
+/* Katalog-Zeilen */
  $$('.cat-row').forEach(row => row.addEventListener('click', () => {
   state.amount = Number(row.dataset.amount);
   $('#amountInput').value = state.amount;
   $$('#quickAmounts input').forEach(r => r.checked = (Number(r.value) === state.amount));
   updateReceipt();
   document.getElementById('schalter').scrollIntoView({behavior:'smooth'});
-  toast(`Stufe „${row.querySelector('h3 small').textContent}" gewählt. Gute Wahl — die beste, eigentlich.`, 'award');
+  toast('Stufe „'+row.querySelector('h3 small').textContent+'“ gewählt. Gute Wahl — die beste, eigentlich.', 'award');
 }));
 
-/* ═══════════════════════ ZIEL / FONDS ═══════════════════════ */
-function updateGoal() {
-  $('#goalCurrent').textContent = fmtEUR(state.fonds);
-  const pct = state.fonds / GOAL * 100;
-  $('#goalPct').textContent = pct.toFixed(4).replace('.', ',');
-  $('#goalFill').style.width = Math.max(0.5, pct * 12) + '%'; // optisch leicht überhöht, sonst sieht man nichts
+/* ═════════════ KONTOSTIMMUNG ═════════════ */
+const MOODS = {
+  traurig: {
+    label:'Traurig, aber stabil', eyes:'dots',
+    mouth:'M32 68 Q50 54 68 68',
+    note:'Fachsprache des Hauses: „flüssige Mittel sind nicht flüssig“. Die Anzeige wird von Hand aktualisiert — Optimismus ist schließlich teuer.'
+  },
+  hoffnungsvoll: {
+    label:'Vorsichtig hoffnungsvoll', eyes:'dots',
+    mouth:'M32 64 Q50 60 68 64',
+    note:'Tritt auf, wenn unbekannte Nummern anrufen und nach „Arthur“ fragen. Meist sind es nur Spam-Bots. Meist.'
+  },
+  gluecklich: {
+    label:'Verdächtig gut gelaunt', eyes:'happy',
+    mouth:'M32 58 Q50 76 68 58',
+    note:'Prüfen Sie bitte das Datum. Wenn der Kontostimmung nach etwas riecht, dann nach Ihrem Zahltag.'
+  },
+  existenziell: {
+    label:'Existenziell: eine Fläche', eyes:'lines',
+    mouth:'M32 63 L68 63',
+    note:'Der Smiley hat das Große Ganze betrachtet und beschlossen, nicht mehr darüber zu sprechen.'
+  }
+};
+function renderMood(key){
+  const m = MOODS[key] || MOODS.traurig;
+  const eyes = m.eyes === 'happy'
+    ? '<path d="M30 42 Q36 36 42 42" /><path d="M58 42 Q64 36 70 42" />'
+    : m.eyes === 'lines'
+      ? '<line x1="30" y1="42" x2="42" y2="42"/><line x1="58" y1="42" x2="70" y2="42"/>'
+      : '<circle cx="36" cy="42" r="4.5" fill="currentColor"/><circle cx="64" cy="42" r="4.5" fill="currentColor"/>';
+  $('#moodSvg').innerHTML =
+    '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">'+
+    '<circle cx="50" cy="50" r="44"/>'+eyes+
+    '<path d="'+m.mouth+'"/></svg>';
+  $('#moodLabel').textContent = m.label;
+  $('#moodNote').textContent = m.note;
+  $('#heroMood').innerHTML =
+    '<svg class="stat-mood-face" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round">'+
+    '<circle cx="50" cy="50" r="44"/>'+eyes+'<path d="'+m.mouth+'"/></svg>'+m.label;
 }
-updateGoal();
 
-/* ═══════════════════════ LIVE-FEED ═══════════════════════ */
-const feedNames = ['Kevın (ohne i)', 'Oma Ingrid', 'Dein Ex', 'Anonym & schuldig', 'Taxifahrer Achmed',
-  'Mark aus dem Gym', 'Dein zukünftiges Ich', 'Ein Kollege, du weißt welcher', 'someone.lvl99', 'Die Hausmeister-Fraktion'];
-const feedMsgs = ['weil ja', 'nimm es und gib Ruhe', 'hier, für das Kanu', 'günstiger als Therapie',
-  'mein Berater hat abgewunken', '1 Stern für den Inhalt, trotzdem Geld', 'bitte hört auf, ihn zu unterstützen (nicht)',
-  'für die Urkunde', 'spontan, inkonsequent, legendär', 'Bar im Umschlag gedacht'];
-const feedAmts = [1,2,3,5,5,10,12,15,20,50,0.01];
+/* ═════════════ ZUSTANDSBERICHT + WITZ-ZAHLEN ═════════════ */
+function renderJournal(){
+  const list = $('#journalList');
+  list.innerHTML = (CONFIG.journal && CONFIG.journal.length)
+    ? CONFIG.journal.map(e => '<li>'+e+'</li>').join('')
+    : '<li>Der Zustandsbericht wird gerade neu sortiert. Vom Zustand ist wenig berichtet, vom Sortieren umso mehr.</li>';
+}
+function renderNumbers(){
+  $('#wDoner').textContent   = CONFIG.daysSinceDoner;
+  $('#wNoodles').textContent = CONFIG.noodlePacks;
+  $('#wConf').textContent    = CONFIG.confidence;
+  $('#wRaids').textContent   = CONFIG.counterRaids;
+  $('#heroDoner').textContent = CONFIG.daysSinceDoner;
+  $('#heroConf').textContent  = CONFIG.confidence;
+}
+renderMood(CONFIG.mood);
+renderJournal();
+renderNumbers();
 
-let feedTotal = 0;
-function addFeedEntry(who, amt, msg, me = false) {
-  const li = document.createElement('li');
-  if (me) li.classList.add('me');
-  li.innerHTML = `<span class="who">${who}</span><span class="amt">${amt === 0 ? '0 €' : fmtInt(amt) + ' €'}</span><span class="msg">„${msg}"</span>`;
-  const list = $('#feedList');
-  list.prepend(li);
-  while (list.children.length > 6) list.lastChild.remove();
-  feedTotal++;
-  $('#feedCount').textContent = feedTotal + ' Einträge';
+/* ═════════════ AUSREDEN-GENERATOR ═════════════ */
+const EXCUSES = [
+  'Ich habe mein gesamtes flüssiges Vermögen in eine vielversprechende Monstera investiert. Die Rendite wächst. Langsam. Photosynthetisch.',
+  'Mein Konto befindet sich bis auf Weiteres in selbstgewählter Zurückgezogenheit. Es braucht das. Wir reden nicht darüber.',
+  'Ich zahle ausschließlich bei Bewölkung. Aktuelle Wetterlage: verdächtig wolkenlos.',
+  'Zwischen mir und meinem Geld liegt eine emotionale Sicherheitsgrenze. Und ein Sparschwein. Beide bissig.',
+  'Ich habe gerade drei Monate Rundum-sorglos-Ausreden-Flatrate abgeschlossen. Diese hier ist Nummer eins.',
+  'Mein Kontostand und ich haben eine Vereinbarung: Wir reden nicht über Fremdgehen. Ähm — Fremdes. Äh. Pass auf, egal.',
+  'Ich unterstütze grundsätzlich nur Personen mit aktenkundigem Kanu. Fehlt dir was?',
+  'Ich hatte heute Kaffee. Von da an war das Budget ein rein theoretisches Konstrukt.',
+  'Auf meinem Konto herrscht seit 2019 Ausnahmezustand. Man gewöhnt sich dran. Nicht.',
+  'Mein Geld hat eine Kontaktsperre gegen mich verhängt. Ich respektiere das. Wir wachsen daran.',
+  'Ich verstehe die Frage nicht — und aus Prinzip beantworte ich nichts, was ich nicht verstehe.',
+  'Mein Geld ist gerade in Nachverhandlungen mit sich selbst. Die Stimmung ist angespannt.',
+  'Ich investiere aktuell alles in meine Zukunft. Die Zukunft hat sich noch nicht gemeldet.',
+  'Ich bin sparsam veranlagt. Und begabt. Und schnell. Vor allem schnell.',
+  'Heute nicht. Meine Ausreden-Abteilung hat Feierabend — deshalb sagte ich das hier. Schönen Tag noch.'
+];
+function newExcuse(){
+  let e = EXCUSES[Math.floor(Math.random()*EXCUSES.length)];
+  if (EXCUSES.length > 1 && e === state.lastExcuse) {
+    e = EXCUSES[(EXCUSES.indexOf(e)+1) % EXCUSES.length];
+  }
+  state.lastExcuse = e;
+  const el = $('#excuseText');
+  el.style.animation = 'none';
+  el.offsetHeight; // Reflow, damit die Animation neu startet
+  el.style.animation = '';
+  el.textContent = '„' + e + '“';
 }
-function randomFeedEntry() {
-  const amt = feedAmts[Math.floor(Math.random()*feedAmts.length)];
-  const who = feedNames[Math.floor(Math.random()*feedNames.length)];
-  const msg = feedMsgs[Math.floor(Math.random()*feedMsgs.length)];
-  addFeedEntry(who, amt, msg);
-  state.fonds += amt;
-  updateGoal();
-  // gelegentlich ein frecher Extra-Gag
-  if (Math.random() < 0.12) addFeedEntry('Du', 0, 'liest nur. zählt fast.');
-}
-// Startbelegung
-['Kevın (ohne i)|3|weil ja', 'Oma Ingrid|20|weil man irgendwann muss', 'Anonym & schuldig|5|kein Kommentar',
- 'Mark aus dem Gym|50|günstiger als Therapie'].forEach(s => {
-  const [w,a,m] = s.split('|'); addFeedEntry(w, Number(a), m);
+ $('#newExcuseBtn').addEventListener('click', newExcuse);
+ $('#copyExcuseBtn').addEventListener('click', () => {
+  if (!state.lastExcuse) { newExcuse(); return; }
+  const t = state.lastExcuse;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(
+      () => toast('Ausrede kopiert. Sie ist jetzt offiziell deine. Ich erhebe keine Lizenzgebühren — diesmal.', 'copy'),
+      () => toast('Kopieren nicht erlaubt. Die Ausrede funktioniert übrigens auch mündlich.', 'copy', true)
+    );
+  } else {
+    toast('Dein Browser mag das Clipboard nicht. Die Ausrede funktioniert dafür umso besser mündlich.', 'copy', true);
+  }
 });
-setInterval(randomFeedEntry, 3200);
 
-/* ═══════════════════════ WERBUNG- OVERLAY ═══════════════════════ */
-const skipGags = ['Nö.', 'Fast.', 'Echt jetzt?', 'Glaubst du alles?', 'Noch nicht.', 'Ausdauer! …hilft nicht.', 'Gleich. Versprochen. Gelogen.'];
-let adTimer = null, adT = 10, gagIdx = 0, gagTimer = null;
-
-function openAd() {
-  $('#adOverlay').classList.add('open');
-  $('#skipBtn').disabled = true;
-  $('#skipBtn').textContent = skipGags[0];
-  $('#adX').title = 'Noch nicht.';
-  adT = 10; gagIdx = 0;
-  $('#adClock').textContent = adT;
-  clearInterval(adTimer); clearInterval(gagTimer);
-  adTimer = setInterval(() => {
-    adT--;
-    $('#adClock').textContent = Math.max(0, adT);
-    if (adT <= 0) {
-      clearInterval(adTimer);
-      $('#skipBtn').disabled = false;
-      $('#skipBtn').textContent = 'Anzeige schließen (erlösend)';
-      $('#adX').title = 'Jetzt erlaubt.';
-    }
-  }, 1000);
-  gagTimer = setInterval(() => {
-    gagIdx = Math.min(gagIdx + 1, skipGags.length - 1);
-    if (!$('#skipBtn').disabled) return;
-    $('#skipBtn').textContent = skipGags[gagIdx];
-  }, 1500);
-}
-function closeAd() {
-  if ($('#skipBtn').disabled) { toast('Rausreden zählt nicht. Die Anzeige dankt es dir trotzdem.', 'shieldalert', true); return; }
-  $('#adOverlay').classList.remove('open');
-  clearInterval(adTimer); clearInterval(gagTimer);
-  state.adsWatched++;
-  state.adRevenue += 0.004;
-  state.fonds += 0.004;
-  updateGoal();
-  $('#adRevenue').textContent = fmtEUR(state.adRevenue) + ' €';
-  $('#adToGo').textContent = fmtInt(Math.max(1, 250000 - state.adsWatched)) + ' Anzeigen';
-  toast(`Werbung verwertet: <b>+0,004 €</b> gutgeschrieben. Gesamt: <b>${fmtEUR(state.adRevenue)} €</b>. Weiter so — nur noch ${fmtInt(250000 - state.adsWatched)} Anzeigen bis zum Döner-Topping.`, 'megaphone');
-}
- $('#adOpenBtn').addEventListener('click', openAd);
- $('#skipBtn').addEventListener('click', closeAd);
- $('#adX').addEventListener('click', closeAd);
- $('#adOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeAd(); });
-
-/* ═══════════════════════ SPENDEN-ABLAUF + URKUNDE ═══════════════════════ */
+/* ═════════════ ZAHLUNGSFLOW ═════════════ */
 function confetti() {
   const colors = ['#146645', '#C33A20', '#181410', '#C9B98A'];
   for (let i = 0; i < 42; i++) {
@@ -1128,53 +1123,97 @@ function confetti() {
     setTimeout(() => c.remove(), 3600);
   }
 }
+function showCert(a, name, wayLabel, mind) {
+  $('#procView').style.display = 'none';
+  $('#payView').style.display = 'none';
+  $('#certView').style.display = 'block';
+  $('#certBody').innerHTML = mind
+    ? 'Hiermit wird feierlich bescheinigt, dass <b>'+name+'</b> diese Website <b>gedanklich</b> mit <b>'+fmtInt(a)+' €</b> unterstützt hat. Der Betrag bleibt bei dir, mein Kampfwille bleibt bei mir. Fair.'
+    : 'Hiermit wird feierlich bescheinigt, dass <b>'+name+'</b> angekündigt hat, den Betreiber dieser Website mit <b>'+fmtInt(a)+' €</b> zu unterstützen. Der Betrag geht zu 100&thinsp;% an <b>Arthur John Fritz Frisch</b> — privat, offen, ohne Umweg. Bestätigt wird die Absicht; den Zahlungseingang prüft der Empfänger, sobald der Anbieter ihn benachrichtigt (also hoffentlich bald, er schaut sehr regelmäßig).';
+  $('#certExtra').textContent = 'Weg: '+wayLabel+'. Dort gelten die Bedingungen des Anbieters.';
+  confetti();
+}
+function buildPayActions(a, name){
+  const box = $('#payActions');
+  const any = CONFIG.paypalMe || CONFIG.kofi || (CONFIG.iban && CONFIG.ibanHolder);
+  if (!any) {
+    box.innerHTML = '<div class="pay-note">Der Schalter ist noch zu: Es ist noch kein Zahlungsweg konfiguriert (siehe CONFIG-Block). Betreiber-Aufgabe. Besucher-Patience: vorhanden.</div>';
+    return;
+  }
+  let html = '';
+  if (CONFIG.paypalMe) html += '<button class="btn btn-primary" id="goPaypal"><i data-icon="card"></i>Mit PayPal unterstützen ('+fmtInt(a)+' €)</button>';
+  if (CONFIG.kofi)     html += '<button class="btn" id="goKofi"><i data-icon="heart"></i>Über Ko-Fi</button>';
+  if (CONFIG.iban && CONFIG.ibanHolder) html += '<button class="btn" id="goIban"><i data-icon="filetext"></i>Per Überweisung (Daten ansehen)</button>';
+  html += '<button class="btn" id="goMind"><i data-icon="brain"></i>Nur gedanklich (kostenlos, mutig)</button>';
+  html += '<div class="iban-box" id="ibanBox" style="display:none"><b>IBAN:</b> '+CONFIG.iban+'<br><b>Kontoinhaber:</b> '+CONFIG.ibanHolder+'<br><b>Verwendungszweck:</b> frei wählbar — „Unterstützung“ reicht.<div style="margin-top:12px"><button class="btn btn-sm btn-primary" id="goIbanCert"><i data-icon="award"></i>Ich überweise — Urkunde bitte</button></div></div>';
+  box.innerHTML = html;
+  renderIcons(box);
+
+  if (CONFIG.paypalMe) box.querySelector('#goPaypal').addEventListener('click', () => {
+    window.open('https://paypal.me/'+encodeURIComponent(CONFIG.paypalMe)+'/'+a, '_blank', 'noopener');
+    showCert(a, name, 'PayPal (extern)');
+    toast('PayPal geöffnet. Dort fragt jetzt der Anbieter dich — nicht mich. Deine Zahlungsdaten sehen mich nie.', 'lock');
+  });
+  if (CONFIG.kofi) box.querySelector('#goKofi').addEventListener('click', () => {
+    window.open('https://ko-fi.com/'+encodeURIComponent(CONFIG.kofi), '_blank', 'noopener');
+    showCert(a, name, 'Ko-Fi (extern)');
+    toast('Ko-Fi geöffnet. Betrag dort frei wählbar — ich schlage '+fmtInt(a)+' € vor, aber du hast das Sagen.', 'heart');
+  });
+  if (CONFIG.iban && CONFIG.ibanHolder) {
+    box.querySelector('#goIban').addEventListener('click', () => {
+      const b = box.querySelector('#ibanBox');
+      b.style.display = b.style.display === 'none' ? 'block' : 'none';
+    });
+    box.querySelector('#goIbanCert').addEventListener('click', () => {
+      showCert(a, name, 'Überweisung (extern)');
+      toast('Urkunde ausgestellt. Deine Überweisung ist dein Wort — das zählt hier doppelt.', 'award');
+    });
+  }
+  box.querySelector('#goMind').addEventListener('click', () => {
+    showCert(a, name, 'rein mental', true);
+    toast('Deine Gedanken sind angekommen. Dein Geld nicht. Fast gleich gut — für dich.', 'brain');
+  });
+}
 
  $('#submitBtn').addEventListener('click', () => {
   const a = state.amount;
-  if (a <= 0) {
-    toast('0 € ist kein Betrag. Das ist ein Blickkontakt.', 'thumbsup', true);
-    return;
-  }
-  if (state.method === 'mind') {
-    toast('Deine Gedanken sind angekommen. Dein Geld nicht. Fast gleich gut.', 'brain');
-  }
-
-  // Name holen
+  if (a <= 0) { toast('0 € ist kein Betrag. Das ist ein Blickkontakt.', 'thumbsup', true); return; }
   const name = $('#nameInput').value.trim() || 'Anonymus Maximus';
 
-  // Overlay in Verarbeitungs-Ansicht
+  if (state.method === 'mind') {
+    $('#donOverlay').classList.add('open');
+    $('#procView').style.display = 'none';
+    $('#payView').style.display = 'none';
+    showCert(a, name, 'rein mental', true);
+    toast('Der frechste Weg von allen: kostenlos, legal, mental.', 'brain');
+    return;
+  }
   $('#donOverlay').classList.add('open');
-  $('#procView').style.display = 'block';
   $('#certView').style.display = 'none';
+  $('#payView').style.display = 'none';
+  $('#procView').style.display = 'block';
   ['p1','p2','p3'].forEach((id, i) => {
     const el = document.getElementById(id);
     el.classList.remove('show');
     setTimeout(() => el.classList.add('show'), 350 + i*550);
   });
-
   setTimeout(() => {
-    // Urkunde füllen
-    $('#certName').textContent = name;
-    $('#certAmount').textContent = (state.method === 'mind' ? '0,00 € (gefühlt: ' + fmtInt(a) + ' €)' : fmtInt(a) + ' €');
-    $('#certExtra').textContent = state.method === 'mind'
-      ? 'Zahlungsweg: rein mental. Der Betrag bleibt bei dir. Ich habe trotzdem gekämpft.'
-      : 'Zahlungsweg: ' + ({transfer:'Überweisung ins Blaue', cash:'Bar im Umschlag — Adresse folgt nie', mind:''}[state.method] || '') ;
     $('#procView').style.display = 'none';
-    $('#certView').style.display = 'block';
-    confetti();
-    renderIcons();
-  }, 2100);
-
-  // Buchung vollziehen
-  state.fonds += a;
-  state.donated = true;
-  updateGoal();
-  addFeedEntry('Du (' + name + ')', a, 'charakterstark. protokolliert.', true);
+    const pay = $('#payView');
+    const sum = [
+      ['Betrag', fmtInt(a)+' €'],
+      ['Stil', {plain:'einmalig, schnörkellos', felt:'einmalig, mit Gefühl', remember:'einmalig, mit Erinnerungswert'}[state.style]],
+      ['Für die Urkunde', name],
+      ['Empfänger', 'Arthur J. F. Frisch (100 %, privat)']
+    ];
+    $('#paySummary').innerHTML = sum.map(([k,v]) => '<div class="receipt-line" style="border-color:#d8cfbc"><span>'+k+'</span><span>'+v+'</span></div>').join('');
+    buildPayActions(a, name);
+    pay.style.display = 'block';
+  }, 2000);
 });
-
  $('#certClose').addEventListener('click', () => {
   $('#donOverlay').classList.remove('open');
-  toast('Eintrag im Protokoll verewigt. Der Nachruhm beginnt jetzt.', 'award');
+  toast('Angekündigt und verewigt. Der Nachruhm beginnt jetzt.', 'award');
 });
  $('#certAgain').addEventListener('click', () => {
   $('#donOverlay').classList.remove('open');
@@ -1182,82 +1221,65 @@ function confetti() {
   toast('So hohe Wiederholungstoleranz. Der Katalog applaudiert.', 'flame');
 });
 
-/* ═══════════════════════ DER FLIEHENDE BUTTON ═══════════════════════ */
-const dodgeBtn = $('#dodgeBtn');
-const zone = $('#dodgeZone');
-
-function flee() {
-  if (state.dodges >= 5) return;
-  state.dodges++;
-  $('#dodgeCount').textContent = state.dodges;
-  if (state.dodges >= 5) {
-    dodgeBtn.textContent = '…na gut. hier klicken.';
-    dodgeBtn.style.left = '50%'; dodgeBtn.style.top = '50%';
-    if (state.dodges === 5) toast('Der Button kapituliert. Willensstärke ist eine Form von Spende. Fast.', 'shield');
-    return;
-  }
-  const maxX = zone.clientWidth - dodgeBtn.offsetWidth - 16;
-  const maxY = zone.clientHeight - dodgeBtn.offsetHeight - 46;
-  dodgeBtn.style.left = (8 + Math.random() * (maxX - 8)) + 'px';
-  dodgeBtn.style.top  = (10 + Math.random() * (maxY - 10)) + 'px';
-  if (state.dodges === 1) toast('Der Button hat besseres vor.', 'move', true);
-}
-// Desktop: bei Hover fliehen
-if (window.matchMedia('(hover:hover)').matches) {
-  dodgeBtn.addEventListener('pointerenter', flee);
-}
-// Touch & Klick: erst nach 5 Versuchen fangen
-dodgeBtn.addEventListener('pointerdown', e => {
-  if (state.dodges < 5) { e.preventDefault(); flee(); }
-  else {
-    toast('Gefasst. Wegducken hat mehr Kraft gekostet als Spenden — kanalisier das endlich.', 'thumbsup', true);
-    document.getElementById('schalter').scrollIntoView({behavior:'smooth'});
-  }
+/* ═════════════ WÜRDVOLLER ABSCHIED ═════════════ */
+ $('#byeBtn').addEventListener('click', () => {
+  $('#byeOverlay').classList.add('open');
 });
- $('#braveBtn').addEventListener('click', () => {
+ $('#byeX').addEventListener('click', () => $('#byeOverlay').classList.remove('open'));
+ $('#byeOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) $('#byeOverlay').classList.remove('open'); });
+ $('#byeBrowse').addEventListener('click', () => {
+  $('#byeOverlay').classList.remove('open');
+  toast('Sag nie, die Seite hätte nichts versucht. Sie hat gewartet. Geduldig. Wie ein Kanu.', 'eye');
+});
+ $('#byeClose').addEventListener('click', () => {
+  $('#byeOverlay').classList.remove('open');
+  toast('Auf Wiedersehen — ohne Tracker, der dich zurückholt. Das ist hier seltener, als man denkt.', 'door');
+});
+ $('#supportBtn').addEventListener('click', () => {
   toast('Charakterstärke registriert. Der Schalter wartet bereits mit Respekt.', 'award');
 });
 
-/* ═══════════════════════ NEWSLETTER ═══════════════════════ */
- $('#newsForm').addEventListener('submit', e => {
+/* ═════════════ BESCHWERDE-EXPRESS (mailto) ═════════════ */
+ $('#complaintForm').addEventListener('submit', e => {
   e.preventDefault();
-  const mail = $('#newsMail').value.trim();
-  if (!mail || !mail.includes('@')) {
-    toast('Das ist keine E-Mail, das ist ein Schreibfehler mit Ambitionen.', 'mail', true);
-    return;
-  }
-  toast('Erfolgreich eingetragen.* &nbsp;<i style="font-style:normal">(nicht wahr.)</i> Es wurde nichts gespeichert — diese Seite hat nicht mal einen Server. Deine Adresse blieb in deinem Formularfeld und verschwindet jetzt feierlich.', 'mail');
-  $('#newsMail').value = '';
+  const subj = $('#complaintSubject').value.trim() || 'Sehr geehrter Geldempfänger,';
+  window.location.href = 'mailto:'+CONFIG.email+'?subject='+encodeURIComponent('Beschwerde-Express: '+subj);
+  toast('Dein Mailprogramm übernimmt. Deine Adresse habe ich nie gesehen — technisch unmöglich.', 'send');
+  $('#complaintSubject').value = '';
 });
 
-/* ═══════════════════════ IMPRESSUM ═══════════════════════ */
- $('#impressumBtn').addEventListener('click', () => $('#impressumOverlay').classList.add('open'));
- $('#impressumX').addEventListener('click', () => $('#impressumOverlay').classList.remove('open'));
- $('#impressumOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) $('#impressumOverlay').classList.remove('open'); });
+/* ═════════════ RECHTS-MODAL ═════════════ */
+function openLegal(tab) {
+  $('#legalOverlay').classList.add('open');
+  $$('.legal-tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  ['impressum','datenschutz','hinweise'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = (t === tab) ? '' : 'none';
+  });
+}
+ $$('.legal-tabs button').forEach(b => b.addEventListener('click', () => openLegal(b.dataset.tab)));
+ $$('[data-legal]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); openLegal(el.dataset.legal); }));
+ $('#legalX').addEventListener('click', () => $('#legalOverlay').classList.remove('open'));
+ $('#legalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) $('#legalOverlay').classList.remove('open'); });
 
-/* ═══════════════════════ SCROLL-REVEAL ═══════════════════════ */
+/* ═════════════ SCROLL-REVEAL / ESC / START ═════════════ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
 }, { threshold: 0.12 });
  $$('.reveal').forEach(el => io.observe(el));
 
-/* ═══════════════════════ ESC SCHLIESST OVERLAYS ═══════════════════════ */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    $('#adOverlay').classList.remove('open');
     $('#donOverlay').classList.remove('open');
-    $('#impressumOverlay').classList.remove('open');
-    clearInterval(adTimer); clearInterval(gagTimer);
+    $('#byeOverlay').classList.remove('open');
+    $('#legalOverlay').classList.remove('open');
   }
 });
 
-/* Icons initial rendern + Impressum einsetzen */
+applyLegal();
 renderIcons();
-applyImpressum();
 
-/* Begrüßungs-Gag nach kurzer Zeit */
 setTimeout(() => {
-  if (!state.donated) toast('Kurze Zwischenfrage: Hat dein Konto das hier eigentlich schon gesehen?', 'eye');
+  toast('Kurze Zwischenfrage: Hat dein Konto das hier eigentlich schon gesehen?', 'eye');
 }, 14000);
 </script>
 </body>
