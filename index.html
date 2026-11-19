@@ -5,7 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101522">
+
 <title>Schere, Stein, Papier</title>
+
+<!-- Eigenes Seitenicon: Schere, Stein und Papier -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%23101522'/%3E%3Ccircle cx='32' cy='32' r='25' fill='%231e2b43' stroke='%238b9cff' stroke-width='2'/%3E%3Ctext x='32' y='25' text-anchor='middle' font-size='19'%3E%E2%9C%82%EF%B8%8F%3C/text%3E%3Ctext x='20' y='47' text-anchor='middle' font-size='17'%3E%F0%9F%AA%A8%3C/text%3E%3Ctext x='45' y='47' text-anchor='middle' font-size='17'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E">
 
 <style>
 :root {
@@ -16,7 +20,7 @@
   --muted: #9caac2;
   --accent: #8b9cff;
   --green: #48d6a0;
-  --red: #ff7185;
+  --red: #ff647c;
   --yellow: #ffd36e;
 }
 
@@ -168,13 +172,8 @@ h2 {
   font-size: .9rem;
 }
 
-.status.online {
-  color: var(--green);
-}
-
-.status.offline {
-  color: var(--yellow);
-}
+.status.online { color: var(--green); }
+.status.offline { color: var(--yellow); }
 
 .secondary-button {
   border: 1px solid rgba(255,255,255,.14);
@@ -201,11 +200,11 @@ footer a {
   text-decoration: none;
 }
 
-footer a:hover {
-  color: white;
-}
+footer a:hover { color: white; }
 
-/* Overlay */
+/* =========================================
+   BOT OVERLAY
+========================================= */
 
 .bot-overlay {
   position: fixed;
@@ -214,8 +213,8 @@ footer a:hover {
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(5,8,16,.88);
-  backdrop-filter: blur(13px);
+  background: rgba(5,8,16,.92);
+  backdrop-filter: blur(16px);
   padding: 20px;
 }
 
@@ -224,8 +223,8 @@ footer a:hover {
 }
 
 .bot-stage {
-  width: min(420px, 90vw);
-  min-height: 390px;
+  width: min(550px, 95vw);
+  min-height: 440px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -235,26 +234,30 @@ footer a:hover {
 }
 
 .bot-overlay-title {
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 750;
-  margin-bottom: 55px;
+  margin-bottom: 38px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .bot-orbit {
   position: absolute;
-  width: 210px;
-  height: 210px;
-  border: 2px solid rgba(139,156,255,.45);
+  width: 235px;
+  height: 235px;
+  border: 2px solid rgba(139,156,255,.35);
   border-radius: 50%;
-  animation: rotate 4s linear infinite;
+  animation: rotate 5s linear infinite;
+  pointer-events: none;
 }
 
 .bot-orbit::before,
 .bot-orbit::after {
   content: "";
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   background: var(--accent);
   border-radius: 50%;
   top: 20px;
@@ -267,17 +270,15 @@ footer a:hover {
   left: auto;
   right: 15px;
   bottom: 35px;
-  width: 7px;
-  height: 7px;
 }
 
 .bot-orbit.two {
-  width: 260px;
-  height: 260px;
+  width: 290px;
+  height: 290px;
   border-style: dashed;
-  border-color: rgba(72,214,160,.4);
+  border-color: rgba(72,214,160,.3);
   animation-direction: reverse;
-  animation-duration: 7s;
+  animation-duration: 8s;
 }
 
 .bot-emoji {
@@ -293,19 +294,177 @@ footer a:hover {
 }
 
 .bot-emoji.final {
-  animation: finalChoice .35s ease-out;
+  animation: finalChoice .4s ease-out;
 }
 
 .bot-choice-name {
-  margin-top: 40px;
-  font-size: 1.2rem;
+  margin-top: 28px;
+  font-size: 1.3rem;
   font-weight: 750;
   color: var(--accent);
+  position: relative;
+  z-index: 2;
 }
 
 .bot-subtitle {
-  margin-top: 9px;
+  margin-top: 10px;
   color: var(--muted);
+  position: relative;
+  z-index: 2;
+}
+
+/* Gegenüberstellung */
+
+.duel {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  margin-top: 5px;
+  position: relative;
+  z-index: 3;
+}
+
+.duel.show {
+  display: flex;
+  animation: duelAppear .4s ease-out;
+}
+
+.duel-card {
+  width: 145px;
+  min-height: 155px;
+  padding: 17px 10px;
+  border-radius: 19px;
+  background: rgba(32,44,66,.9);
+  border: 1px solid rgba(255,255,255,.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.duel-card.player {
+  border-color: rgba(139,156,255,.6);
+}
+
+.duel-card.bot {
+  border-color: rgba(255,211,110,.5);
+}
+
+.duel-card .duel-emoji {
+  font-size: 3.7rem;
+}
+
+.duel-card .duel-label {
+  color: var(--muted);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.duel-card .duel-name {
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.duel-vs {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* Ergebnisanzeige */
+
+.outcome {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  position: relative;
+  z-index: 4;
+}
+
+.outcome.show {
+  display: flex;
+}
+
+.outcome-symbol {
+  font-size: 4rem;
+  line-height: 1.3;
+}
+
+.outcome-title {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 950;
+  letter-spacing: -1.5px;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.outcome-description {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.outcome.win .outcome-title {
+  color: var(--green);
+  text-shadow: 0 0 30px rgba(72,214,160,.5);
+}
+
+.outcome.loss .outcome-title {
+  color: var(--red);
+  text-shadow: 0 0 30px rgba(255,100,124,.5);
+}
+
+.outcome.draw .outcome-title {
+  color: var(--yellow);
+  text-shadow: 0 0 30px rgba(255,211,110,.5);
+}
+
+.outcome.win .outcome-symbol {
+  filter: drop-shadow(0 0 25px rgba(72,214,160,.6));
+}
+
+.outcome.loss .outcome-symbol {
+  filter: drop-shadow(0 0 25px rgba(255,100,124,.6));
+}
+
+.outcome.draw .outcome-symbol {
+  filter: drop-shadow(0 0 25px rgba(255,211,110,.6));
+}
+
+.bot-overlay.win {
+  background:
+    radial-gradient(circle at center, rgba(25,120,85,.25), transparent 65%),
+    rgba(5,8,16,.94);
+}
+
+.bot-overlay.loss {
+  background:
+    radial-gradient(circle at center, rgba(160,35,60,.28), transparent 65%),
+    rgba(5,8,16,.94);
+}
+
+.bot-overlay.draw {
+  background:
+    radial-gradient(circle at center, rgba(160,120,30,.23), transparent 65%),
+    rgba(5,8,16,.94);
+}
+
+.outcome.show {
+  animation: outcomeAppear .55s cubic-bezier(.16,1,.3,1);
+}
+
+.bot-stage.result-mode .bot-orbit {
+  opacity: .18;
+}
+
+.bot-stage.result-mode .bot-overlay-title {
+  margin-bottom: 22px;
 }
 
 @keyframes rotate {
@@ -324,7 +483,20 @@ footer a:hover {
   100% { transform: scale(1); }
 }
 
-/* Modals */
+@keyframes duelAppear {
+  from { opacity: 0; transform: translateY(20px) scale(.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes outcomeAppear {
+  0% { opacity: 0; transform: scale(.5); }
+  65% { opacity: 1; transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* =========================================
+   MODALS
+========================================= */
 
 .modal-backdrop {
   display: none;
@@ -371,9 +543,7 @@ footer a:hover {
   font-weight: 750;
 }
 
-.primary-button:hover {
-  filter: brightness(1.1);
-}
+.primary-button:hover { filter: brightness(1.1); }
 
 .settings-row {
   display: flex;
@@ -415,29 +585,16 @@ footer a:hover {
 }
 
 @media(max-width:550px) {
-  .game-buttons {
-    gap: 8px;
-  }
-
-  .choice-button {
-    min-height: 120px;
-  }
-
-  .choice-button .emoji {
-    font-size: 2.6rem;
-  }
-
-  .panel {
-    padding: 18px;
-  }
-
-  .stats {
-    gap: 7px;
-  }
-
-  .stat strong {
-    font-size: 1.6rem;
-  }
+  .game-buttons { gap: 8px; }
+  .choice-button { min-height: 120px; }
+  .choice-button .emoji { font-size: 2.6rem; }
+  .panel { padding: 18px; }
+  .stats { gap: 7px; }
+  .stat strong { font-size: 1.6rem; }
+  .duel { gap: 10px; }
+  .duel-card { width: 125px; min-height: 140px; }
+  .duel-card .duel-emoji { font-size: 3rem; }
+  .bot-stage { min-height: 420px; }
 }
 
 @media(prefers-reduced-motion: reduce) {
@@ -513,7 +670,7 @@ footer a:hover {
     <div>
       <h2 style="margin-bottom:5px">Datenspeicherung</h2>
       <div id="firebaseStatus" class="status offline">
-        Noch nicht verbunden – Spiel funktioniert lokal.
+        Lokaler Spielmodus.
       </div>
     </div>
     <button class="secondary-button" id="connectionButton">
@@ -548,7 +705,8 @@ footer a:hover {
 <!-- Bot-Overlay -->
 
 <div id="botOverlay" class="bot-overlay" aria-live="polite">
-  <div class="bot-stage">
+  <div id="botStage" class="bot-stage">
+
     <div id="botOverlayTitle" class="bot-overlay-title">
       Der Bot entscheidet ...
     </div>
@@ -558,30 +716,55 @@ footer a:hover {
 
     <div id="botEmoji" class="bot-emoji">❔</div>
 
-    <div id="botChoiceName" class="bot-choice-name">
-      ?
-    </div>
+    <div id="botChoiceName" class="bot-choice-name">?</div>
 
     <div id="botSubtitle" class="bot-subtitle">
       Die Entscheidung wird getroffen ...
     </div>
+
+    <div id="duel" class="duel">
+      <div class="duel-card player">
+        <div class="duel-label">Du</div>
+        <div id="playerEmoji" class="duel-emoji">✂️</div>
+        <div id="playerName" class="duel-name">Schere</div>
+      </div>
+
+      <div class="duel-vs">VS.</div>
+
+      <div class="duel-card bot">
+        <div class="duel-label">Bot</div>
+        <div id="duelBotEmoji" class="duel-emoji">🪨</div>
+        <div id="duelBotName" class="duel-name">Stein</div>
+      </div>
+    </div>
+
+    <div id="outcome" class="outcome">
+      <div id="outcomeSymbol" class="outcome-symbol">🏆</div>
+      <div id="outcomeTitle" class="outcome-title">GEWONNEN!</div>
+      <div id="outcomeDescription" class="outcome-description">
+        Du hast den Bot besiegt!
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- Cookie- und Datenschutzdialog -->
+<!-- Cookie-Dialog -->
 
 <div id="consentModal" class="modal-backdrop">
   <div class="modal">
     <h2>Datenspeicherung</h2>
+
     <p>
       Du kannst das Spiel ohne Datenspeicherung verwenden.
       Wenn du zustimmst, wird im Hintergrund eine anonyme Firebase-
       Kennung erstellt und deine Spielzüge werden gespeichert.
     </p>
+
     <p>
-      Die Kennung ist nicht mit einer Registrierung oder deinem Namen
-      verbunden. Sie ist jedoch ein pseudonymes Online-Kennzeichen.
-      Weitere Informationen findest du in der Datenschutzerklärung.
+      Die Kennung ist pseudonym und nicht mit einer Registrierung
+      oder deinem Namen verbunden. Weitere Informationen findest
+      du in der Datenschutzerklärung.
     </p>
 
     <div class="modal-actions">
@@ -643,12 +826,9 @@ footer a:hover {
 
 <script type="module">
 
-/* =========================================================
+/* =========================================
    FIREBASE-KONFIGURATION
-   Die Werte apiKey und appId aus deiner Firebase-Web-App
-   einsetzen. Die Werte findest du in den Projekteinstellungen.
-========================================================= */
-
+========================================= */
 
 const firebaseConfig = {
   apiKey: "AIzaSyDao1FkE3xLVoUg6f3OSIuh44B4b6MyV_o",
@@ -661,10 +841,9 @@ const firebaseConfig = {
   measurementId: "G-GW0FBPCEGK"
 };
 
-
-/* =========================================================
+/* =========================================
    GRUNDEINSTELLUNGEN
-========================================================= */
+========================================= */
 
 const $ = id => document.getElementById(id);
 
@@ -675,6 +854,15 @@ const visuals = {
   Stein: { emoji: "🪨", color: "#ffd36e" },
   Papier: { emoji: "📄", color: "#48d6a0" }
 };
+
+/* Dauer der Ergebnisanzeige im Overlay */
+const RESULT_DISPLAY_DURATION = 1600;
+
+/* Dauer der Roulette-Animation */
+const ROULETTE_INTERVALS = [
+  20, 25, 30, 35, 40,
+  45, 50, 55, 60, 65
+];
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -696,9 +884,9 @@ let firebaseInitializing = null;
 
 let consent = localStorage.getItem("gameConsent");
 
-/* =========================================================
+/* =========================================
    HILFSFUNKTIONEN
-========================================================= */
+========================================= */
 
 function showToast(message) {
   $("toast").textContent = message;
@@ -733,10 +921,9 @@ function determineResult(player, bot) {
   return "Verloren";
 }
 
-/* =========================================================
+/* =========================================
    FIREBASE INITIALISIEREN
-   Erst nach ausdrücklicher Zustimmung wird Firebase geladen.
-========================================================= */
+========================================= */
 
 async function initializeFirebase() {
   if (firebaseAuth && database && firebaseAuth.currentUser) {
@@ -749,14 +936,6 @@ async function initializeFirebase() {
 
   firebaseInitializing = (async () => {
     try {
-      if (
-        firebaseConfig.apiKey === "DEIN_API_KEY" ||
-        firebaseConfig.appId === "DEINE_APP_ID" ||
-        firebaseConfig.authDomain === "DEINE_AUTH_DOMAIN"
-      ) {
-        throw new Error("Bitte zuerst die Firebase-Konfiguration ergänzen.");
-      }
-
       const [
         appModule,
         authModule,
@@ -779,14 +958,16 @@ async function initializeFirebase() {
 
       const credential = await authModule.signInAnonymously(firebaseAuth);
 
-      setFirebaseStatus("Anonym verbunden – Spielzüge werden gespeichert.", true);
+      setFirebaseStatus(
+        "Anonym verbunden – Spielzüge werden gespeichert.",
+        true
+      );
 
       return credential.user;
 
     } catch (error) {
       console.error("Firebase-Fehler:", error);
-      setFirebaseStatus("Keine Firebase-Verbindung: " + error.message);
-      showToast("Firebase konnte nicht verbunden werden.");
+      setFirebaseStatus("Firebase-Fehler: " + error.message);
       throw error;
 
     } finally {
@@ -797,10 +978,9 @@ async function initializeFirebase() {
   return firebaseInitializing;
 }
 
-/* =========================================================
+/* =========================================
    SPIELZUG SPEICHERN
-   Jede Runde erhält eine eindeutige Firebase-ID.
-========================================================= */
+========================================= */
 
 async function saveRound(player, bot, result) {
   if (consent !== "accepted") return;
@@ -808,11 +988,7 @@ async function saveRound(player, bot, result) {
   try {
     const user = await initializeFirebase();
 
-    const {
-      ref,
-      push,
-      set
-    } = firebaseModules;
+    const { ref, push, set } = firebaseModules;
 
     const roundsRef = ref(
       database,
@@ -821,25 +997,23 @@ async function saveRound(player, bot, result) {
 
     const newRoundRef = push(roundsRef);
 
-    const roundData = {
+    await set(newRoundRef, {
       spieler: player,
       bot: bot,
       ergebnis: result,
       runde: roundCount,
       zeitpunkt: Date.now()
-    };
-
-    await set(newRoundRef, roundData);
+    });
 
   } catch (error) {
     console.error("Spielzug konnte nicht gespeichert werden:", error);
-    showToast("Spielzug wurde lokal gespielt, aber nicht gespeichert.");
+    showToast("Spielzug wurde gespielt, aber nicht gespeichert.");
   }
 }
 
-/* =========================================================
+/* =========================================
    REFRESH-EVENT SPEICHERN
-========================================================= */
+========================================= */
 
 async function saveRefreshEvent() {
   if (consent !== "accepted") {
@@ -850,11 +1024,7 @@ async function saveRefreshEvent() {
   try {
     const user = await initializeFirebase();
 
-    const {
-      ref,
-      push,
-      set
-    } = firebaseModules;
+    const { ref, push, set } = firebaseModules;
 
     const refreshRef = ref(
       database,
@@ -873,69 +1043,143 @@ async function saveRefreshEvent() {
   }
 }
 
-/* =========================================================
-   BOT-ANIMATION
-========================================================= */
+/* =========================================
+   OVERLAY ZURÜCKSETZEN
+========================================= */
 
-async function showBotAnimation(bot) {
-  const overlay = $("botOverlay");
-  const emoji = $("botEmoji");
-  const text = $("botSubtitle");
-  const choice = $("botChoiceName");
+function resetOverlay() {
+  $("botOverlay").className = "bot-overlay";
+  $("botStage").classList.remove("result-mode");
+
+  $("botEmoji").className = "bot-emoji";
+  $("botEmoji").textContent = "❔";
+  $("botEmoji").style.color = "white";
 
   $("botOverlayTitle").textContent = "Der Bot entscheidet ...";
+  $("botChoiceName").textContent = "?";
+  $("botSubtitle").textContent = "Die Entscheidung wird getroffen ...";
 
-  text.textContent = "Die Entscheidung wird getroffen ...";
-  choice.textContent = "?";
+  $("duel").classList.remove("show");
+  $("outcome").className = "outcome";
+}
 
-  emoji.textContent = "❔";
-  emoji.style.color = "white";
-  emoji.className = "bot-emoji";
+/* =========================================
+   BOT-ANIMATION MIT ERGEBNIS
+========================================= */
+
+async function showBotAnimation(player, bot, result) {
+  const overlay = $("botOverlay");
+  const emoji = $("botEmoji");
+
+  resetOverlay();
 
   overlay.classList.add("show");
 
-  if (reducedMotion) {
-    await sleep(250);
-  } else {
-    const intervals = [
-      20, 25, 30, 35, 40,
-      45, 50, 55, 60, 65
-    ];
+  /* Phase 1: Bot entscheidet */
 
-    for (let i = 0; i < intervals.length; i++) {
+  if (reducedMotion) {
+    await sleep(200);
+  } else {
+    for (const interval of ROULETTE_INTERVALS) {
       const next = randomChoice();
 
       emoji.classList.add("tick");
-      await sleep(Math.min(15, intervals[i] / 2));
+      await sleep(Math.min(15, interval / 2));
 
       emoji.textContent = visuals[next].emoji;
       emoji.style.color = visuals[next].color;
 
       emoji.classList.remove("tick");
 
-      await sleep(intervals[i]);
+      await sleep(interval);
     }
   }
 
-  /* Die tatsächliche Bot-Entscheidung wird angezeigt. */
+  /* Phase 2: Tatsächliche Bot-Wahl */
 
   emoji.textContent = visuals[bot].emoji;
   emoji.style.color = visuals[bot].color;
   emoji.classList.add("final");
 
   $("botOverlayTitle").textContent = "Der Bot hat gewählt";
+  $("botChoiceName").textContent = bot;
+  $("botSubtitle").textContent = "Jetzt wird verglichen ...";
 
-  text.textContent = "Sein Zug steht fest";
-  choice.textContent = bot;
+  await sleep(reducedMotion ? 100 : 180);
 
-  await sleep(reducedMotion ? 200 : 250);
+  /* Phase 3: Beide Züge gegenüberstellen */
+
+  $("botStage").classList.add("result-mode");
+
+  $("botEmoji").style.display = "none";
+  $("botChoiceName").style.display = "none";
+  $("botSubtitle").style.display = "none";
+
+  $("playerEmoji").textContent = visuals[player].emoji;
+  $("playerName").textContent = player;
+
+  $("duelBotEmoji").textContent = visuals[bot].emoji;
+  $("duelBotName").textContent = bot;
+
+  $("duel").classList.add("show");
+
+  $("botOverlayTitle").textContent = "Der Vergleich";
+
+  await sleep(reducedMotion ? 100 : 300);
+
+  /* Phase 4: Das echte Spielergebnis */
+
+  const outcome = $("outcome");
+
+  let symbol;
+  let title;
+  let description;
+
+  if (result === "Gewonnen") {
+    overlay.classList.add("win");
+
+    symbol = "🏆";
+    title = "GEWONNEN!";
+    description = "Du hast den Bot besiegt!";
+    outcome.classList.add("win");
+
+  } else if (result === "Verloren") {
+    overlay.classList.add("loss");
+
+    symbol = "💥";
+    title = "VERLOREN!";
+    description = "Der Bot hat diese Runde gewonnen.";
+    outcome.classList.add("loss");
+
+  } else {
+    overlay.classList.add("draw");
+
+    symbol = "🤝";
+    title = "UNENTSCHIEDEN!";
+    description = "Ihr habt beide dasselbe gewählt.";
+    outcome.classList.add("draw");
+  }
+
+  $("outcomeSymbol").textContent = symbol;
+  $("outcomeTitle").textContent = title;
+  $("outcomeDescription").textContent = description;
+
+  $("botOverlayTitle").textContent = "Das Ergebnis steht fest";
+
+  outcome.classList.add("show");
+
+  await sleep(reducedMotion ? 300 : RESULT_DISPLAY_DURATION);
 
   overlay.classList.remove("show");
+
+  $("botEmoji").style.display = "";
+  $("botChoiceName").style.display = "";
+  $("botSubtitle").style.display = "";
 }
 
-/* =========================================================
+/* =========================================
    SPIELLOGIK
-========================================================= */
+========================================= */
 
 async function play(player) {
   if (busy) return;
@@ -950,9 +1194,9 @@ async function play(player) {
     /* Bot-Wahl wird vor der Animation festgelegt. */
     const bot = randomChoice();
 
-    await showBotAnimation(bot);
-
     const result = determineResult(player, bot);
+
+    await showBotAnimation(player, bot, result);
 
     roundCount++;
 
@@ -998,9 +1242,9 @@ function showResult(player, bot, result) {
     `${visuals[bot].emoji} ${bot}`;
 }
 
-/* =========================================================
-   COOKIE- UND DATENSCHUTZEINSTELLUNGEN
-========================================================= */
+/* =========================================
+   DATENSCHUTZ
+========================================= */
 
 function showConsentModal() {
   $("consentModal").classList.add("show");
@@ -1021,6 +1265,7 @@ async function acceptConsent() {
     await saveRefreshEvent();
   } catch (error) {
     console.error(error);
+    showToast("Firebase konnte nicht initialisiert werden.");
   }
 }
 
@@ -1030,7 +1275,10 @@ function declineConsent() {
 
   hideConsentModal();
 
-  setFirebaseStatus("Lokaler Spielmodus – keine Spielzüge werden gespeichert.");
+  setFirebaseStatus(
+    "Lokaler Spielmodus – keine Spielzüge werden gespeichert."
+  );
+
   showToast("Du spielst ohne Datenspeicherung.");
 }
 
@@ -1050,9 +1298,9 @@ async function revokeConsent() {
   showToast("Datenspeicherung wurde deaktiviert.");
 }
 
-/* =========================================================
+/* =========================================
    EINSTELLUNGEN
-========================================================= */
+========================================= */
 
 const defaultKeys = {
   Schere: "s",
@@ -1097,9 +1345,9 @@ function saveSettings() {
   showToast("Einstellungen gespeichert.");
 }
 
-/* =========================================================
+/* =========================================
    EVENT LISTENER
-========================================================= */
+========================================= */
 
 document.querySelectorAll(".choice-button").forEach(button => {
   button.addEventListener("click", () => {
@@ -1126,55 +1374,52 @@ $("saveSettings").addEventListener("click", saveSettings);
 $("cookieSettingsLink").addEventListener("click", event => {
   event.preventDefault();
 
-  if (consent === "accepted") {
-    const modal = $("settingsModal");
+  const modal = $("settingsModal");
+  const heading = modal.querySelector("h2");
 
-    modal.classList.add("show");
+  heading.textContent = "Datenschutzeinstellungen";
 
-    const heading = modal.querySelector("h2");
-    heading.textContent = "Datenschutzeinstellungen";
+  const oldActions = modal.querySelector(".modal-actions");
 
-    const oldActions = modal.querySelector(".modal-actions");
-    oldActions.innerHTML = `
-      <button id="revokeConsentButton" class="secondary-button">
-        Zustimmung widerrufen
-      </button>
-      <button id="closePrivacySettings" class="primary-button">
-        Schließen
-      </button>
-    `;
+  oldActions.innerHTML = `
+    <button id="revokeConsentButton" class="secondary-button">
+      Zustimmung widerrufen
+    </button>
+    <button id="closePrivacySettings" class="primary-button">
+      Schließen
+    </button>
+  `;
 
-    $("revokeConsentButton").addEventListener("click", async () => {
-      await revokeConsent();
-      modal.classList.remove("show");
-      heading.textContent = "Einstellungen";
-      oldActions.innerHTML = `
-        <button id="saveSettings" class="primary-button">Speichern</button>
-        <button id="closeSettings" class="secondary-button">Schließen</button>
-      `;
-      $("saveSettings").addEventListener("click", saveSettings);
-      $("closeSettings").addEventListener("click", () => {
-        modal.classList.remove("show");
-      });
-    });
+  modal.classList.add("show");
 
-    $("closePrivacySettings").addEventListener("click", () => {
-      modal.classList.remove("show");
-      heading.textContent = "Einstellungen";
-      oldActions.innerHTML = `
-        <button id="saveSettings" class="primary-button">Speichern</button>
-        <button id="closeSettings" class="secondary-button">Schließen</button>
-      `;
-      $("saveSettings").addEventListener("click", saveSettings);
-      $("closeSettings").addEventListener("click", () => {
-        modal.classList.remove("show");
-      });
-    });
+  $("revokeConsentButton").addEventListener("click", async () => {
+    await revokeConsent();
+    modal.classList.remove("show");
+    restoreSettingsModal();
+  });
 
-  } else {
-    showConsentModal();
-  }
+  $("closePrivacySettings").addEventListener("click", () => {
+    modal.classList.remove("show");
+    restoreSettingsModal();
+  });
 });
+
+function restoreSettingsModal() {
+  const modal = $("settingsModal");
+
+  modal.querySelector("h2").textContent = "Einstellungen";
+
+  modal.querySelector(".modal-actions").innerHTML = `
+    <button id="saveSettings" class="primary-button">Speichern</button>
+    <button id="closeSettings" class="secondary-button">Schließen</button>
+  `;
+
+  $("saveSettings").addEventListener("click", saveSettings);
+
+  $("closeSettings").addEventListener("click", () => {
+    modal.classList.remove("show");
+  });
+}
 
 /* Tastatursteuerung */
 
@@ -1203,16 +1448,20 @@ document.addEventListener("keydown", event => {
   }
 });
 
-/* =========================================================
+/* =========================================
    START
-========================================================= */
+========================================= */
 
 if (consent === "accepted") {
   initializeFirebase().catch(error => {
     console.error(error);
   });
+
 } else if (consent === "declined") {
-  setFirebaseStatus("Lokaler Spielmodus – keine Spielzüge werden gespeichert.");
+  setFirebaseStatus(
+    "Lokaler Spielmodus – keine Spielzüge werden gespeichert."
+  );
+
 } else {
   showConsentModal();
 }
