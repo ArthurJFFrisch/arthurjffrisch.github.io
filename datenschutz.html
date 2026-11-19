@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datenschutzerklärung – Schere Stein Papier</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen p-6">
+  <main class="max-w-3xl mx-auto bg-white rounded-2xl shadow p-6 md:p-10">
+    <a href="index.html" class="text-blue-600 underline">← Zurück zum Spiel</a>
+    <h1 class="text-3xl font-bold mt-5 mb-3">Datenschutzerklärung</h1>
+    <p class="text-sm text-gray-500 mb-8">Mustertext – vor Veröffentlichung an die tatsächliche Website und Konfiguration anpassen.</p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">1. Verantwortlicher</h2>
+    <p class="leading-7">
+      Verantwortlich für die Datenverarbeitung ist:<br>
+      Arthur John Fritz Frisch<br>
+      Hinter der Kirche 16 in 63454 Hanau, Deutschland<br>
+      E-Mail: luckyart@gmx.de
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">2. Betrieb des Spiels und gespeicherte Daten</h2>
+    <p class="leading-7">
+      Das Spiel kann grundsätzlich ohne Benutzerkonto gespielt werden. Wenn eine Einwilligung
+      zur Wiedererkennung und Speicherung erteilt wurde, erzeugt die Website eine zufällige
+      Kennung (ID). Unter dieser pseudonymen Kennung können Spielzüge (Auswahl des Spielers und
+      des Bots), Rundennummern, Spielergebnisse sowie Zeitstempel in einer Firebase Realtime
+      Database gespeichert werden. Die Kennung ist kein Passwort und stellt keine sichere
+      Authentifizierung dar.
+    </p>
+    <p class="leading-7 mt-3">
+      Die Website kann außerdem lokal im Browser eine Entscheidung zur Einwilligung und
+      individuelle Tastenkürzel speichern. Die Tastenkürzel werden nicht an Firebase übertragen.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">3. Cookies und lokaler Speicher</h2>
+    <p class="leading-7">
+      Nach einer Einwilligung wird ein Cookie mit dem Namen <code>id</code> und einer zufälligen
+      Kennung für bis zu 24 Stunden gesetzt. Er dient dazu, Spielstände demselben Browser
+      zuzuordnen. Die Einwilligungsentscheidung und Tastenkürzel können zusätzlich in
+      <code>localStorage</code> gespeichert werden. Das sind Speicherzugriffe auf dem Endgerät.
+      Die Einwilligung kann über eine E-Mail an luckyart@gmx.de widerrufen werden.
+    </p>
+    <p class="leading-7 mt-3">
+      Ohne Einwilligung darf die Website den nicht notwendigen ID-Cookie nicht setzen und
+      die damit verbundene Speicherung nicht durchführen. Die konkrete rechtliche Einordnung
+      und die Gestaltung des Einwilligungsdialogs müssen vor dem Einsatz geprüft werden.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">4. Firebase Realtime Database</h2>
+    <p class="leading-7">
+      Für die Speicherung der Spielhistorie wird Firebase Realtime Database verwendet,
+      ein Dienst von Google. Projekt und Datenbank werden vom Betreiber dieser Website
+      konfiguriert. Dabei werden die oben beschriebenen Spielinformationen unter einer
+      pseudonymen Kennung verarbeitet.
+    </p>
+    <p class="leading-7 mt-3">
+      Anbieter und mögliche Empfänger: Google Ireland Limited, Gordon House, Barrow Street,
+      Dublin 4, Irland, sowie – abhängig von der konkreten Firebase-Leistung und den
+      Vertragsbedingungen – weitere Google-Unternehmen. Bitte prüfe die tatsächlich
+      geltenden Vertragsunterlagen, den Auftragsverarbeitungsvertrag, die Datenregion,
+      Unterauftragsverarbeiter und mögliche Drittlandübermittlungen für dein Firebase-Projekt.
+    </p>
+    <p class="leading-7 mt-3">
+      Rechtsgrundlage für die mit der Einwilligung verbundene Verarbeitung ist Art. 6 Abs. 1
+      lit. a DSGVO. Soweit eine Auftragsverarbeitung vorliegt, ist ein Vertrag nach Art. 28
+      DSGVO erforderlich. Eine Übermittlung in Drittländer darf nur unter den Voraussetzungen
+      der Art. 44 ff. DSGVO erfolgen.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">5. Analyse der Spielzüge</h2>
+    <p class="leading-7">
+      Die Analyse-Seite wertet gespeicherte Spielzüge statistisch aus. Dazu werden Folgen von
+      Spielerentscheidungen und Übergangswahrscheinlichkeiten (Markov-Ketten) berechnet.
+      Die Auswertung kann pro pseudonymer Benutzerkennung erfolgen. Wenn diese Funktion
+      aktiviert ist, können die Daten mehrerer Nutzer für die Auswahl und Analyse in der
+      Analyse-Oberfläche geladen werden. Beschränke den Datenbankzugriff deshalb technisch
+      auf berechtigte Personen und informiere die Nutzer vorab transparent über diesen Zweck.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">6. Speicherdauer</h2>
+    <p class="leading-7">
+      Der ID-Cookie ist im aktuellen Beispiel auf 24 Stunden begrenzt. Spielhistorien und
+      Refresh-Protokolle bleiben in Firebase gespeichert, bis sie gelöscht werden oder eine
+      festgelegte Löschfrist greift.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">7. Rechte betroffener Personen</h2>
+    <p class="leading-7">
+      Betroffene Personen haben im Rahmen der gesetzlichen Voraussetzungen insbesondere
+      Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+      Datenübertragbarkeit und Widerspruch. Eine erteilte Einwilligung kann jederzeit mit
+      Wirkung für die Zukunft widerrufen werden. Außerdem besteht ein Beschwerderecht bei
+      einer Datenschutzaufsichtsbehörde.
+    </p>
+    <p class="leading-7 mt-3">
+      Anfragen können an luckyart@gmx.de gerichtet werden. Bitte beschreibe dabei, soweit
+      möglich, die verwendete Benutzerkennung, damit zugehörige Datensätze gefunden werden
+      können. Fordere keine unnötigen zusätzlichen personenbezogenen Daten an.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">8. Sicherheit</h2>
+    <p class="leading-7">
+      Die Datenbank muss durch geeignete Firebase Security Rules geschützt werden.
+      Eine im Browser gespeicherte Cookie-ID ist frei manipulierbar und darf nicht als
+      Berechtigungsnachweis verwendet werden. Insbesondere darf ein öffentlicher Client
+      nicht unbeschränkt sämtliche Nutzerdaten lesen, verändern oder löschen können.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">9. Änderungen</h2>
+    <p class="leading-7">
+      Diese Datenschutzerklärung wird angepasst, wenn sich die Datenverarbeitung oder
+      die eingesetzten Dienste ändern.
+    </p>
+  </main>
+</body>
+</html>

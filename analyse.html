@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Markov-Analyse – Schere Stein Papier</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    .heat { min-width: 72px; padding: .65rem .35rem; border-radius: .6rem; text-align:center; }
+    .mono { font-variant-numeric: tabular-nums; }
+    canvas { max-width: 100%; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen p-5 md:p-8">
+<main class="max-w-6xl mx-auto">
+  <header class="flex flex-wrap items-center justify-between gap-3 mb-8">
+    <div>
+      <a href="index.html" class="text-blue-600 underline text-sm">← Zurück zum Spiel</a>
+      <h1 class="text-3xl font-bold mt-2">Markov-Analyse</h1>
+      <p class="text-gray-500 mt-1">Analyse der aufeinanderfolgenden Spielerentscheidungen</p>
+    </div>
+    <button id="reload" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-4 py-3">Daten neu laden</button>
+  </header>
+
+  <section class="bg-white rounded-2xl shadow p-5 mb-6">
+    <div class="grid md:grid-cols-3 gap-4 items-end">
+      <label class="block">
+        <span class="block text-sm font-medium mb-1">Nutzerkennung</span>
+        <select id="userSelect" class="w-full border rounded-lg p-3">
+          <option value="">Daten werden geladen …</option>
+        </select>
+      </label>
+      <label class="block">
+        <span class="block text-sm font-medium mb-1">Markov-Ordnung</span>
+        <select id="orderSelect" class="w-full border rounded-lg p-3">
+          <option value="1">1. Ordnung</option>
+          <option value="2">2. Ordnung</option>
+          <option value="3">3. Ordnung</option>
+          <option value="4">4. Ordnung</option>
+          <option value="5">5. Ordnung</option>
+          <option value="6">6. Ordnung</option>
+          <option value="7">7. Ordnung</option>
+          <option value="8">8. Ordnung</option>
+        </select>
+      </label>
+      <div class="text-sm text-gray-500" id="summary">Noch keine Daten geladen.</div>
+    </div>
+    <p id="status" class="text-sm text-gray-500 mt-4" role="status"></p>
+  </section>
+
+  <section class="grid sm:grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-2xl shadow p-5">
+      <p class="text-sm text-gray-500">Ausgewertete Runden</p>
+      <p id="roundCount" class="text-3xl font-bold mono">0</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow p-5">
+      <p class="text-sm text-gray-500">Übergänge dieser Ordnung</p>
+      <p id="transitionCount" class="text-3xl font-bold mono">0</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow p-5">
+      <p class="text-sm text-gray-500">Abhängigkeit (Mutual Information)</p>
+      <p id="miValue" class="text-3xl font-bold mono">–</p>
+      <p id="miPercent" class="text-xs text-gray-500 mt-1"></p>
+    </div>
+  </section>
+
+  <section class="bg-white rounded-2xl shadow p-5 mb-6">
+    <h2 class="text-xl font-bold mb-2" id="visualTitle">Übergangswahrscheinlichkeiten</h2>
+    <p class="text-sm text-gray-500 mb-4" id="visualDescription">
+      Für die 1. und 2. Ordnung werden empirische Übergangswahrscheinlichkeiten als Heatmap dargestellt.
+    </p>
+    <div id="visualArea"></div>
+  </section>
+
+  <section class="bg-white rounded-2xl shadow p-5 mb-6">
+    <h2 class="text-xl font-bold mb-3">Abhängigkeitswerte</h2>
+    <div id="metrics" class="space-y-3 text-sm"></div>
+  </section>
+
+  <section class="bg-white rounded-2xl shadow p-5">
+    <h2 class="text-xl font-bold mb-3">Methodik</h2>
+    <div class="text-sm text-gray-600 space-y-2 leading-6">
+      <p><strong>1. Ordnung:</strong> Die nächste Wahl wird anhand der unmittelbar vorherigen Spielerwahl modelliert: P(Xₜ | Xₜ₋₁).</p>
+      <p><strong>2. Ordnung:</strong> Die nächste Wahl wird anhand der letzten zwei Spielerwahlen modelliert: P(Xₜ | Xₜ₋₂, Xₜ₋₁).</p>
+      <p><strong>n. Ordnung:</strong> Allgemein wird P(Xₜ | Xₜ₋ₙ, …, Xₜ₋₁) geschätzt. Ein Kontext zählt nur, wenn er in den Daten tatsächlich vorkommt.</p>
+      <p><strong>Abhängigkeit:</strong> Angezeigt wird die empirische gegenseitige Information I(Vergangenheit; nächste Wahl) in Bit. Zusätzlich wird ihr Anteil an der Entropie der nächsten Wahl angegeben. 0 Bit bedeutet, dass der betrachtete Kontext in den beobachteten Daten keine zusätzliche Vorhersageinformation liefert.</p>
+      <p><strong>Wichtige Einschränkung:</strong> Seltene Kontexte liefern sehr unsichere Schätzungen. Die Werte sind deskriptiv und beweisen weder Kausalität noch, dass ein Spieler bewusst einem Muster folgt. Für belastbare Prognosen sind genügend viele Runden und eine getrennte Testmenge erforderlich.</p>
+    </div>
+  </section>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+const firebaseConfig = {
+  projectId: "scheresteinpapier-8a235",
+  databaseURL: "https://scheresteinpapier-8a235-default-rtdb.europe-west1.firebasedatabase.app"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const MOVES = ["Schere", "Stein", "Papier"];
+const $ = id => document.getElementById(id);
+let allUsers = {};
+
+function setStatus(message) { $("status").textContent = message; }
+
+function roundEntries(userData) {
+  if (!userData || typeof userData !== "object") return [];
+  return Object.entries(userData)
+    .filter(([key, value]) => /^\d+$/.test(key) && value && MOVES.includes(value.spieler))
+    .map(([key, value]) => ({
+      number: Number(key),
+      move: value.spieler,
+      bot: value.bot ?? null,
+      result: value.ergebnis ?? null,
+      time: value.zeitpunkt ?? null
+    }))
+    .sort((a, b) => a.number - b.number);
+}
+
+async function loadAllUsers() {
+  setStatus("Lade Daten aus Firebase …");
+  $("userSelect").innerHTML = "";
+  try {
+    // Erfordert Leseberechtigung auf Datenbankebene. Nicht öffentlich freigeben!
+    const snap = await get(ref(db, "/"));
+    allUsers = snap.val() || {};
+    const ids = Object.keys(allUsers).filter(key => {
+      const value = allUsers[key];
+      return value && typeof value === "object" &&
+        Object.keys(value).some(k => /^\d+$/.test(k));
+    });
+
+    if (!ids.length) {
+      $("userSelect").innerHTML = '<option value="">Keine Nutzer mit Spielrunden gefunden</option>';
+      setStatus("Es wurden keine gespeicherten Spielrunden gefunden.");
+      renderEmpty();
+      return;
+    }
+
+    $("userSelect").innerHTML = ids.map((id, i) =>
+      `<option value="${escapeHtml(id)}">Nutzer ${i + 1} · ${escapeHtml(id.slice(0, 8))}…</option>`
+    ).join("");
+
+    setStatus(`${ids.length} Nutzer mit Spielrunden gefunden.`);
+    render();
+  } catch (error) {
+    console.error(error);
+    setStatus("Fehler beim Laden. Prüfe Firebase Security Rules und Leseberechtigungen: " + error.message);
+    renderEmpty();
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+function entropy(counts) {
+  const total = counts.reduce((a,b) => a+b, 0);
+  if (!total) return 0;
+  return counts.reduce((sum, c) => {
+    if (!c) return sum;
+    const p = c / total;
+    return sum - p * Math.log2(p);
+  }, 0);
+}
+
+function analyze(moves, order) {
+  const contexts = new Map();
+  const nextCounts = [0,0,0];
+  let transitions = 0;
+
+  for (let i = order; i < moves.length; i++) {
+    const context = moves.slice(i-order, i).join(" → ");
+    const next = MOVES.indexOf(moves[i]);
+    if (next < 0) continue;
+
+    if (!contexts.has(context)) contexts.set(context, [0,0,0]);
+    contexts.get(context)[next]++;
+    nextCounts[next]++;
+    transitions++;
+  }
+
+  const totalH = entropy(nextCounts);
+  let conditionalH = 0;
+  for (const counts of contexts.values()) {
+    const n = counts.reduce((a,b) => a+b, 0);
+    conditionalH += (n / (transitions || 1)) * entropy(counts);
+  }
+  const mi = Math.max(0, totalH - conditionalH);
+  const percent = totalH > 0 ? (mi / totalH) * 100 : 0;
+
+  return { contexts, nextCounts, transitions, totalH, conditionalH, mi, percent };
+}
+
+function renderHeatmap(result, order) {
+  const contexts = [...result.contexts.entries()]
+    .sort((a,b) => a[0].localeCompare(b[0], "de"));
+
+  if (!contexts.length) {
+    $("visualArea").innerHTML = '<p class="text-gray-500">Nicht genügend Runden für diese Ordnung.</p>';
+    return;
+  }
+
+  let html = '<div class="overflow-x-auto"><table class="w-full text-sm border-separate" style="border-spacing:5px"><thead><tr><th class="text-left p-2">Vergangener Kontext</th>';
+  for (const move of MOVES) html += `<th class="p-2">${move}</th>`;
+  html += '<th class="p-2">Anzahl</th></tr></thead><tbody>';
+
+  for (const [context, counts] of contexts) {
+    const n = counts.reduce((a,b) => a+b, 0);
+    html += `<tr><td class="font-medium p-2 whitespace-nowrap">${escapeHtml(context)}</td>`;
+    for (const c of counts) {
+      const p = c / n;
+      const alpha = 0.10 + p * 0.75;
+      html += `<td class="heat" style="background:rgba(37,99,235,${alpha});color:${p > .58 ? "white" : "#1f2937"}" title="${c} von ${n}">${(p*100).toFixed(1)}%</td>`;
+    }
+    html += `<td class="text-center mono">${n}</td></tr>`;
+  }
+  html += '</tbody></table></div>';
+  $("visualArea").innerHTML = html;
+}
+
+function renderNumeric(result, order) {
+  const contexts = [...result.contexts.entries()]
+    .sort((a,b) => b[1].reduce((x,y)=>x+y,0) - a[1].reduce((x,y)=>x+y,0));
+
+  let html = `<p class="text-sm text-gray-500 mb-4">Grafische Darstellung ab 3. Ordnung ausgeblendet. Es werden ${contexts.length} beobachtete Kontexte numerisch aufgelistet.</p>`;
+  html += '<div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left border-b"><th class="p-2">Kontext</th><th class="p-2">N</th><th class="p-2">P(Schere)</th><th class="p-2">P(Stein)</th><th class="p-2">P(Papier)</th><th class="p-2">H(nächste Wahl)</th></tr></thead><tbody>';
+  for (const [context, counts] of contexts) {
+    const n = counts.reduce((a,b)=>a+b,0);
+    const probs = counts.map(c => (c/n*100).toFixed(1) + "%");
+    html += `<tr class="border-b"><td class="p-2">${escapeHtml(context)}</td><td class="p-2 mono">${n}</td>${probs.map(p=>`<td class="p-2 mono">${p}</td>`).join("")}<td class="p-2 mono">${entropy(counts).toFixed(3)} Bit</td></tr>`;
+  }
+  html += '</tbody></table></div>';
+  $("visualArea").innerHTML = html;
+}
+
+function renderEmpty() {
+  $("roundCount").textContent = "0";
+  $("transitionCount").textContent = "0";
+  $("miValue").textContent = "–";
+  $("miPercent").textContent = "";
+  $("summary").textContent = "Keine Daten.";
+  $("visualArea").innerHTML = '<p class="text-gray-500">Keine Daten vorhanden.</p>';
+  $("metrics").innerHTML = "";
+}
+
+function render() {
+  const userId = $("userSelect").value;
+  if (!userId) return renderEmpty();
+
+  const rounds = roundEntries(allUsers[userId]);
+  const moves = rounds.map(r => r.move);
+  const order = Number($("orderSelect").value);
+  const result = analyze(moves, order);
+
+  $("roundCount").textContent = rounds.length;
+  $("transitionCount").textContent = result.transitions;
+  $("miValue").textContent = result.mi.toFixed(4) + " Bit";
+  $("miPercent").textContent = result.percent.toFixed(1) + "% der Entropie der nächsten Wahl erklärt";
+  $("summary").textContent = `${rounds.length} Runden · ${new Set(moves).size} verschiedene Spielerzüge`;
+
+  $("visualTitle").textContent = `${order}. Markov-Ordnung`;
+  if (order <= 2) {
+    $("visualDescription").textContent =
+      "Die Zellen zeigen die empirische Wahrscheinlichkeit der nächsten Spielerwahl für jeden beobachteten Kontext. Dunklere Zellen bedeuten höhere Wahrscheinlichkeiten.";
+    renderHeatmap(result, order);
+  } else {
+    $("visualDescription").textContent =
+      "Für höhere Ordnungen werden die beobachteten Kontexte und ihre Wahrscheinlichkeiten ausschließlich numerisch dargestellt.";
+    renderNumeric(result, order);
+  }
+
+  $("metrics").innerHTML = `
+    <div class="flex justify-between gap-4"><span>Entropie der nächsten Wahl H(Xₜ)</span><strong class="mono">${result.totalH.toFixed(4)} Bit</strong></div>
+    <div class="flex justify-between gap-4"><span>Bedingte Entropie H(Xₜ | Kontext)</span><strong class="mono">${result.conditionalH.toFixed(4)} Bit</strong></div>
+    <div class="flex justify-between gap-4"><span>Mutual Information I(Kontext; Xₜ)</span><strong class="mono">${result.mi.toFixed(4)} Bit</strong></div>
+    <div class="flex justify-between gap-4"><span>Relative Abhängigkeit</span><strong class="mono">${result.percent.toFixed(2)}%</strong></div>
+    <div class="flex justify-between gap-4"><span>Beobachtete Kontexte</span><strong class="mono">${result.contexts.size}</strong></div>
+  `;
+}
+
+$("userSelect").addEventListener("change", render);
+$("orderSelect").addEventListener("change", render);
+$("reload").addEventListener("click", loadAllUsers);
+loadAllUsers();
+</script>
+</body>
+</html>

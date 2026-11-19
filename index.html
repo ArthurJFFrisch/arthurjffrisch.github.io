@@ -1,0 +1,1223 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101522">
+<title>Schere, Stein, Papier</title>
+
+<style>
+:root {
+  --bg: #101522;
+  --panel: #192235;
+  --panel2: #202c42;
+  --text: #f3f6ff;
+  --muted: #9caac2;
+  --accent: #8b9cff;
+  --green: #48d6a0;
+  --red: #ff7185;
+  --yellow: #ffd36e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 0%, #29375c 0%, transparent 45%),
+    var(--bg);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.container {
+  width: min(900px, 92%);
+  margin: auto;
+  padding: 35px 0 25px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  margin: 0;
+  letter-spacing: -1.5px;
+}
+
+header p {
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.panel {
+  background: rgba(25,34,53,.92);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 15px 45px rgba(0,0,0,.18);
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 1.25rem;
+}
+
+.game-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.choice-button {
+  min-height: 145px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 18px;
+  color: white;
+  background: var(--panel2);
+  transition: .2s;
+}
+
+.choice-button:hover:not(:disabled) {
+  transform: translateY(-5px);
+  background: #2d3b57;
+  border-color: var(--accent);
+}
+
+.choice-button .emoji {
+  display: block;
+  font-size: 3.5rem;
+  margin-bottom: 8px;
+}
+
+.choice-button span:last-child {
+  font-weight: 650;
+  font-size: 1.05rem;
+}
+
+.result {
+  text-align: center;
+  min-height: 100px;
+  padding: 22px 10px 5px;
+}
+
+.result-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.result-description {
+  color: var(--muted);
+  margin-top: 7px;
+}
+
+.win { color: var(--green); }
+.loss { color: var(--red); }
+.draw { color: var(--yellow); }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat {
+  background: var(--panel2);
+  border-radius: 15px;
+  text-align: center;
+  padding: 18px 8px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 2rem;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.status {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.status.online {
+  color: var(--green);
+}
+
+.status.offline {
+  color: var(--yellow);
+}
+
+.secondary-button {
+  border: 1px solid rgba(255,255,255,.14);
+  color: var(--text);
+  background: var(--panel2);
+  padding: 10px 15px;
+  border-radius: 11px;
+}
+
+.secondary-button:hover {
+  border-color: var(--accent);
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: .9rem;
+  padding: 12px 0 25px;
+}
+
+footer a {
+  color: var(--muted);
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* Overlay */
+
+.bot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5,8,16,.88);
+  backdrop-filter: blur(13px);
+  padding: 20px;
+}
+
+.bot-overlay.show {
+  display: flex;
+}
+
+.bot-stage {
+  width: min(420px, 90vw);
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+}
+
+.bot-overlay-title {
+  font-size: 1.35rem;
+  font-weight: 750;
+  margin-bottom: 55px;
+}
+
+.bot-orbit {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border: 2px solid rgba(139,156,255,.45);
+  border-radius: 50%;
+  animation: rotate 4s linear infinite;
+}
+
+.bot-orbit::before,
+.bot-orbit::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  top: 20px;
+  left: 25px;
+  box-shadow: 0 0 18px var(--accent);
+}
+
+.bot-orbit::after {
+  top: auto;
+  left: auto;
+  right: 15px;
+  bottom: 35px;
+  width: 7px;
+  height: 7px;
+}
+
+.bot-orbit.two {
+  width: 260px;
+  height: 260px;
+  border-style: dashed;
+  border-color: rgba(72,214,160,.4);
+  animation-direction: reverse;
+  animation-duration: 7s;
+}
+
+.bot-emoji {
+  position: relative;
+  z-index: 2;
+  font-size: 105px;
+  line-height: 1.3;
+  filter: drop-shadow(0 0 25px rgba(139,156,255,.45));
+}
+
+.bot-emoji.tick {
+  animation: tick .12s ease;
+}
+
+.bot-emoji.final {
+  animation: finalChoice .35s ease-out;
+}
+
+.bot-choice-name {
+  margin-top: 40px;
+  font-size: 1.2rem;
+  font-weight: 750;
+  color: var(--accent);
+}
+
+.bot-subtitle {
+  margin-top: 9px;
+  color: var(--muted);
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tick {
+  0% { transform: scale(.85) rotate(-8deg); }
+  60% { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes finalChoice {
+  0% { transform: scale(.5); opacity: .3; }
+  70% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Modals */
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(0,0,0,.75);
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modal-backdrop.show {
+  display: flex;
+}
+
+.modal {
+  width: min(500px, 100%);
+  background: #192235;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 20px 70px rgba(0,0,0,.5);
+}
+
+.modal p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.primary-button {
+  background: var(--accent);
+  color: #101522;
+  border: 0;
+  border-radius: 11px;
+  padding: 11px 17px;
+  font-weight: 750;
+}
+
+.primary-button:hover {
+  filter: brightness(1.1);
+}
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin: 14px 0;
+}
+
+.settings-row select {
+  background: var(--panel2);
+  color: white;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.toast {
+  position: fixed;
+  z-index: 110000;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  background: #293750;
+  border: 1px solid rgba(255,255,255,.12);
+  color: white;
+  border-radius: 12px;
+  padding: 12px 18px;
+  transition: .25s;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media(max-width:550px) {
+  .game-buttons {
+    gap: 8px;
+  }
+
+  .choice-button {
+    min-height: 120px;
+  }
+
+  .choice-button .emoji {
+    font-size: 2.6rem;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .stats {
+    gap: 7px;
+  }
+
+  .stat strong {
+    font-size: 1.6rem;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <h1>Schere, Stein, Papier</h1>
+  <p>Kannst du den Bot schlagen?</p>
+</header>
+
+<main>
+
+<section class="panel">
+  <h2>Deine Wahl</h2>
+
+  <div class="game-buttons">
+    <button class="choice-button" data-choice="Schere">
+      <span class="emoji">✂️</span>
+      <span>Schere</span>
+    </button>
+
+    <button class="choice-button" data-choice="Stein">
+      <span class="emoji">🪨</span>
+      <span>Stein</span>
+    </button>
+
+    <button class="choice-button" data-choice="Papier">
+      <span class="emoji">📄</span>
+      <span>Papier</span>
+    </button>
+  </div>
+
+  <div class="result" aria-live="polite">
+    <div id="resultTitle" class="result-title">Bereit?</div>
+    <div id="resultDescription" class="result-description">
+      Wähle Schere, Stein oder Papier.
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Deine Statistik in dieser Sitzung</h2>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="wins">0</strong>
+      <span>Siege</span>
+    </div>
+    <div class="stat">
+      <strong id="draws">0</strong>
+      <span>Unentschieden</span>
+    </div>
+    <div class="stat">
+      <strong id="losses">0</strong>
+      <span>Niederlagen</span>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="info-row">
+    <div>
+      <h2 style="margin-bottom:5px">Datenspeicherung</h2>
+      <div id="firebaseStatus" class="status offline">
+        Noch nicht verbunden – Spiel funktioniert lokal.
+      </div>
+    </div>
+    <button class="secondary-button" id="connectionButton">
+      Verbindung prüfen
+    </button>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="info-row">
+    <div>
+      <h2 style="margin-bottom:5px">Einstellungen</h2>
+      <div class="status">Tastatursteuerung und Datenschutz</div>
+    </div>
+    <button class="secondary-button" id="settingsButton">
+      Einstellungen
+    </button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a href="impressum.html">Impressum</a>
+  <a href="datenschutz.html">Datenschutz</a>
+  <a href="analyse.html">Analyse</a>
+  <a href="#" id="cookieSettingsLink">Cookie-Einstellungen</a>
+</footer>
+
+</div>
+
+<!-- Bot-Overlay -->
+
+<div id="botOverlay" class="bot-overlay" aria-live="polite">
+  <div class="bot-stage">
+    <div id="botOverlayTitle" class="bot-overlay-title">
+      Der Bot entscheidet ...
+    </div>
+
+    <div class="bot-orbit"></div>
+    <div class="bot-orbit two"></div>
+
+    <div id="botEmoji" class="bot-emoji">❔</div>
+
+    <div id="botChoiceName" class="bot-choice-name">
+      ?
+    </div>
+
+    <div id="botSubtitle" class="bot-subtitle">
+      Die Entscheidung wird getroffen ...
+    </div>
+  </div>
+</div>
+
+<!-- Cookie- und Datenschutzdialog -->
+
+<div id="consentModal" class="modal-backdrop">
+  <div class="modal">
+    <h2>Datenspeicherung</h2>
+    <p>
+      Du kannst das Spiel ohne Datenspeicherung verwenden.
+      Wenn du zustimmst, wird im Hintergrund eine anonyme Firebase-
+      Kennung erstellt und deine Spielzüge werden gespeichert.
+    </p>
+    <p>
+      Die Kennung ist nicht mit einer Registrierung oder deinem Namen
+      verbunden. Sie ist jedoch ein pseudonymes Online-Kennzeichen.
+      Weitere Informationen findest du in der Datenschutzerklärung.
+    </p>
+
+    <div class="modal-actions">
+      <button id="acceptConsent" class="primary-button">
+        Zustimmen
+      </button>
+      <button id="declineConsent" class="secondary-button">
+        Ablehnen
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Einstellungen -->
+
+<div id="settingsModal" class="modal-backdrop">
+  <div class="modal">
+    <h2>Einstellungen</h2>
+
+    <div class="settings-row">
+      <label for="keySchere">Schere-Taste</label>
+      <select id="keySchere">
+        <option value="s">S</option>
+        <option value="1">1</option>
+        <option value="q">Q</option>
+      </select>
+    </div>
+
+    <div class="settings-row">
+      <label for="keyStein">Stein-Taste</label>
+      <select id="keyStein">
+        <option value="r">R</option>
+        <option value="2">2</option>
+        <option value="w">W</option>
+      </select>
+    </div>
+
+    <div class="settings-row">
+      <label for="keyPapier">Papier-Taste</label>
+      <select id="keyPapier">
+        <option value="p">P</option>
+        <option value="3">3</option>
+        <option value="e">E</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button id="saveSettings" class="primary-button">
+        Speichern
+      </button>
+      <button id="closeSettings" class="secondary-button">
+        Schließen
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE-KONFIGURATION
+   Die Werte apiKey und appId aus deiner Firebase-Web-App
+   einsetzen. Die Werte findest du in den Projekteinstellungen.
+========================================================= */
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDao1FkE3xLVoUg6f3OSIuh44B4b6MyV_o",
+  authDomain: "scheresteinpapier-8a235.firebaseapp.com",
+  databaseURL: "https://scheresteinpapier-8a235-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "scheresteinpapier-8a235",
+  storageBucket: "scheresteinpapier-8a235.firebasestorage.app",
+  messagingSenderId: "596695399540",
+  appId: "1:596695399540:web:b2115026c0f1ed1f546521",
+  measurementId: "G-GW0FBPCEGK"
+};
+
+
+/* =========================================================
+   GRUNDEINSTELLUNGEN
+========================================================= */
+
+const $ = id => document.getElementById(id);
+
+const options = ["Schere", "Stein", "Papier"];
+
+const visuals = {
+  Schere: { emoji: "✂️", color: "#8b9cff" },
+  Stein: { emoji: "🪨", color: "#ffd36e" },
+  Papier: { emoji: "📄", color: "#48d6a0" }
+};
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const reducedMotion =
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let busy = false;
+let roundCount = 0;
+
+let wins = 0;
+let draws = 0;
+let losses = 0;
+
+let firebaseApp = null;
+let firebaseAuth = null;
+let database = null;
+let firebaseModules = null;
+let firebaseInitializing = null;
+
+let consent = localStorage.getItem("gameConsent");
+
+/* =========================================================
+   HILFSFUNKTIONEN
+========================================================= */
+
+function showToast(message) {
+  $("toast").textContent = message;
+  $("toast").classList.add("show");
+
+  setTimeout(() => {
+    $("toast").classList.remove("show");
+  }, 2600);
+}
+
+function setFirebaseStatus(message, online = false) {
+  const element = $("firebaseStatus");
+  element.textContent = message;
+  element.className = online ? "status online" : "status offline";
+}
+
+function randomChoice() {
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function determineResult(player, bot) {
+  if (player === bot) return "Unentschieden";
+
+  if (
+    (player === "Schere" && bot === "Papier") ||
+    (player === "Stein" && bot === "Schere") ||
+    (player === "Papier" && bot === "Stein")
+  ) {
+    return "Gewonnen";
+  }
+
+  return "Verloren";
+}
+
+/* =========================================================
+   FIREBASE INITIALISIEREN
+   Erst nach ausdrücklicher Zustimmung wird Firebase geladen.
+========================================================= */
+
+async function initializeFirebase() {
+  if (firebaseAuth && database && firebaseAuth.currentUser) {
+    return firebaseAuth.currentUser;
+  }
+
+  if (firebaseInitializing) {
+    return firebaseInitializing;
+  }
+
+  firebaseInitializing = (async () => {
+    try {
+      if (
+        firebaseConfig.apiKey === "DEIN_API_KEY" ||
+        firebaseConfig.appId === "DEINE_APP_ID" ||
+        firebaseConfig.authDomain === "DEINE_AUTH_DOMAIN"
+      ) {
+        throw new Error("Bitte zuerst die Firebase-Konfiguration ergänzen.");
+      }
+
+      const [
+        appModule,
+        authModule,
+        databaseModule
+      ] = await Promise.all([
+        import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
+        import("https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js")
+      ]);
+
+      firebaseModules = {
+        ...appModule,
+        ...authModule,
+        ...databaseModule
+      };
+
+      firebaseApp = appModule.initializeApp(firebaseConfig);
+      firebaseAuth = authModule.getAuth(firebaseApp);
+      database = databaseModule.getDatabase(firebaseApp);
+
+      const credential = await authModule.signInAnonymously(firebaseAuth);
+
+      setFirebaseStatus("Anonym verbunden – Spielzüge werden gespeichert.", true);
+
+      return credential.user;
+
+    } catch (error) {
+      console.error("Firebase-Fehler:", error);
+      setFirebaseStatus("Keine Firebase-Verbindung: " + error.message);
+      showToast("Firebase konnte nicht verbunden werden.");
+      throw error;
+
+    } finally {
+      firebaseInitializing = null;
+    }
+  })();
+
+  return firebaseInitializing;
+}
+
+/* =========================================================
+   SPIELZUG SPEICHERN
+   Jede Runde erhält eine eindeutige Firebase-ID.
+========================================================= */
+
+async function saveRound(player, bot, result) {
+  if (consent !== "accepted") return;
+
+  try {
+    const user = await initializeFirebase();
+
+    const {
+      ref,
+      push,
+      set
+    } = firebaseModules;
+
+    const roundsRef = ref(
+      database,
+      `users/${user.uid}/rounds`
+    );
+
+    const newRoundRef = push(roundsRef);
+
+    const roundData = {
+      spieler: player,
+      bot: bot,
+      ergebnis: result,
+      runde: roundCount,
+      zeitpunkt: Date.now()
+    };
+
+    await set(newRoundRef, roundData);
+
+  } catch (error) {
+    console.error("Spielzug konnte nicht gespeichert werden:", error);
+    showToast("Spielzug wurde lokal gespielt, aber nicht gespeichert.");
+  }
+}
+
+/* =========================================================
+   REFRESH-EVENT SPEICHERN
+========================================================= */
+
+async function saveRefreshEvent() {
+  if (consent !== "accepted") {
+    showToast("Datenspeicherung ist nicht aktiviert.");
+    return;
+  }
+
+  try {
+    const user = await initializeFirebase();
+
+    const {
+      ref,
+      push,
+      set
+    } = firebaseModules;
+
+    const refreshRef = ref(
+      database,
+      `users/${user.uid}/refresh`
+    );
+
+    await set(push(refreshRef), {
+      zeitpunkt: Date.now()
+    });
+
+    showToast("Firebase-Verbindung erfolgreich geprüft.");
+
+  } catch (error) {
+    console.error(error);
+    showToast("Verbindung fehlgeschlagen.");
+  }
+}
+
+/* =========================================================
+   BOT-ANIMATION
+========================================================= */
+
+async function showBotAnimation(bot) {
+  const overlay = $("botOverlay");
+  const emoji = $("botEmoji");
+  const text = $("botSubtitle");
+  const choice = $("botChoiceName");
+
+  $("botOverlayTitle").textContent = "Der Bot entscheidet ...";
+
+  text.textContent = "Die Entscheidung wird getroffen ...";
+  choice.textContent = "?";
+
+  emoji.textContent = "❔";
+  emoji.style.color = "white";
+  emoji.className = "bot-emoji";
+
+  overlay.classList.add("show");
+
+  if (reducedMotion) {
+    await sleep(250);
+  } else {
+    const intervals = [
+      20, 25, 30, 35, 40,
+      45, 50, 55, 60, 65
+    ];
+
+    for (let i = 0; i < intervals.length; i++) {
+      const next = randomChoice();
+
+      emoji.classList.add("tick");
+      await sleep(Math.min(15, intervals[i] / 2));
+
+      emoji.textContent = visuals[next].emoji;
+      emoji.style.color = visuals[next].color;
+
+      emoji.classList.remove("tick");
+
+      await sleep(intervals[i]);
+    }
+  }
+
+  /* Die tatsächliche Bot-Entscheidung wird angezeigt. */
+
+  emoji.textContent = visuals[bot].emoji;
+  emoji.style.color = visuals[bot].color;
+  emoji.classList.add("final");
+
+  $("botOverlayTitle").textContent = "Der Bot hat gewählt";
+
+  text.textContent = "Sein Zug steht fest";
+  choice.textContent = bot;
+
+  await sleep(reducedMotion ? 200 : 250);
+
+  overlay.classList.remove("show");
+}
+
+/* =========================================================
+   SPIELLOGIK
+========================================================= */
+
+async function play(player) {
+  if (busy) return;
+
+  busy = true;
+
+  document.querySelectorAll(".choice-button").forEach(button => {
+    button.disabled = true;
+  });
+
+  try {
+    /* Bot-Wahl wird vor der Animation festgelegt. */
+    const bot = randomChoice();
+
+    await showBotAnimation(bot);
+
+    const result = determineResult(player, bot);
+
+    roundCount++;
+
+    if (result === "Gewonnen") wins++;
+    else if (result === "Unentschieden") draws++;
+    else losses++;
+
+    updateStats();
+    showResult(player, bot, result);
+
+    await saveRound(player, bot, result);
+
+  } finally {
+    busy = false;
+
+    document.querySelectorAll(".choice-button").forEach(button => {
+      button.disabled = false;
+    });
+  }
+}
+
+function updateStats() {
+  $("wins").textContent = wins;
+  $("draws").textContent = draws;
+  $("losses").textContent = losses;
+}
+
+function showResult(player, bot, result) {
+  const title = $("resultTitle");
+  const description = $("resultDescription");
+
+  title.textContent = result;
+
+  title.className = "result-title " +
+    (result === "Gewonnen"
+      ? "win"
+      : result === "Verloren"
+        ? "loss"
+        : "draw");
+
+  description.textContent =
+    `${visuals[player].emoji} ${player} gegen ` +
+    `${visuals[bot].emoji} ${bot}`;
+}
+
+/* =========================================================
+   COOKIE- UND DATENSCHUTZEINSTELLUNGEN
+========================================================= */
+
+function showConsentModal() {
+  $("consentModal").classList.add("show");
+}
+
+function hideConsentModal() {
+  $("consentModal").classList.remove("show");
+}
+
+async function acceptConsent() {
+  localStorage.setItem("gameConsent", "accepted");
+  consent = "accepted";
+
+  hideConsentModal();
+
+  try {
+    await initializeFirebase();
+    await saveRefreshEvent();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function declineConsent() {
+  localStorage.setItem("gameConsent", "declined");
+  consent = "declined";
+
+  hideConsentModal();
+
+  setFirebaseStatus("Lokaler Spielmodus – keine Spielzüge werden gespeichert.");
+  showToast("Du spielst ohne Datenspeicherung.");
+}
+
+async function revokeConsent() {
+  localStorage.setItem("gameConsent", "declined");
+  consent = "declined";
+
+  if (firebaseAuth && firebaseModules) {
+    try {
+      await firebaseModules.signOut(firebaseAuth);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setFirebaseStatus("Datenspeicherung deaktiviert.");
+  showToast("Datenspeicherung wurde deaktiviert.");
+}
+
+/* =========================================================
+   EINSTELLUNGEN
+========================================================= */
+
+const defaultKeys = {
+  Schere: "s",
+  Stein: "r",
+  Papier: "p"
+};
+
+function getKeys() {
+  try {
+    return {
+      ...defaultKeys,
+      ...JSON.parse(localStorage.getItem("gameKeys") || "{}")
+    };
+  } catch {
+    return { ...defaultKeys };
+  }
+}
+
+function loadSettings() {
+  const keys = getKeys();
+
+  $("keySchere").value = keys.Schere;
+  $("keyStein").value = keys.Stein;
+  $("keyPapier").value = keys.Papier;
+}
+
+function saveSettings() {
+  const keys = {
+    Schere: $("keySchere").value,
+    Stein: $("keyStein").value,
+    Papier: $("keyPapier").value
+  };
+
+  if (new Set(Object.values(keys)).size !== 3) {
+    showToast("Jede Aktion benötigt eine andere Taste.");
+    return;
+  }
+
+  localStorage.setItem("gameKeys", JSON.stringify(keys));
+
+  $("settingsModal").classList.remove("show");
+  showToast("Einstellungen gespeichert.");
+}
+
+/* =========================================================
+   EVENT LISTENER
+========================================================= */
+
+document.querySelectorAll(".choice-button").forEach(button => {
+  button.addEventListener("click", () => {
+    play(button.dataset.choice);
+  });
+});
+
+$("acceptConsent").addEventListener("click", acceptConsent);
+$("declineConsent").addEventListener("click", declineConsent);
+
+$("connectionButton").addEventListener("click", saveRefreshEvent);
+
+$("settingsButton").addEventListener("click", () => {
+  loadSettings();
+  $("settingsModal").classList.add("show");
+});
+
+$("closeSettings").addEventListener("click", () => {
+  $("settingsModal").classList.remove("show");
+});
+
+$("saveSettings").addEventListener("click", saveSettings);
+
+$("cookieSettingsLink").addEventListener("click", event => {
+  event.preventDefault();
+
+  if (consent === "accepted") {
+    const modal = $("settingsModal");
+
+    modal.classList.add("show");
+
+    const heading = modal.querySelector("h2");
+    heading.textContent = "Datenschutzeinstellungen";
+
+    const oldActions = modal.querySelector(".modal-actions");
+    oldActions.innerHTML = `
+      <button id="revokeConsentButton" class="secondary-button">
+        Zustimmung widerrufen
+      </button>
+      <button id="closePrivacySettings" class="primary-button">
+        Schließen
+      </button>
+    `;
+
+    $("revokeConsentButton").addEventListener("click", async () => {
+      await revokeConsent();
+      modal.classList.remove("show");
+      heading.textContent = "Einstellungen";
+      oldActions.innerHTML = `
+        <button id="saveSettings" class="primary-button">Speichern</button>
+        <button id="closeSettings" class="secondary-button">Schließen</button>
+      `;
+      $("saveSettings").addEventListener("click", saveSettings);
+      $("closeSettings").addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+    });
+
+    $("closePrivacySettings").addEventListener("click", () => {
+      modal.classList.remove("show");
+      heading.textContent = "Einstellungen";
+      oldActions.innerHTML = `
+        <button id="saveSettings" class="primary-button">Speichern</button>
+        <button id="closeSettings" class="secondary-button">Schließen</button>
+      `;
+      $("saveSettings").addEventListener("click", saveSettings);
+      $("closeSettings").addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+    });
+
+  } else {
+    showConsentModal();
+  }
+});
+
+/* Tastatursteuerung */
+
+document.addEventListener("keydown", event => {
+  if (
+    event.repeat ||
+    event.ctrlKey ||
+    event.altKey ||
+    event.metaKey
+  ) return;
+
+  if (
+    $("settingsModal").classList.contains("show") ||
+    $("consentModal").classList.contains("show") ||
+    $("botOverlay").classList.contains("show")
+  ) return;
+
+  const key = event.key.toLowerCase();
+  const keys = getKeys();
+
+  const matchingChoice = Object.entries(keys)
+    .find(([choice, configuredKey]) => configuredKey === key);
+
+  if (matchingChoice) {
+    play(matchingChoice[0]);
+  }
+});
+
+/* =========================================================
+   START
+========================================================= */
+
+if (consent === "accepted") {
+  initializeFirebase().catch(error => {
+    console.error(error);
+  });
+} else if (consent === "declined") {
+  setFirebaseStatus("Lokaler Spielmodus – keine Spielzüge werden gespeichert.");
+} else {
+  showConsentModal();
+}
+
+</script>
+
+</body>
+</html>
