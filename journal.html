@@ -10,245 +10,61 @@
 <style>
 :root {
   color-scheme: dark;
-  --bg: #11131a;
-  --panel: #191d27;
-  --panel2: #242a38;
-  --text: #edf0f7;
-  --muted: #9aa4b5;
-  --line: #303747;
-  --accent: #a7b8ff;
-  --danger: #ff8f8f;
-  --good: #9be0bd;
+  --bg:#11131a;
+  --panel:#191d27;
+  --panel2:#242a38;
+  --text:#edf0f7;
+  --muted:#9aa4b5;
+  --line:#303747;
+  --accent:#a7b8ff;
+  --good:#9be0bd;
+  --danger:#ff8f8f;
 }
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 15px/1.6 system-ui, sans-serif;
-}
-
-button, input { font: inherit; }
-
-button {
-  border: 1px solid var(--line);
-  background: var(--panel2);
-  color: var(--text);
-  padding: 9px 13px;
-  border-radius: 9px;
-  cursor: pointer;
-}
-
-button:hover { border-color: var(--accent); }
-button.primary {
-  background: var(--accent);
-  color: #151927;
-  font-weight: 650;
-}
-
-input {
-  width: 100%;
-  background: #11151e;
-  color: var(--text);
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  padding: 11px;
-}
-
-.top {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 22px;
-  border-bottom: 1px solid var(--line);
-  background: #151821;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-}
-
-.brand { font-weight: 750; }
-.brand span { color: var(--accent); }
-
-.layout {
-  display: grid;
-  grid-template-columns: 270px minmax(0,1fr);
-  max-width: 1300px;
-  margin: auto;
-  min-height: calc(100vh - 60px);
-}
-
-aside {
-  border-right: 1px solid var(--line);
-  padding: 20px 14px;
-}
-
-main {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-  padding: 35px clamp(16px,5vw,65px);
-}
-
-h1 { font-size: 32px; margin: 0 0 8px; }
-h2 { font-size: 20px; }
-
-.muted { color: var(--muted); }
-.small { font-size: 12px; color: var(--muted); }
-
-.hidden { display: none !important; }
-
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 13px;
-  padding: 20px;
-  margin: 15px 0;
-}
-
-.stack { display: grid; gap: 12px; }
-
-.screen {
-  max-width: 520px;
-  margin: 9vh auto;
-  padding: 20px;
-}
-
-.notice {
-  background: #242b3a;
-  border: 1px solid #39445a;
-  border-radius: 9px;
-  padding: 13px;
-  color: #cbd4e8;
-  font-size: 13px;
-}
-
-.sidehead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.entry-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.entry-item {
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border-color: transparent;
-}
-
-.entry-item.active {
-  background: var(--panel2);
-  border-color: var(--line);
-}
-
-.entry-item strong, .entry-item small {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.entry-item small {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.editor-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.title-input {
-  font-size: 27px;
-  font-weight: 700;
-  background: transparent;
-  border: none;
-  padding: 8px 0;
-}
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 10px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 10px 10px 0 0;
-}
-
-.toolbar button { padding: 6px 10px; }
-
-.editor {
-  min-height: 420px;
-  padding: 22px;
-  background: #171b25;
-  border: 1px solid var(--line);
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  outline: none;
-  overflow-wrap: anywhere;
-}
-
-.editor:empty::before {
-  content: "Was geht dir durch den Kopf?";
-  color: #758096;
-}
-
-.editor img {
-  max-width: 100%;
-  border-radius: 9px;
-}
-
-.editor blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 14px;
-  margin-left: 0;
-  color: #c3cbe0;
-}
-
-.actions {
-  display: flex;
-  gap: 9px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 15px;
-}
-
-.status {
-  color: var(--muted);
-  font-size: 12px;
-  margin-left: auto;
-}
-
-.status.good { color: var(--good); }
-.status.bad { color: var(--danger); }
-
-@media(max-width:750px) {
-  .layout { grid-template-columns: 1fr; }
-  aside {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .entry-list {
-    flex-direction: row;
-    overflow-x: auto;
-  }
-  .entry-item { min-width: 150px; }
-  main { padding: 22px 15px; }
-  .editor { min-height: 55vh; padding: 15px; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,sans-serif}
+button,input{font:inherit}
+button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:9px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:#151927;font-weight:650}
+input{width:100%;background:#11151e;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px}
+.hidden{display:none!important}
+.top{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#151821;position:sticky;top:0;z-index:5}
+.brand{font-weight:750}.brand span{color:var(--accent)}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1300px;margin:auto;min-height:calc(100vh - 60px)}
+aside{border-right:1px solid var(--line);padding:20px 14px}
+main{width:100%;max-width:900px;margin:auto;padding:35px clamp(16px,5vw,65px)}
+h1{font-size:32px;margin:0 0 8px}
+.muted{color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
+.screen{max-width:520px;margin:9vh auto;padding:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px;margin:15px 0}
+.stack{display:grid;gap:12px}
+.notice{background:#242b3a;border:1px solid #39445a;border-radius:9px;padding:13px;color:#cbd4e8;font-size:13px}
+.sidehead{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+.entry-list{display:flex;flex-direction:column;gap:6px}
+.entry-item{width:100%;text-align:left;background:transparent;border-color:transparent}
+.entry-item.active{background:var(--panel2);border-color:var(--line)}
+.entry-item strong,.entry-item small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.entry-item small{color:var(--muted);font-size:11px}
+.editor-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
+.title-input{font-size:27px;font-weight:700;background:transparent;border:none;padding:8px 0}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px 10px 0 0}
+.toolbar button{padding:6px 10px}
+.editor{min-height:420px;padding:22px;background:#171b25;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;outline:none;overflow-wrap:anywhere}
+.editor:empty:before{content:"Was geht dir durch den Kopf?";color:#758096}
+.editor img{max-width:100%;height:auto;border-radius:9px}
+.editor blockquote{border-left:3px solid var(--accent);padding-left:14px;margin-left:0;color:#c3cbe0}
+.editor a{color:var(--accent)}
+.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:15px}
+.status{color:var(--muted);font-size:12px;margin-left:auto}
+.status.good{color:var(--good)}.status.bad{color:var(--danger)}
+@media(max-width:750px){
+ .layout{grid-template-columns:1fr}
+ aside{border-right:0;border-bottom:1px solid var(--line)}
+ .entry-list{flex-direction:row;overflow-x:auto}
+ .entry-item{min-width:150px}
+ main{padding:22px 15px}
+ .editor{min-height:55vh;padding:15px}
 }
 </style>
 </head>
@@ -263,49 +79,38 @@ h2 { font-size: 20px; }
   </div>
 </header>
 
-<section id="setupScreen" class="screen">
+<section id="loginScreen" class="screen">
   <h1>Dein privater Ort.</h1>
   <p class="muted">
-    Deine Einträge werden lokal verschlüsselt, bevor sie
-    an GitHub übertragen werden.
+    Melde dich mit GitHub an. Deine Einträge werden anschließend
+    mit deinem eigenen Tagebuchpasswort verschlüsselt.
   </p>
 
   <div class="card stack">
-    <label class="small">
-      GitHub-Benutzername
-      <input id="owner" placeholder="ArthurJFFrisch">
-    </label>
-
-    <label class="small">
-      Privates Daten-Repository
-      <input id="repo" placeholder="private-journal-data">
-    </label>
-
-    <label class="small">
-      Cloudflare Worker
-      <input id="worker"
-        value="https://journal-auth.arthurfrisch-contact.workers.dev">
-    </label>
-
-    <button id="connectBtn" class="primary">
-      Mit GitHub verbinden
+    <button id="loginBtn" class="primary">
+      Mit GitHub anmelden
     </button>
+    <p class="small">
+      Es wird ausschließlich das private Repository verwendet,
+      für das du die Journal-App installiert hast.
+    </p>
   </div>
 
   <div class="notice">
-    Entwicklungsfassung: Noch nicht unabhängig sicherheitsgeprüft.
-    Verwende ausschließlich Testdaten.
+    Entwicklungsfassung: Bitte zunächst nur Testdaten verwenden.
   </div>
 </section>
 
 <section id="unlockScreen" class="screen hidden">
-  <h1>Willkommen zurück.</h1>
+  <h1>Tagebuch entsperren</h1>
   <p class="muted">
-    Gib dein Tagebuchpasswort ein.
+    Dieses Passwort ist unabhängig von deinem GitHub-Passwort.
+    Es verschlüsselt deine Tagebucheinträge.
   </p>
 
   <div class="card stack">
     <input id="password" type="password"
+      autocomplete="current-password"
       placeholder="Tagebuchpasswort">
     <button id="unlockBtn" class="primary">Entsperren</button>
     <p id="unlockMsg" class="small"></p>
@@ -313,7 +118,6 @@ h2 { font-size: 20px; }
 </section>
 
 <div id="app" class="layout hidden">
-
   <aside>
     <div class="sidehead">
       <strong>Einträge</strong>
@@ -325,10 +129,13 @@ h2 { font-size: 20px; }
     <div class="stack" style="margin-top:22px">
       <button id="syncBtn">Synchronisieren</button>
       <button id="exportBtn">Backup exportieren</button>
+
       <label class="small">
         Backup importieren
         <input id="importFile" type="file" accept=".enc">
       </label>
+
+      <button id="logoutBtn">Von GitHub abmelden</button>
     </div>
   </aside>
 
@@ -355,23 +162,20 @@ h2 { font-size: 20px; }
       <button data-cmd="insertOrderedList">1. Liste</button>
       <button id="linkBtn">Link</button>
       <button id="imageBtn">Bild</button>
-      <input id="imageFile" type="file"
-        accept="image/*" class="hidden">
+      <input id="imageFile" type="file" accept="image/*" hidden>
     </div>
 
     <div id="editor" class="editor"
       contenteditable="true" spellcheck="true"></div>
 
     <div class="actions">
-      <button id="saveBtn" class="primary">Speichern</button>
-      <span id="saveStatus" class="status">
-        Noch nicht gespeichert
-      </span>
+      <button id="saveBtn" class="primary">Jetzt speichern</button>
+      <span id="saveStatus" class="status">Bereit</span>
     </div>
 
     <p class="small" style="margin-top:25px">
-      Android: Über das Browsermenü kannst du diese Seite
-      zum Startbildschirm hinzufügen.
+      Änderungen werden lokal verschlüsselt zwischengespeichert
+      und automatisch zur Cloud übertragen.
     </p>
   </main>
 </div>
@@ -380,34 +184,40 @@ h2 { font-size: 20px; }
 "use strict";
 
 const $ = id => document.getElementById(id);
-
-const API = "https://api.github.com";
-const DATA_FILE = "journal-v1.enc";
-
 const enc = new TextEncoder();
 const dec = new TextDecoder();
 
-let token = null;
+const WORKER =
+  "https://journal-auth.arthurfrisch-contact.workers.dev";
+
+const CACHE_KEY = "private-journal-cache-v2";
+
+let sessionId = null;
 let key = null;
 let salt = null;
 let entries = [];
 let activeId = null;
 let remoteSha = null;
+let dirty = false;
+let saveTimer = null;
+let syncTimer = null;
+let saving = false;
 
-let owner = "";
-let repo = "";
-let worker = "";
+function show(id) {
+  ["loginScreen","unlockScreen","app"].forEach(x =>
+    $(x).classList.toggle("hidden",x!==id)
+  );
+}
 
-function setCloud(text, good=false) {
+function setCloud(text,good=false) {
   $("cloudState").textContent = text;
   $("cloudState").style.color =
     good ? "var(--good)" : "var(--muted)";
 }
 
-function show(id) {
-  ["setupScreen","unlockScreen","app"].forEach(x =>
-    $(x).classList.toggle("hidden", x !== id)
-  );
+function setStatus(text,type="") {
+  $("saveStatus").textContent = text;
+  $("saveStatus").className = "status " + type;
 }
 
 function uuid() {
@@ -415,37 +225,31 @@ function uuid() {
 }
 
 function b64(bytes) {
-  let s = "";
-  const a = new Uint8Array(bytes);
-
-  for (let i=0; i<a.length; i+=0x8000) {
-    s += String.fromCharCode(...a.subarray(i,i+0x8000));
+  let s="";
+  const a=new Uint8Array(bytes);
+  for(let i=0;i<a.length;i+=0x8000) {
+    s+=String.fromCharCode(...a.subarray(i,i+0x8000));
   }
-
   return btoa(s);
 }
 
 function unb64(s) {
-  return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  return Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 }
 
 /* ---------- Verschlüsselung ---------- */
 
-async function deriveKey(password, saltBytes) {
-  const material = await crypto.subtle.importKey(
-    "raw",
-    enc.encode(password),
-    "PBKDF2",
-    false,
-    ["deriveKey"]
+async function deriveKey(password,saltBytes) {
+  const material=await crypto.subtle.importKey(
+    "raw",enc.encode(password),"PBKDF2",false,["deriveKey"]
   );
 
   return crypto.subtle.deriveKey(
     {
-      name: "PBKDF2",
-      salt: saltBytes,
-      iterations: 600000,
-      hash: "SHA-256"
+      name:"PBKDF2",
+      salt:saltBytes,
+      iterations:600000,
+      hash:"SHA-256"
     },
     material,
     {name:"AES-GCM",length:256},
@@ -455,9 +259,9 @@ async function deriveKey(password, saltBytes) {
 }
 
 async function encryptData(data) {
-  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const iv=crypto.getRandomValues(new Uint8Array(12));
 
-  const ciphertext = await crypto.subtle.encrypt(
+  const ciphertext=await crypto.subtle.encrypt(
     {name:"AES-GCM",iv},
     key,
     enc.encode(JSON.stringify(data))
@@ -465,6 +269,8 @@ async function encryptData(data) {
 
   return {
     version:1,
+    kdf:"PBKDF2-SHA-256",
+    iterations:600000,
     salt:b64(salt),
     iv:b64(iv),
     ciphertext:b64(ciphertext)
@@ -472,161 +278,212 @@ async function encryptData(data) {
 }
 
 async function decryptData(blob) {
-  if (blob.version !== 1) {
-    throw new Error("Unbekanntes Datenformat.");
-  }
+  if(blob.version!==1) throw new Error("Unbekanntes Datenformat.");
 
-  salt = unb64(blob.salt);
+  const savedSalt=unb64(blob.salt);
+  const iv=unb64(blob.iv);
 
-  const plaintext = await crypto.subtle.decrypt(
-    {name:"AES-GCM",iv:unb64(blob.iv)},
+  const plaintext=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv},
     key,
     unb64(blob.ciphertext)
   );
 
+  salt=savedSalt;
   return JSON.parse(dec.decode(plaintext));
 }
 
-/* ---------- GitHub API ---------- */
+/* ---------- Lokaler verschlüsselter Speicher ---------- */
 
-async function api(path, options={}) {
-  const response = await fetch(API + path, {
+function openDatabase() {
+  return new Promise((resolve,reject)=>{
+    const request=indexedDB.open("PrivateJournalDB",1);
+
+    request.onupgradeneeded=()=>{
+      const db=request.result;
+      if(!db.objectStoreNames.contains("cache")) {
+        db.createObjectStore("cache");
+      }
+    };
+
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>reject(request.error);
+  });
+}
+
+async function cachePut(value) {
+  const db=await openDatabase();
+
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction("cache","readwrite");
+    tx.objectStore("cache").put(value,CACHE_KEY);
+    tx.oncomplete=()=>{db.close();resolve()};
+    tx.onerror=()=>{db.close();reject(tx.error)};
+  });
+}
+
+async function cacheGet() {
+  const db=await openDatabase();
+
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction("cache","readonly");
+    const request=tx.objectStore("cache").get(CACHE_KEY);
+    request.onsuccess=()=>{db.close();resolve(request.result||null)};
+    request.onerror=()=>{db.close();reject(request.error)};
+  });
+}
+
+async function saveEncryptedCache() {
+  const envelope=await encryptData({
+    entries,
+    updatedAt:new Date().toISOString()
+  });
+
+  await cachePut(envelope);
+  return envelope;
+}
+
+/* ---------- Cloudflare Worker API ---------- */
+
+async function workerRequest(path,options={}) {
+  const response=await fetch(WORKER+path,{
     ...options,
-    headers: {
-      Authorization:"Bearer " + token,
-      Accept:"application/vnd.github+json",
-      "X-GitHub-Api-Version":"2022-11-28",
-      ...(options.headers || {})
+    headers:{
+      ...(options.headers||{}),
+      Authorization:"Bearer "+sessionId
     }
   });
 
-  const result = await response.json().catch(() => ({}));
+  const result=await response.json().catch(()=>({}));
 
-  if (!response.ok) {
-    const error = new Error(
-      result.message || "GitHub API Fehler " + response.status
-    );
-    error.status = response.status;
-    throw error;
+  if(response.status===401) {
+    sessionId=null;
+    sessionStorage.removeItem("pj-session");
+    show("loginScreen");
+    setCloud("Erneute Anmeldung erforderlich");
+    throw new Error(result.error||"Sitzung abgelaufen.");
+  }
+
+  if(!response.ok) {
+    throw new Error(result.message||result.error||"Serverfehler "+response.status);
   }
 
   return result;
 }
 
-function repoPath() {
-  return `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${DATA_FILE}`;
-}
-
 async function getRemote() {
-  try {
-    const file = await api(repoPath());
-    remoteSha = file.sha;
-
-    if (!file.content) {
-      throw new Error("GitHub hat keinen Dateiinhalt geliefert.");
-    }
-
-    const blob = JSON.parse(
-      dec.decode(unb64(file.content.replace(/\n/g,"")))
-    );
-
-    const data = await decryptData(blob);
-
-    entries = Array.isArray(data.entries) ? data.entries : [];
-
-    setCloud("Cloud synchronisiert",true);
-    renderList();
-
-    return true;
-  } catch(error) {
-    if (error.status === 404) {
-      remoteSha = null;
-      entries = [];
-      renderList();
-      setCloud("Neues Tagebuch",true);
-      return false;
-    }
-
-    throw error;
-  }
-}
-
-async function pushRemote() {
-  const blob = await encryptData({
-    entries,
-    updatedAt:new Date().toISOString()
+  const response=await fetch(WORKER+"/api/file",{
+    headers:{Authorization:"Bearer "+sessionId}
   });
 
-  const raw = enc.encode(JSON.stringify(blob));
+  const result=await response.json().catch(()=>({}));
 
-  if (raw.length > 850000) {
-    throw new Error("Tagebuch zu groß für diesen einfachen Upload.");
+  if(response.status===404) {
+    remoteSha=null;
+    return null;
   }
 
-  let latestSha = null;
+  if(response.status===401) {
+    sessionId=null;
+    sessionStorage.removeItem("pj-session");
+    show("loginScreen");
+    throw new Error("Sitzung abgelaufen. Bitte erneut anmelden.");
+  }
+
+  if(!response.ok) {
+    throw new Error(result.error||result.message||"Cloud-Lesefehler.");
+  }
+
+  if(!result.content) {
+    throw new Error("Die Cloud-Datei enthält keinen lesbaren Inhalt.");
+  }
+
+  remoteSha=result.sha;
+
+  const blob=JSON.parse(
+    dec.decode(unb64(result.content.replace(/\n/g,"")))
+  );
+
+  return blob;
+}
+
+async function pushRemote(envelope) {
+  // Vor dem Schreiben prüfen, ob ein anderes Gerät geändert hat.
+  let latestSha=null;
 
   try {
-    latestSha = (await api(repoPath())).sha;
+    const latest=await workerRequest("/api/file");
+    latestSha=latest.sha;
   } catch(error) {
-    if (error.status !== 404) throw error;
+    if(!String(error.message).includes("404")) throw error;
   }
 
-  if (latestSha !== remoteSha) {
+  if(latestSha!==remoteSha) {
     throw new Error(
-      "Cloud-Konflikt: Bitte zuerst synchronisieren. " +
-      "Es wurde nichts überschrieben."
+      "Synchronisierungskonflikt: Die Cloud wurde zwischenzeitlich " +
+      "auf einem anderen Gerät verändert. Bitte nicht überschreiben."
     );
   }
 
-  const body = {
-    message:"Update encrypted journal",
+  const raw=enc.encode(JSON.stringify(envelope));
+
+  // Sicherheitsgrenze für den einfachen Contents-API-Speicher.
+  if(raw.length>650000) {
+    throw new Error(
+      "Das Tagebuch ist zu groß für den aktuellen Cloud-Speicher. " +
+      "Bitte Bilder verkleinern oder Einträge exportieren."
+    );
+  }
+
+  const body={
+    message:"Save encrypted journal",
     content:b64(raw)
   };
 
-  if (remoteSha) body.sha = remoteSha;
+  if(remoteSha) body.sha=remoteSha;
 
-  const result = await api(repoPath(), {
+  const result=await workerRequest("/api/file",{
     method:"PUT",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(body)
   });
 
-  remoteSha = result.content.sha;
-  setCloud("Cloud gespeichert",true);
+  remoteSha=result.content.sha;
+  setCloud("Cloud synchronisiert",true);
 }
 
-/* ---------- Editor und Einträge ---------- */
+/* ---------- HTML bereinigen ---------- */
 
 function cleanHTML(html) {
-  const doc = new DOMParser().parseFromString(html,"text/html");
+  const doc=new DOMParser().parseFromString(html,"text/html");
 
-  const allowed = new Set([
+  const allowed=new Set([
     "P","BR","B","STRONG","I","EM","U","S",
     "H2","H3","BLOCKQUOTE","UL","OL","LI",
     "A","IMG","DIV","SPAN","PRE","CODE"
   ]);
 
-  doc.body.querySelectorAll("*").forEach(el => {
-    if (!allowed.has(el.tagName)) {
+  doc.body.querySelectorAll("*").forEach(el=>{
+    if(!allowed.has(el.tagName)) {
       el.replaceWith(...el.childNodes);
       return;
     }
 
-    [...el.attributes].forEach(attr => {
-      if (el.tagName === "A" && attr.name === "href") {
+    [...el.attributes].forEach(attr=>{
+      if(el.tagName==="A" && attr.name==="href") {
         try {
-          const u = new URL(attr.value);
-          if (!["http:","https:"].includes(u.protocol)) {
+          const u=new URL(attr.value);
+          if(!["https:","http:"].includes(u.protocol)) {
             el.removeAttribute("href");
           }
         } catch {
           el.removeAttribute("href");
         }
-      } else if (el.tagName === "IMG" && attr.name === "src") {
-        if (!attr.value.startsWith("data:image/")) {
+      } else if(el.tagName==="IMG" && attr.name==="src") {
+        if(!attr.value.startsWith("data:image/")) {
           el.removeAttribute("src");
         }
-      } else if (!(el.tagName === "IMG" && attr.name === "alt")) {
+      } else if(!(el.tagName==="IMG" && attr.name==="alt")) {
         el.removeAttribute(attr.name);
       }
     });
@@ -635,29 +492,7 @@ function cleanHTML(html) {
   return doc.body.innerHTML;
 }
 
-function renderList() {
-  const host = $("entries");
-  host.replaceChildren();
-
-  [...entries]
-    .sort((a,b) => b.updatedAt.localeCompare(a.updatedAt))
-    .forEach(entry => {
-      const button = document.createElement("button");
-      button.className =
-        "entry-item" + (entry.id === activeId ? " active" : "");
-
-      const title = document.createElement("strong");
-      title.textContent = entry.title || "Ohne Titel";
-
-      const date = document.createElement("small");
-      date.textContent = new Date(entry.updatedAt)
-        .toLocaleString("de-DE");
-
-      button.append(title,date);
-      button.onclick = () => selectEntry(entry.id);
-      host.append(button);
-    });
-}
+/* ---------- Einträge ---------- */
 
 function currentEntry() {
   return {
@@ -668,39 +503,60 @@ function currentEntry() {
   };
 }
 
-function saveLocal() {
-  if (!activeId) return;
+function saveCurrent() {
+  if(!activeId) return;
 
-  const entry = currentEntry();
-  const index = entries.findIndex(e => e.id === activeId);
+  const entry=currentEntry();
+  const index=entries.findIndex(e=>e.id===activeId);
 
-  if (index < 0) entries.unshift(entry);
-  else entries[index] = entry;
+  if(index<0) entries.unshift(entry);
+  else entries[index]=entry;
 
   renderList();
+}
+
+function renderList() {
+  const host=$("entries");
+  host.replaceChildren();
+
+  [...entries]
+    .sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))
+    .forEach(entry=>{
+      const button=document.createElement("button");
+      button.className="entry-item"+(entry.id===activeId?" active":"");
+
+      const title=document.createElement("strong");
+      title.textContent=entry.title||"Ohne Titel";
+
+      const date=document.createElement("small");
+      date.textContent=new Date(entry.updatedAt)
+        .toLocaleString("de-DE");
+
+      button.append(title,date);
+      button.onclick=()=>selectEntry(entry.id);
+      host.append(button);
+    });
 }
 
 function selectEntry(id) {
-  saveLocal();
+  saveCurrent();
 
-  activeId = id;
+  activeId=id;
+  const entry=entries.find(e=>e.id===id);
 
-  const entry = entries.find(e => e.id === id);
-
-  $("entryTitle").value = entry?.title || "";
-  $("editor").innerHTML = entry?.html || "";
-
-  $("dateLabel").textContent = entry
-    ? new Date(entry.updatedAt).toLocaleString("de-DE")
-    : "";
+  $("entryTitle").value=entry?.title||"";
+  $("editor").innerHTML=entry?.html||"";
+  $("dateLabel").textContent=entry
+    ?new Date(entry.updatedAt).toLocaleString("de-DE"):"";
 
   renderList();
+  dirty=false;
 }
 
 function newEntry() {
-  saveLocal();
+  saveCurrent();
 
-  const entry = {
+  const entry={
     id:uuid(),
     title:"",
     html:"",
@@ -708,333 +564,416 @@ function newEntry() {
   };
 
   entries.unshift(entry);
-  activeId = entry.id;
+  activeId=entry.id;
 
-  $("entryTitle").value = "";
-  $("editor").innerHTML = "";
-  $("dateLabel").textContent = new Date().toLocaleString("de-DE");
+  $("entryTitle").value="";
+  $("editor").innerHTML="";
+  $("dateLabel").textContent=new Date().toLocaleString("de-DE");
 
   renderList();
+  dirty=true;
+  scheduleSave();
   $("entryTitle").focus();
 }
 
-/* ---------- Anmeldung ---------- */
+/* ---------- Automatisches Speichern ---------- */
 
-$("connectBtn").onclick = () => {
-  owner = $("owner").value.trim();
-  repo = $("repo").value.trim();
-  worker = $("worker").value.trim().replace(/\/+$/,"");
+function scheduleSave() {
+  dirty=true;
+  setStatus("Änderungen erkannt…");
 
-  if (!owner || !repo || !worker.startsWith("https://")) {
-    alert("Bitte alle Angaben prüfen.");
-    return;
+  clearTimeout(saveTimer);
+  clearTimeout(syncTimer);
+
+  saveTimer=setTimeout(async()=>{
+    saveCurrent();
+
+    try {
+      await saveEncryptedCache();
+      setStatus("Lokal verschlüsselt gespeichert","good");
+    } catch(error) {
+      setStatus("Lokaler Speicherfehler: "+error.message,"bad");
+    }
+  },900);
+
+  syncTimer=setTimeout(async()=>{
+    await saveAndSync();
+  },5000);
+}
+
+async function saveAndSync() {
+  if(saving || !key || !sessionId) return;
+
+  saving=true;
+  clearTimeout(saveTimer);
+  clearTimeout(syncTimer);
+
+  try {
+    saveCurrent();
+
+    const envelope=await saveEncryptedCache();
+    setStatus("Synchronisiere…");
+
+    await pushRemote(envelope);
+
+    dirty=false;
+    setStatus("Verschlüsselt gespeichert","good");
+  } catch(error) {
+    setStatus(error.message,"bad");
+  } finally {
+    saving=false;
   }
+}
 
-  localStorage.setItem("pj-config",JSON.stringify({
-    owner,repo,worker
-  }));
+/* ---------- Entsperren ---------- */
 
-  location.href = worker + "/login";
-};
+async function unlock() {
+  const password=$("password").value;
 
-$("unlockBtn").onclick = async () => {
-  const password = $("password").value;
-
-  if (password.length < 12) {
-    $("unlockMsg").textContent =
+  if(password.length<12) {
+    $("unlockMsg").textContent=
       "Bitte ein langes Passwort mit mindestens 12 Zeichen verwenden.";
     return;
   }
 
-  $("unlockMsg").textContent = "Schlüssel wird abgeleitet…";
+  $("unlockMsg").textContent="Daten werden geladen…";
 
   try {
-    let envelope = null;
+    const remote=await getRemote();
 
-    try {
-      const file = await api(repoPath());
-      remoteSha = file.sha;
+    if(remote) {
+      salt=unb64(remote.salt);
+      key=await deriveKey(password,salt);
 
-      envelope = JSON.parse(
-        dec.decode(unb64(file.content.replace(/\n/g,"")))
-      );
+      const data=await decryptData(remote);
+      entries=Array.isArray(data.entries)?data.entries:[];
 
-      salt = unb64(envelope.salt);
-    } catch(error) {
-      if (error.status !== 404) throw error;
-      salt = crypto.getRandomValues(new Uint8Array(16));
-    }
-
-    key = await deriveKey(password,salt);
-
-    if (envelope) {
-      const data = await decryptData(envelope);
-      entries = Array.isArray(data.entries) ? data.entries : [];
     } else {
-      entries = [];
+      // Wenn es noch keine Cloud-Datei gibt, lokales Backup prüfen.
+      const cached=await cacheGet();
+
+      if(cached) {
+        salt=unb64(cached.salt);
+        key=await deriveKey(password,salt);
+
+        const data=await decryptData(cached);
+
+        if(confirm(
+          "Es gibt noch keine Cloud-Datei, aber einen lokalen " +
+          "verschlüsselten Datenstand. Möchtest du ihn laden?"
+        )) {
+          entries=Array.isArray(data.entries)?data.entries:[];
+        } else {
+          salt=crypto.getRandomValues(new Uint8Array(16));
+          key=await deriveKey(password,salt);
+          entries=[];
+        }
+      } else {
+        salt=crypto.getRandomValues(new Uint8Array(16));
+        key=await deriveKey(password,salt);
+        entries=[];
+      }
     }
 
-    $("password").value = "";
+    $("password").value="";
+    $("unlockMsg").textContent="";
+
     show("app");
     $("lockBtn").classList.remove("hidden");
 
     renderList();
 
-    if (entries.length) {
-      selectEntry(
-        [...entries].sort((a,b) =>
-          b.updatedAt.localeCompare(a.updatedAt)
-        )[0].id
-      );
+    if(entries.length) {
+      const latest=[...entries].sort((a,b)=>
+        b.updatedAt.localeCompare(a.updatedAt)
+      )[0];
+      selectEntry(latest.id);
     } else {
       newEntry();
     }
 
-    setCloud("GitHub verbunden",true);
+    setCloud("Tagebuch entsperrt",true);
 
   } catch(error) {
-    $("unlockMsg").textContent =
-      "Entsperren fehlgeschlagen: " + error.message;
+    key=null;
+    $("unlockMsg").textContent=
+      "Entsperren fehlgeschlagen: "+error.message;
   }
+}
+
+/* ---------- Login / Logout ---------- */
+
+$("loginBtn").onclick=()=>{
+  location.href=WORKER+"/login";
 };
 
-/* ---------- Buttons ---------- */
+$("unlockBtn").onclick=unlock;
 
-$("newBtn").onclick = newEntry;
-
-$("saveBtn").onclick = async () => {
-  saveLocal();
-
-  $("saveStatus").textContent = "Verschlüsseln und speichern…";
-
-  try {
-    await pushRemote();
-    $("saveStatus").textContent = "Verschlüsselt gespeichert";
-    $("saveStatus").className = "status good";
-  } catch(error) {
-    $("saveStatus").textContent = error.message;
-    $("saveStatus").className = "status bad";
-  }
-};
-
-$("syncBtn").onclick = async () => {
-  try {
-    await getRemote();
-
-    if (entries.length) {
-      selectEntry(entries[0].id);
+$("logoutBtn").onclick=async()=>{
+  if(dirty) {
+    if(!confirm("Es gibt möglicherweise ungespeicherte Änderungen. Trotzdem abmelden?")) {
+      return;
     }
-
-    $("saveStatus").textContent = "Synchronisiert";
-  } catch(error) {
-    $("saveStatus").textContent = error.message;
-    $("saveStatus").className = "status bad";
   }
+
+  try {
+    await workerRequest("/logout",{method:"POST"});
+  } catch(error) {
+    console.warn(error);
+  }
+
+  sessionId=null;
+  sessionStorage.removeItem("pj-session");
+  key=null;
+  entries=[];
+  activeId=null;
+
+  show("loginScreen");
+  $("lockBtn").classList.add("hidden");
+  setCloud("Abgemeldet");
 };
 
-$("deleteBtn").onclick = () => {
-  if (!activeId || !confirm("Eintrag wirklich löschen?")) return;
+$("lockBtn").onclick=async()=>{
+  if(dirty) await saveAndSync();
 
-  entries = entries.filter(e => e.id !== activeId);
-  activeId = null;
-
-  if (entries.length) selectEntry(entries[0].id);
-  else newEntry();
-
-  renderList();
-  $("saveStatus").textContent =
-    "Gelöscht – noch nicht in der Cloud gespeichert.";
-};
-
-$("lockBtn").onclick = () => {
-  key = null;
-  token = null;
-  entries = [];
-  activeId = null;
-  remoteSha = null;
+  key=null;
+  entries=[];
+  activeId=null;
 
   show("unlockScreen");
   $("lockBtn").classList.add("hidden");
   setCloud("Gesperrt");
 };
 
-/* ---------- Formatierungen ---------- */
+/* ---------- Bedienung ---------- */
 
-$("toolbar").addEventListener("click",event => {
-  const button = event.target.closest("button");
-  if (!button) return;
+$("newBtn").onclick=newEntry;
+$("saveBtn").onclick=saveAndSync;
 
-  if (button.dataset.cmd) {
-    document.execCommand(button.dataset.cmd,false,null);
+$("deleteBtn").onclick=()=>{
+  if(!activeId || !confirm("Eintrag wirklich löschen?")) return;
+
+  entries=entries.filter(e=>e.id!==activeId);
+  activeId=null;
+
+  if(entries.length) selectEntry(entries[0].id);
+  else newEntry();
+
+  dirty=true;
+  scheduleSave();
+};
+
+$("syncBtn").onclick=async()=>{
+  if(dirty) {
+    alert(
+      "Du hast noch lokale Änderungen. Speichere diese zuerst, " +
+      "bevor du die Cloud neu lädst."
+    );
+    return;
   }
 
-  if (button.dataset.block) {
-    document.execCommand("formatBlock",false,button.dataset.block);
-  }
-});
+  try {
+    const remote=await getRemote();
 
-$("linkBtn").onclick = () => {
-  const url = prompt("HTTPS-Link eingeben:");
+    if(!remote) {
+      alert("In der Cloud gibt es noch keine Datei.");
+      return;
+    }
 
-  if (url && /^https?:\/\//i.test(url)) {
-    document.execCommand("createLink",false,url);
+    const data=await decryptData(remote);
+    entries=Array.isArray(data.entries)?data.entries:[];
+
+    renderList();
+
+    if(entries.length) selectEntry(entries[0].id);
+    setStatus("Cloud-Daten geladen","good");
+
+  } catch(error) {
+    setStatus(error.message,"bad");
   }
 };
 
+/* ---------- Editor ---------- */
+
+$("toolbar").addEventListener("click",event=>{
+  const button=event.target.closest("button");
+  if(!button) return;
+
+  if(button.dataset.cmd) {
+    document.execCommand(button.dataset.cmd,false,null);
+  }
+
+  if(button.dataset.block) {
+    document.execCommand("formatBlock",false,button.dataset.block);
+  }
+
+  scheduleSave();
+});
+
+$("linkBtn").onclick=()=>{
+  const url=prompt("HTTPS-Link eingeben:");
+
+  if(url && /^https?:\/\//i.test(url)) {
+    document.execCommand("createLink",false,url);
+    scheduleSave();
+  }
+};
+
+$("entryTitle").addEventListener("input",scheduleSave);
+$("editor").addEventListener("input",scheduleSave);
+
 /* ---------- Bilder ---------- */
 
-$("imageBtn").onclick = () => $("imageFile").click();
+$("imageBtn").onclick=()=>$("imageFile").click();
 
-$("imageFile").onchange = event => {
-  const file = event.target.files[0];
-  if (!file) return;
+$("imageFile").onchange=event=>{
+  const file=event.target.files[0];
+  if(!file) return;
 
-  if (!file.type.startsWith("image/")) {
+  if(!file.type.startsWith("image/")) {
     alert("Bitte eine Bilddatei auswählen.");
     return;
   }
 
-  if (file.size > 2 * 1024 * 1024) {
-    alert("Bitte zunächst Bilder unter 2 MB verwenden.");
+  if(file.size>5*1024*1024) {
+    alert("Bitte zunächst ein Bild unter 5 MB auswählen.");
     return;
   }
 
-  const reader = new FileReader();
+  const reader=new FileReader();
 
-  reader.onload = () => {
-    const img = new Image();
+  reader.onload=()=>{
+    const img=new Image();
 
-    img.onload = () => {
-      const scale = Math.min(
-        1,
-        1400 / img.width,
-        1400 / img.height
-      );
+    img.onload=()=>{
+      const scale=Math.min(1,1200/img.width,1200/img.height);
+      const canvas=document.createElement("canvas");
 
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.round(img.width * scale);
-      canvas.height = Math.round(img.height * scale);
+      canvas.width=Math.round(img.width*scale);
+      canvas.height=Math.round(img.height*scale);
 
       canvas.getContext("2d").drawImage(
         img,0,0,canvas.width,canvas.height
       );
 
-      const data = canvas.toDataURL("image/webp",0.78);
+      const data=canvas.toDataURL("image/webp",0.65);
 
       document.execCommand(
         "insertHTML",
         false,
         `<p><img src="${data}" alt="Bild"></p>`
       );
+
+      scheduleSave();
     };
 
-    img.src = reader.result;
+    img.src=reader.result;
   };
 
   reader.readAsDataURL(file);
-  event.target.value = "";
+  event.target.value="";
 };
 
 /* ---------- Backup ---------- */
 
-$("exportBtn").onclick = async () => {
+$("exportBtn").onclick=async()=>{
   try {
-    saveLocal();
+    saveCurrent();
 
-    const blob = await encryptData({
+    const envelope=await encryptData({
       entries,
       updatedAt:new Date().toISOString()
     });
 
-    const file = new Blob(
-      [JSON.stringify(blob)],
+    const file=new Blob(
+      [JSON.stringify(envelope)],
       {type:"application/octet-stream"}
     );
 
-    const url = URL.createObjectURL(file);
-    const a = document.createElement("a");
+    const url=URL.createObjectURL(file);
+    const a=document.createElement("a");
 
-    a.href = url;
-    a.download = "tagebuch-backup.enc";
+    a.href=url;
+    a.download="tagebuch-backup.enc";
     a.click();
 
     URL.revokeObjectURL(url);
 
   } catch(error) {
-    alert(error.message);
+    alert("Backup fehlgeschlagen: "+error.message);
   }
 };
 
-$("importFile").onchange = async event => {
-  const file = event.target.files[0];
-  if (!file) return;
+$("importFile").onchange=async event=>{
+  const file=event.target.files[0];
+  if(!file) return;
 
   try {
-    const blob = JSON.parse(await file.text());
-    const data = await decryptData(blob);
+    const envelope=JSON.parse(await file.text());
 
-    if (!Array.isArray(data.entries)) {
-      throw new Error("Backup enthält keine Einträge.");
+    salt=unb64(envelope.salt);
+
+    const password=prompt(
+      "Gib das Passwort des Backups ein:"
+    );
+
+    if(!password) return;
+
+    key=await deriveKey(password,salt);
+
+    const data=await decryptData(envelope);
+
+    if(!Array.isArray(data.entries)) {
+      throw new Error("Das Backup enthält keine Einträge.");
     }
 
-    if (!confirm("Aktuelle Einträge durch das Backup ersetzen?")) {
+    if(!confirm("Aktuelle Einträge durch das Backup ersetzen?")) {
       return;
     }
 
-    entries = data.entries;
-    activeId = null;
+    entries=data.entries;
+    activeId=null;
     renderList();
 
-    if (entries.length) selectEntry(entries[0].id);
+    if(entries.length) selectEntry(entries[0].id);
     else newEntry();
 
-    $("saveStatus").textContent =
-      "Backup geladen – noch nicht synchronisiert.";
+    dirty=true;
+    await saveAndSync();
 
   } catch(error) {
-    alert("Backup konnte nicht geöffnet werden: " + error.message);
+    alert("Backup konnte nicht geladen werden: "+error.message);
   } finally {
-    event.target.value = "";
+    event.target.value="";
   }
 };
 
-/* ---------- Initialisierung ---------- */
+/* ---------- Start ---------- */
 
-window.addEventListener("DOMContentLoaded",() => {
-  const config = JSON.parse(
-    localStorage.getItem("pj-config") || "null"
-  );
+window.addEventListener("DOMContentLoaded",()=>{
+  const params=new URLSearchParams(location.hash.slice(1));
+  const returnedSession=params.get("session_id");
 
-  if (config) {
-    owner = config.owner;
-    repo = config.repo;
-    worker = config.worker;
-
-    $("owner").value = owner;
-    $("repo").value = repo;
-    $("worker").value = worker;
-  }
-
-  const hash = new URLSearchParams(location.hash.slice(1));
-  const accessToken = hash.get("access_token");
-
-  if (accessToken) {
-    token = accessToken;
+  if(returnedSession) {
+    sessionId=returnedSession;
+    sessionStorage.setItem("pj-session",sessionId);
 
     history.replaceState(
       null,
       "",
-      location.pathname + location.search
+      location.pathname+location.search
     );
-
-    show("unlockScreen");
-    setCloud("GitHub verbunden",true);
-
   } else {
-    show("setupScreen");
+    sessionId=sessionStorage.getItem("pj-session");
+  }
+
+  if(sessionId) {
+    show("unlockScreen");
+    setCloud("GitHub angemeldet",true);
+  } else {
+    show("loginScreen");
   }
 });
-
 </script>
 </body>
 </html>
