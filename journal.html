@@ -372,39 +372,34 @@ async function workerRequest(path,options={}) {
 }
 
 async function getRemote() {
-  const response=await fetch(WORKER+"/api/file",{
-    headers:{Authorization:"Bearer "+sessionId}
+  const response = await fetch(WORKER + "/api/file", {
+    headers: {
+      Authorization: "Bearer " + sessionId
+    }
   });
 
-  const result=await response.json().catch(()=>({}));
-
-  if(response.status===404) {
-    remoteSha=null;
+  if (response.status === 404) {
+    remoteSha = null;
     return null;
   }
 
-  if(response.status===401) {
-    sessionId=null;
-    sessionStorage.removeItem("pj-session");
-    show("loginScreen");
-    throw new Error("Sitzung abgelaufen. Bitte erneut anmelden.");
+  const text = await response.text();
+
+  if (!response.ok) {
+    throw new Error(
+      `Cloud-Lesefehler (HTTP ${response.status}): ${text}`
+    );
   }
 
-  if(!response.ok) {
-    throw new Error(result.error||result.message||"Cloud-Lesefehler.");
+  let result;
+  try {
+    result = JSON.parse(text);
+  } catch {
+    throw new Error("Ungültige Serverantwort: " + text);
   }
 
-  if(!result.content) {
-    throw new Error("Die Cloud-Datei enthält keinen lesbaren Inhalt.");
-  }
-
-  remoteSha=result.sha;
-
-  const blob=JSON.parse(
-    dec.decode(unb64(result.content.replace(/\n/g,"")))
-  );
-
-  return blob;
+  remoteSha = result.sha;
+  return result;
 }
 
 async function pushRemote(envelope) {
