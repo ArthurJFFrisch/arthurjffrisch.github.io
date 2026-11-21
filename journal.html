@@ -1,0 +1,1040 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171923">
+<title>Privates Journal</title>
+
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #11131a;
+  --panel: #191d27;
+  --panel2: #242a38;
+  --text: #edf0f7;
+  --muted: #9aa4b5;
+  --line: #303747;
+  --accent: #a7b8ff;
+  --danger: #ff8f8f;
+  --good: #9be0bd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.6 system-ui, sans-serif;
+}
+
+button, input { font: inherit; }
+
+button {
+  border: 1px solid var(--line);
+  background: var(--panel2);
+  color: var(--text);
+  padding: 9px 13px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--accent); }
+button.primary {
+  background: var(--accent);
+  color: #151927;
+  font-weight: 650;
+}
+
+input {
+  width: 100%;
+  background: #11151e;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px;
+}
+
+.top {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--line);
+  background: #151821;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.brand { font-weight: 750; }
+.brand span { color: var(--accent); }
+
+.layout {
+  display: grid;
+  grid-template-columns: 270px minmax(0,1fr);
+  max-width: 1300px;
+  margin: auto;
+  min-height: calc(100vh - 60px);
+}
+
+aside {
+  border-right: 1px solid var(--line);
+  padding: 20px 14px;
+}
+
+main {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 35px clamp(16px,5vw,65px);
+}
+
+h1 { font-size: 32px; margin: 0 0 8px; }
+h2 { font-size: 20px; }
+
+.muted { color: var(--muted); }
+.small { font-size: 12px; color: var(--muted); }
+
+.hidden { display: none !important; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.stack { display: grid; gap: 12px; }
+
+.screen {
+  max-width: 520px;
+  margin: 9vh auto;
+  padding: 20px;
+}
+
+.notice {
+  background: #242b3a;
+  border: 1px solid #39445a;
+  border-radius: 9px;
+  padding: 13px;
+  color: #cbd4e8;
+  font-size: 13px;
+}
+
+.sidehead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.entry-item {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border-color: transparent;
+}
+
+.entry-item.active {
+  background: var(--panel2);
+  border-color: var(--line);
+}
+
+.entry-item strong, .entry-item small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entry-item small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.editor-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.title-input {
+  font-size: 27px;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px 10px 0 0;
+}
+
+.toolbar button { padding: 6px 10px; }
+
+.editor {
+  min-height: 420px;
+  padding: 22px;
+  background: #171b25;
+  border: 1px solid var(--line);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  outline: none;
+  overflow-wrap: anywhere;
+}
+
+.editor:empty::before {
+  content: "Was geht dir durch den Kopf?";
+  color: #758096;
+}
+
+.editor img {
+  max-width: 100%;
+  border-radius: 9px;
+}
+
+.editor blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 14px;
+  margin-left: 0;
+  color: #c3cbe0;
+}
+
+.actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.status {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.status.good { color: var(--good); }
+.status.bad { color: var(--danger); }
+
+@media(max-width:750px) {
+  .layout { grid-template-columns: 1fr; }
+  aside {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .entry-list {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .entry-item { min-width: 150px; }
+  main { padding: 22px 15px; }
+  .editor { min-height: 55vh; padding: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="brand">privates<span>journal</span></div>
+  <div>
+    <span id="cloudState" class="small">Nicht verbunden</span>
+    <button id="lockBtn" class="hidden">Sperren</button>
+  </div>
+</header>
+
+<section id="setupScreen" class="screen">
+  <h1>Dein privater Ort.</h1>
+  <p class="muted">
+    Deine Einträge werden lokal verschlüsselt, bevor sie
+    an GitHub übertragen werden.
+  </p>
+
+  <div class="card stack">
+    <label class="small">
+      GitHub-Benutzername
+      <input id="owner" placeholder="ArthurJFFrisch">
+    </label>
+
+    <label class="small">
+      Privates Daten-Repository
+      <input id="repo" placeholder="private-journal-data">
+    </label>
+
+    <label class="small">
+      Cloudflare Worker
+      <input id="worker"
+        value="https://journal-auth.arthurfrisch-contact.workers.dev">
+    </label>
+
+    <button id="connectBtn" class="primary">
+      Mit GitHub verbinden
+    </button>
+  </div>
+
+  <div class="notice">
+    Entwicklungsfassung: Noch nicht unabhängig sicherheitsgeprüft.
+    Verwende ausschließlich Testdaten.
+  </div>
+</section>
+
+<section id="unlockScreen" class="screen hidden">
+  <h1>Willkommen zurück.</h1>
+  <p class="muted">
+    Gib dein Tagebuchpasswort ein.
+  </p>
+
+  <div class="card stack">
+    <input id="password" type="password"
+      placeholder="Tagebuchpasswort">
+    <button id="unlockBtn" class="primary">Entsperren</button>
+    <p id="unlockMsg" class="small"></p>
+  </div>
+</section>
+
+<div id="app" class="layout hidden">
+
+  <aside>
+    <div class="sidehead">
+      <strong>Einträge</strong>
+      <button id="newBtn">＋</button>
+    </div>
+
+    <div id="entries" class="entry-list"></div>
+
+    <div class="stack" style="margin-top:22px">
+      <button id="syncBtn">Synchronisieren</button>
+      <button id="exportBtn">Backup exportieren</button>
+      <label class="small">
+        Backup importieren
+        <input id="importFile" type="file" accept=".enc">
+      </label>
+    </div>
+  </aside>
+
+  <main>
+    <div class="editor-head">
+      <div>
+        <div class="small" id="dateLabel"></div>
+        <div class="small">Eintrag bearbeiten</div>
+      </div>
+      <button id="deleteBtn">Löschen</button>
+    </div>
+
+    <input id="entryTitle" class="title-input"
+      placeholder="Titel deines Eintrags">
+
+    <div class="toolbar" id="toolbar">
+      <button data-cmd="bold"><b>B</b></button>
+      <button data-cmd="italic"><i>I</i></button>
+      <button data-cmd="underline"><u>U</u></button>
+      <button data-block="h2">H2</button>
+      <button data-block="h3">H3</button>
+      <button data-block="blockquote">Zitat</button>
+      <button data-cmd="insertUnorderedList">• Liste</button>
+      <button data-cmd="insertOrderedList">1. Liste</button>
+      <button id="linkBtn">Link</button>
+      <button id="imageBtn">Bild</button>
+      <input id="imageFile" type="file"
+        accept="image/*" class="hidden">
+    </div>
+
+    <div id="editor" class="editor"
+      contenteditable="true" spellcheck="true"></div>
+
+    <div class="actions">
+      <button id="saveBtn" class="primary">Speichern</button>
+      <span id="saveStatus" class="status">
+        Noch nicht gespeichert
+      </span>
+    </div>
+
+    <p class="small" style="margin-top:25px">
+      Android: Über das Browsermenü kannst du diese Seite
+      zum Startbildschirm hinzufügen.
+    </p>
+  </main>
+</div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const API = "https://api.github.com";
+const DATA_FILE = "journal-v1.enc";
+
+const enc = new TextEncoder();
+const dec = new TextDecoder();
+
+let token = null;
+let key = null;
+let salt = null;
+let entries = [];
+let activeId = null;
+let remoteSha = null;
+
+let owner = "";
+let repo = "";
+let worker = "";
+
+function setCloud(text, good=false) {
+  $("cloudState").textContent = text;
+  $("cloudState").style.color =
+    good ? "var(--good)" : "var(--muted)";
+}
+
+function show(id) {
+  ["setupScreen","unlockScreen","app"].forEach(x =>
+    $(x).classList.toggle("hidden", x !== id)
+  );
+}
+
+function uuid() {
+  return crypto.randomUUID();
+}
+
+function b64(bytes) {
+  let s = "";
+  const a = new Uint8Array(bytes);
+
+  for (let i=0; i<a.length; i+=0x8000) {
+    s += String.fromCharCode(...a.subarray(i,i+0x8000));
+  }
+
+  return btoa(s);
+}
+
+function unb64(s) {
+  return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+}
+
+/* ---------- Verschlüsselung ---------- */
+
+async function deriveKey(password, saltBytes) {
+  const material = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(password),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+
+  return crypto.subtle.deriveKey(
+    {
+      name: "PBKDF2",
+      salt: saltBytes,
+      iterations: 600000,
+      hash: "SHA-256"
+    },
+    material,
+    {name:"AES-GCM",length:256},
+    false,
+    ["encrypt","decrypt"]
+  );
+}
+
+async function encryptData(data) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+
+  const ciphertext = await crypto.subtle.encrypt(
+    {name:"AES-GCM",iv},
+    key,
+    enc.encode(JSON.stringify(data))
+  );
+
+  return {
+    version:1,
+    salt:b64(salt),
+    iv:b64(iv),
+    ciphertext:b64(ciphertext)
+  };
+}
+
+async function decryptData(blob) {
+  if (blob.version !== 1) {
+    throw new Error("Unbekanntes Datenformat.");
+  }
+
+  salt = unb64(blob.salt);
+
+  const plaintext = await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:unb64(blob.iv)},
+    key,
+    unb64(blob.ciphertext)
+  );
+
+  return JSON.parse(dec.decode(plaintext));
+}
+
+/* ---------- GitHub API ---------- */
+
+async function api(path, options={}) {
+  const response = await fetch(API + path, {
+    ...options,
+    headers: {
+      Authorization:"Bearer " + token,
+      Accept:"application/vnd.github+json",
+      "X-GitHub-Api-Version":"2022-11-28",
+      ...(options.headers || {})
+    }
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const error = new Error(
+      result.message || "GitHub API Fehler " + response.status
+    );
+    error.status = response.status;
+    throw error;
+  }
+
+  return result;
+}
+
+function repoPath() {
+  return `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${DATA_FILE}`;
+}
+
+async function getRemote() {
+  try {
+    const file = await api(repoPath());
+    remoteSha = file.sha;
+
+    if (!file.content) {
+      throw new Error("GitHub hat keinen Dateiinhalt geliefert.");
+    }
+
+    const blob = JSON.parse(
+      dec.decode(unb64(file.content.replace(/\n/g,"")))
+    );
+
+    const data = await decryptData(blob);
+
+    entries = Array.isArray(data.entries) ? data.entries : [];
+
+    setCloud("Cloud synchronisiert",true);
+    renderList();
+
+    return true;
+  } catch(error) {
+    if (error.status === 404) {
+      remoteSha = null;
+      entries = [];
+      renderList();
+      setCloud("Neues Tagebuch",true);
+      return false;
+    }
+
+    throw error;
+  }
+}
+
+async function pushRemote() {
+  const blob = await encryptData({
+    entries,
+    updatedAt:new Date().toISOString()
+  });
+
+  const raw = enc.encode(JSON.stringify(blob));
+
+  if (raw.length > 850000) {
+    throw new Error("Tagebuch zu groß für diesen einfachen Upload.");
+  }
+
+  let latestSha = null;
+
+  try {
+    latestSha = (await api(repoPath())).sha;
+  } catch(error) {
+    if (error.status !== 404) throw error;
+  }
+
+  if (latestSha !== remoteSha) {
+    throw new Error(
+      "Cloud-Konflikt: Bitte zuerst synchronisieren. " +
+      "Es wurde nichts überschrieben."
+    );
+  }
+
+  const body = {
+    message:"Update encrypted journal",
+    content:b64(raw)
+  };
+
+  if (remoteSha) body.sha = remoteSha;
+
+  const result = await api(repoPath(), {
+    method:"PUT",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(body)
+  });
+
+  remoteSha = result.content.sha;
+  setCloud("Cloud gespeichert",true);
+}
+
+/* ---------- Editor und Einträge ---------- */
+
+function cleanHTML(html) {
+  const doc = new DOMParser().parseFromString(html,"text/html");
+
+  const allowed = new Set([
+    "P","BR","B","STRONG","I","EM","U","S",
+    "H2","H3","BLOCKQUOTE","UL","OL","LI",
+    "A","IMG","DIV","SPAN","PRE","CODE"
+  ]);
+
+  doc.body.querySelectorAll("*").forEach(el => {
+    if (!allowed.has(el.tagName)) {
+      el.replaceWith(...el.childNodes);
+      return;
+    }
+
+    [...el.attributes].forEach(attr => {
+      if (el.tagName === "A" && attr.name === "href") {
+        try {
+          const u = new URL(attr.value);
+          if (!["http:","https:"].includes(u.protocol)) {
+            el.removeAttribute("href");
+          }
+        } catch {
+          el.removeAttribute("href");
+        }
+      } else if (el.tagName === "IMG" && attr.name === "src") {
+        if (!attr.value.startsWith("data:image/")) {
+          el.removeAttribute("src");
+        }
+      } else if (!(el.tagName === "IMG" && attr.name === "alt")) {
+        el.removeAttribute(attr.name);
+      }
+    });
+  });
+
+  return doc.body.innerHTML;
+}
+
+function renderList() {
+  const host = $("entries");
+  host.replaceChildren();
+
+  [...entries]
+    .sort((a,b) => b.updatedAt.localeCompare(a.updatedAt))
+    .forEach(entry => {
+      const button = document.createElement("button");
+      button.className =
+        "entry-item" + (entry.id === activeId ? " active" : "");
+
+      const title = document.createElement("strong");
+      title.textContent = entry.title || "Ohne Titel";
+
+      const date = document.createElement("small");
+      date.textContent = new Date(entry.updatedAt)
+        .toLocaleString("de-DE");
+
+      button.append(title,date);
+      button.onclick = () => selectEntry(entry.id);
+      host.append(button);
+    });
+}
+
+function currentEntry() {
+  return {
+    id:activeId,
+    title:$("entryTitle").value,
+    html:cleanHTML($("editor").innerHTML),
+    updatedAt:new Date().toISOString()
+  };
+}
+
+function saveLocal() {
+  if (!activeId) return;
+
+  const entry = currentEntry();
+  const index = entries.findIndex(e => e.id === activeId);
+
+  if (index < 0) entries.unshift(entry);
+  else entries[index] = entry;
+
+  renderList();
+}
+
+function selectEntry(id) {
+  saveLocal();
+
+  activeId = id;
+
+  const entry = entries.find(e => e.id === id);
+
+  $("entryTitle").value = entry?.title || "";
+  $("editor").innerHTML = entry?.html || "";
+
+  $("dateLabel").textContent = entry
+    ? new Date(entry.updatedAt).toLocaleString("de-DE")
+    : "";
+
+  renderList();
+}
+
+function newEntry() {
+  saveLocal();
+
+  const entry = {
+    id:uuid(),
+    title:"",
+    html:"",
+    updatedAt:new Date().toISOString()
+  };
+
+  entries.unshift(entry);
+  activeId = entry.id;
+
+  $("entryTitle").value = "";
+  $("editor").innerHTML = "";
+  $("dateLabel").textContent = new Date().toLocaleString("de-DE");
+
+  renderList();
+  $("entryTitle").focus();
+}
+
+/* ---------- Anmeldung ---------- */
+
+$("connectBtn").onclick = () => {
+  owner = $("owner").value.trim();
+  repo = $("repo").value.trim();
+  worker = $("worker").value.trim().replace(/\/+$/,"");
+
+  if (!owner || !repo || !worker.startsWith("https://")) {
+    alert("Bitte alle Angaben prüfen.");
+    return;
+  }
+
+  localStorage.setItem("pj-config",JSON.stringify({
+    owner,repo,worker
+  }));
+
+  location.href = worker + "/login";
+};
+
+$("unlockBtn").onclick = async () => {
+  const password = $("password").value;
+
+  if (password.length < 12) {
+    $("unlockMsg").textContent =
+      "Bitte ein langes Passwort mit mindestens 12 Zeichen verwenden.";
+    return;
+  }
+
+  $("unlockMsg").textContent = "Schlüssel wird abgeleitet…";
+
+  try {
+    let envelope = null;
+
+    try {
+      const file = await api(repoPath());
+      remoteSha = file.sha;
+
+      envelope = JSON.parse(
+        dec.decode(unb64(file.content.replace(/\n/g,"")))
+      );
+
+      salt = unb64(envelope.salt);
+    } catch(error) {
+      if (error.status !== 404) throw error;
+      salt = crypto.getRandomValues(new Uint8Array(16));
+    }
+
+    key = await deriveKey(password,salt);
+
+    if (envelope) {
+      const data = await decryptData(envelope);
+      entries = Array.isArray(data.entries) ? data.entries : [];
+    } else {
+      entries = [];
+    }
+
+    $("password").value = "";
+    show("app");
+    $("lockBtn").classList.remove("hidden");
+
+    renderList();
+
+    if (entries.length) {
+      selectEntry(
+        [...entries].sort((a,b) =>
+          b.updatedAt.localeCompare(a.updatedAt)
+        )[0].id
+      );
+    } else {
+      newEntry();
+    }
+
+    setCloud("GitHub verbunden",true);
+
+  } catch(error) {
+    $("unlockMsg").textContent =
+      "Entsperren fehlgeschlagen: " + error.message;
+  }
+};
+
+/* ---------- Buttons ---------- */
+
+$("newBtn").onclick = newEntry;
+
+$("saveBtn").onclick = async () => {
+  saveLocal();
+
+  $("saveStatus").textContent = "Verschlüsseln und speichern…";
+
+  try {
+    await pushRemote();
+    $("saveStatus").textContent = "Verschlüsselt gespeichert";
+    $("saveStatus").className = "status good";
+  } catch(error) {
+    $("saveStatus").textContent = error.message;
+    $("saveStatus").className = "status bad";
+  }
+};
+
+$("syncBtn").onclick = async () => {
+  try {
+    await getRemote();
+
+    if (entries.length) {
+      selectEntry(entries[0].id);
+    }
+
+    $("saveStatus").textContent = "Synchronisiert";
+  } catch(error) {
+    $("saveStatus").textContent = error.message;
+    $("saveStatus").className = "status bad";
+  }
+};
+
+$("deleteBtn").onclick = () => {
+  if (!activeId || !confirm("Eintrag wirklich löschen?")) return;
+
+  entries = entries.filter(e => e.id !== activeId);
+  activeId = null;
+
+  if (entries.length) selectEntry(entries[0].id);
+  else newEntry();
+
+  renderList();
+  $("saveStatus").textContent =
+    "Gelöscht – noch nicht in der Cloud gespeichert.";
+};
+
+$("lockBtn").onclick = () => {
+  key = null;
+  token = null;
+  entries = [];
+  activeId = null;
+  remoteSha = null;
+
+  show("unlockScreen");
+  $("lockBtn").classList.add("hidden");
+  setCloud("Gesperrt");
+};
+
+/* ---------- Formatierungen ---------- */
+
+$("toolbar").addEventListener("click",event => {
+  const button = event.target.closest("button");
+  if (!button) return;
+
+  if (button.dataset.cmd) {
+    document.execCommand(button.dataset.cmd,false,null);
+  }
+
+  if (button.dataset.block) {
+    document.execCommand("formatBlock",false,button.dataset.block);
+  }
+});
+
+$("linkBtn").onclick = () => {
+  const url = prompt("HTTPS-Link eingeben:");
+
+  if (url && /^https?:\/\//i.test(url)) {
+    document.execCommand("createLink",false,url);
+  }
+};
+
+/* ---------- Bilder ---------- */
+
+$("imageBtn").onclick = () => $("imageFile").click();
+
+$("imageFile").onchange = event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Bitte eine Bilddatei auswählen.");
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Bitte zunächst Bilder unter 2 MB verwenden.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const img = new Image();
+
+    img.onload = () => {
+      const scale = Math.min(
+        1,
+        1400 / img.width,
+        1400 / img.height
+      );
+
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+
+      canvas.getContext("2d").drawImage(
+        img,0,0,canvas.width,canvas.height
+      );
+
+      const data = canvas.toDataURL("image/webp",0.78);
+
+      document.execCommand(
+        "insertHTML",
+        false,
+        `<p><img src="${data}" alt="Bild"></p>`
+      );
+    };
+
+    img.src = reader.result;
+  };
+
+  reader.readAsDataURL(file);
+  event.target.value = "";
+};
+
+/* ---------- Backup ---------- */
+
+$("exportBtn").onclick = async () => {
+  try {
+    saveLocal();
+
+    const blob = await encryptData({
+      entries,
+      updatedAt:new Date().toISOString()
+    });
+
+    const file = new Blob(
+      [JSON.stringify(blob)],
+      {type:"application/octet-stream"}
+    );
+
+    const url = URL.createObjectURL(file);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "tagebuch-backup.enc";
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+  } catch(error) {
+    alert(error.message);
+  }
+};
+
+$("importFile").onchange = async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  try {
+    const blob = JSON.parse(await file.text());
+    const data = await decryptData(blob);
+
+    if (!Array.isArray(data.entries)) {
+      throw new Error("Backup enthält keine Einträge.");
+    }
+
+    if (!confirm("Aktuelle Einträge durch das Backup ersetzen?")) {
+      return;
+    }
+
+    entries = data.entries;
+    activeId = null;
+    renderList();
+
+    if (entries.length) selectEntry(entries[0].id);
+    else newEntry();
+
+    $("saveStatus").textContent =
+      "Backup geladen – noch nicht synchronisiert.";
+
+  } catch(error) {
+    alert("Backup konnte nicht geöffnet werden: " + error.message);
+  } finally {
+    event.target.value = "";
+  }
+};
+
+/* ---------- Initialisierung ---------- */
+
+window.addEventListener("DOMContentLoaded",() => {
+  const config = JSON.parse(
+    localStorage.getItem("pj-config") || "null"
+  );
+
+  if (config) {
+    owner = config.owner;
+    repo = config.repo;
+    worker = config.worker;
+
+    $("owner").value = owner;
+    $("repo").value = repo;
+    $("worker").value = worker;
+  }
+
+  const hash = new URLSearchParams(location.hash.slice(1));
+  const accessToken = hash.get("access_token");
+
+  if (accessToken) {
+    token = accessToken;
+
+    history.replaceState(
+      null,
+      "",
+      location.pathname + location.search
+    );
+
+    show("unlockScreen");
+    setCloud("GitHub verbunden",true);
+
+  } else {
+    show("setupScreen");
+  }
+});
+
+</script>
+</body>
+</html>
