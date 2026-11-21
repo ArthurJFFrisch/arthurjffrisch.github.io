@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -373,9 +372,7 @@ async function workerRequest(path,options={}) {
 
 async function getRemote() {
   const response = await fetch(WORKER + "/api/file", {
-    headers: {
-      Authorization: "Bearer " + sessionId
-    }
+    headers: { Authorization: "Bearer " + sessionId }
   });
 
   if (response.status === 404) {
@@ -385,10 +382,16 @@ async function getRemote() {
 
   const text = await response.text();
 
+  if (response.status === 401) {
+    sessionId = null;
+    sessionStorage.removeItem("pj-session");
+    show("loginScreen");
+    setCloud("Erneute Anmeldung erforderlich");
+    throw new Error("Sitzung abgelaufen. Bitte erneut anmelden.");
+  }
+
   if (!response.ok) {
-    throw new Error(
-      `Cloud-Lesefehler (HTTP ${response.status}): ${text}`
-    );
+    throw new Error(`Cloud-Lesefehler (HTTP ${response.status}): ${text}`);
   }
 
   let result;
@@ -398,53 +401,82 @@ async function getRemote() {
     throw new Error("Ungültige Serverantwort: " + text);
   }
 
+  if (!result.envelope || !result.sha) {
+    throw new Error("Die Cloud-Antwort enthält keine gültigen Tagebuchdaten.");
+  }
+
   remoteSha = result.sha;
-  return result;
+  return result.envelope;
 }
 
 async function pushRemote(envelope) {
-  // Vor dem Schreiben prüfen, ob ein anderes Gerät geändert hat.
-  let latestSha=null;
+  const check = await fetch(WORKER + "/api/file", {
+    headers: { Authorization: "Bearer " + sessionId }
+  });
 
-  try {
-    const latest=await workerRequest("/api/file");
-    latestSha=latest.sha;
-  } catch(error) {
-    if(!String(error.message).includes("404")) throw error;
+  let latestSha = null;
+
+  if (check.status === 404) {
+    latestSha = null;
+  } else {
+    const text = await check.text();
+
+    if (check.status === 401) {
+      sessionId = null;
+      sessionStorage.removeItem("pj-session");
+      show("loginScreen");
+      setCloud("Erneute Anmeldung erforderlich");
+      throw new Error("Sitzung abgelaufen. Bitte erneut anmelden.");
+    }
+
+    let latest;
+    try {
+      latest = JSON.parse(text);
+    } catch {
+      throw new Error("Ungültige Antwort bei der Cloud-Prüfung: " + text);
+    }
+
+    if (!check.ok) {
+      throw new Error(latest.message || latest.error || "Cloud-Prüfung fehlgeschlagen.");
+    }
+
+    latestSha = latest.sha;
   }
 
-  if(latestSha!==remoteSha) {
+  if (latestSha !== remoteSha) {
     throw new Error(
       "Synchronisierungskonflikt: Die Cloud wurde zwischenzeitlich " +
       "auf einem anderen Gerät verändert. Bitte nicht überschreiben."
     );
   }
 
-  const raw=enc.encode(JSON.stringify(envelope));
-
-  // Sicherheitsgrenze für den einfachen Contents-API-Speicher.
-  if(raw.length>650000) {
+  const raw = enc.encode(JSON.stringify(envelope));
+  if (raw.length > 650000) {
     throw new Error(
       "Das Tagebuch ist zu groß für den aktuellen Cloud-Speicher. " +
       "Bitte Bilder verkleinern oder Einträge exportieren."
     );
   }
 
-  const body={
-    message:"Save encrypted journal",
-    content:b64(raw)
+  const body = {
+    message: "Save encrypted journal",
+    content: b64(raw)
   };
 
-  if(remoteSha) body.sha=remoteSha;
+  if (remoteSha) body.sha = remoteSha;
 
-  const result=await workerRequest("/api/file",{
-    method:"PUT",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(body)
+  const result = await workerRequest("/api/file", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
   });
 
-  remoteSha=result.content.sha;
-  setCloud("Cloud synchronisiert",true);
+  if (!result.content || !result.content.sha) {
+    throw new Error("GitHub hat keinen neuen Datei-SHA zurückgegeben.");
+  }
+
+  remoteSha = result.content.sha;
+  setCloud("Cloud synchronisiert", true);
 }
 
 /* ---------- HTML bereinigen ---------- */
@@ -644,7 +676,6 @@ async function unlock() {
       entries=Array.isArray(data.entries)?data.entries:[];
 
     } else {
-      // Wenn es noch keine Cloud-Datei gibt, lokales Backup prüfen.
       const cached=await cacheGet();
 
       if(cached) {
