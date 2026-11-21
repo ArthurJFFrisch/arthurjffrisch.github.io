@@ -8,7 +8,7 @@
 
 <style>
 :root {
-  color-scheme: dark;
+  color-scheme:dark;
   --bg:#11131a;
   --panel:#191d27;
   --panel2:#242a38;
@@ -18,45 +18,141 @@
   --accent:#a7b8ff;
   --good:#9be0bd;
   --danger:#ff8f8f;
+  --private:#d8ad6a;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,sans-serif}
-button,input{font:inherit}
-button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:9px;cursor:pointer}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.6 system-ui,sans-serif
+}
+button,input,textarea,select{font:inherit}
+button{
+  border:1px solid var(--line);background:var(--panel2);
+  color:var(--text);padding:9px 13px;border-radius:9px;
+  cursor:pointer
+}
 button:hover{border-color:var(--accent)}
+button:disabled{opacity:.5;cursor:not-allowed}
 button.primary{background:var(--accent);color:#151927;font-weight:650}
-input{width:100%;background:#11151e;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px}
+input,textarea,select{
+  width:100%;background:#11151e;color:var(--text);
+  border:1px solid var(--line);border-radius:9px;padding:11px
+}
+textarea{resize:vertical;min-height:100px}
+select{cursor:pointer}
 .hidden{display:none!important}
-.top{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#151821;position:sticky;top:0;z-index:5}
+.top{
+  height:60px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 22px;
+  border-bottom:1px solid var(--line);background:#151821;
+  position:sticky;top:0;z-index:5
+}
 .brand{font-weight:750}.brand span{color:var(--accent)}
-.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1300px;margin:auto;min-height:calc(100vh - 60px)}
+.layout{
+  display:grid;grid-template-columns:270px minmax(0,1fr);
+  max-width:1400px;margin:auto;min-height:calc(100vh - 60px)
+}
 aside{border-right:1px solid var(--line);padding:20px 14px}
-main{width:100%;max-width:900px;margin:auto;padding:35px clamp(16px,5vw,65px)}
+main{width:100%;max-width:1000px;margin:auto;padding:35px clamp(16px,5vw,65px)}
 h1{font-size:32px;margin:0 0 8px}
+h2{font-size:21px;margin:0 0 10px}
+h3{font-size:16px;margin:0 0 8px}
+p{margin:5px 0}
 .muted{color:var(--muted)}
 .small{font-size:12px;color:var(--muted)}
 .screen{max-width:520px;margin:9vh auto;padding:20px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px;margin:15px 0}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:13px;padding:20px;margin:15px 0
+}
 .stack{display:grid;gap:12px}
-.notice{background:#242b3a;border:1px solid #39445a;border-radius:9px;padding:13px;color:#cbd4e8;font-size:13px}
+.notice{
+  background:#242b3a;border:1px solid #39445a;
+  border-radius:9px;padding:13px;color:#cbd4e8;font-size:13px
+}
 .sidehead{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
 .entry-list{display:flex;flex-direction:column;gap:6px}
-.entry-item{width:100%;text-align:left;background:transparent;border-color:transparent}
+.entry-item{
+  width:100%;text-align:left;background:transparent;
+  border-color:transparent
+}
 .entry-item.active{background:var(--panel2);border-color:var(--line)}
-.entry-item strong,.entry-item small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.entry-item strong,.entry-item small{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
 .entry-item small{color:var(--muted);font-size:11px}
-.editor-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
-.title-input{font-size:27px;font-weight:700;background:transparent;border:none;padding:8px 0}
-.toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px 10px 0 0}
+.editor-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;margin-bottom:15px
+}
+.title-input{
+  font-size:27px;font-weight:700;background:transparent;
+  border:none;padding:8px 0
+}
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:6px;padding:10px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:10px 10px 0 0
+}
 .toolbar button{padding:6px 10px}
-.editor{min-height:420px;padding:22px;background:#171b25;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;outline:none;overflow-wrap:anywhere}
+.editor{
+  min-height:420px;padding:22px;background:#171b25;
+  border:1px solid var(--line);border-top:0;
+  border-radius:0 0 10px 10px;outline:none;overflow-wrap:anywhere
+}
 .editor:empty:before{content:"Was geht dir durch den Kopf?";color:#758096}
 .editor img{max-width:100%;height:auto;border-radius:9px}
-.editor blockquote{border-left:3px solid var(--accent);padding-left:14px;margin-left:0;color:#c3cbe0}
+.editor blockquote{
+  border-left:3px solid var(--accent);padding-left:14px;
+  margin-left:0;color:#c3cbe0
+}
 .editor a{color:var(--accent)}
+.editor [data-private-level]{
+  background:rgba(216,173,106,.15);
+  border-bottom:2px dashed var(--private);
+  border-radius:3px;padding:1px 3px
+}
+.editor .private-hidden{
+  background:#303747!important;color:#303747!important;
+  user-select:none
+}
 .actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:15px}
 .status{color:var(--muted);font-size:12px;margin-left:auto}
-.status.good{color:var(--good)}.status.bad{color:var(--danger)}
+.status.good{color:var(--good)}
+.status.bad{color:var(--danger)}
+.section{margin:25px 0}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.row>*{flex:1}
+.pill{
+  display:inline-block;padding:4px 9px;border-radius:30px;
+  background:var(--panel2);font-size:12px;color:var(--muted)
+}
+.privacy-panel{
+  background:var(--panel);border:1px solid var(--line);
+  padding:14px;border-radius:10px;margin:14px 0
+}
+.level-row{
+  display:grid;grid-template-columns:1fr auto;gap:8px;
+  align-items:center;padding:10px 0;border-bottom:1px solid var(--line)
+}
+.private-preview{
+  background:rgba(216,173,106,.12);
+  border:1px solid rgba(216,173,106,.35);
+  border-radius:8px;padding:10px;margin:8px 0
+}
+.modal-backdrop{
+  position:fixed;inset:0;background:#000b;z-index:20;
+  display:flex;align-items:center;justify-content:center;padding:15px
+}
+.modal{
+  width:min(600px,100%);max-height:90vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:22px
+}
+.progress{
+  height:8px;background:#303747;border-radius:20px;overflow:hidden
+}
+.progress>div{height:100%;width:0;background:var(--accent);transition:width .2s}
 @media(max-width:750px){
  .layout{grid-template-columns:1fr}
  aside{border-right:0;border-bottom:1px solid var(--line)}
@@ -64,6 +160,7 @@ h1{font-size:32px;margin:0 0 8px}
  .entry-item{min-width:150px}
  main{padding:22px 15px}
  .editor{min-height:55vh;padding:15px}
+ .row>*{min-width:100%}
 }
 </style>
 </head>
@@ -72,7 +169,7 @@ h1{font-size:32px;margin:0 0 8px}
 
 <header class="top">
   <div class="brand">privates<span>journal</span></div>
-  <div>
+  <div class="row" style="flex:0;min-width:0">
     <span id="cloudState" class="small">Nicht verbunden</span>
     <button id="lockBtn" class="hidden">Sperren</button>
   </div>
@@ -81,35 +178,21 @@ h1{font-size:32px;margin:0 0 8px}
 <section id="loginScreen" class="screen">
   <h1>Dein privater Ort.</h1>
   <p class="muted">
-    Melde dich mit GitHub an. Deine Einträge werden anschließend
-    mit deinem eigenen Tagebuchpasswort verschlüsselt.
+    Deine Einträge werden mit deinem eigenen Tagebuchpasswort
+    verschlüsselt.
   </p>
-
   <div class="card stack">
-    <button id="loginBtn" class="primary">
-      Mit GitHub anmelden
-    </button>
-    <p class="small">
-      Es wird ausschließlich das private Repository verwendet,
-      für das du die Journal-App installiert hast.
-    </p>
+    <button id="loginBtn" class="primary">Mit GitHub anmelden</button>
+    <p class="small">Die Cloud speichert ausschließlich verschlüsselte Daten.</p>
   </div>
-
-  <div class="notice">
-    Entwicklungsfassung: Bitte zunächst nur Testdaten verwenden.
-  </div>
+  <div class="notice">Entwicklungsfassung: Bitte zunächst nur Testdaten verwenden.</div>
 </section>
 
 <section id="unlockScreen" class="screen hidden">
   <h1>Tagebuch entsperren</h1>
-  <p class="muted">
-    Dieses Passwort ist unabhängig von deinem GitHub-Passwort.
-    Es verschlüsselt deine Tagebucheinträge.
-  </p>
-
+  <p class="muted">Dein Tagebuchpasswort ist unabhängig von deinem GitHub-Passwort.</p>
   <div class="card stack">
-    <input id="password" type="password"
-      autocomplete="current-password"
+    <input id="password" type="password" autocomplete="current-password"
       placeholder="Tagebuchpasswort">
     <button id="unlockBtn" class="primary">Entsperren</button>
     <p id="unlockMsg" class="small"></p>
@@ -128,12 +211,11 @@ h1{font-size:32px;margin:0 0 8px}
     <div class="stack" style="margin-top:22px">
       <button id="syncBtn">Synchronisieren</button>
       <button id="exportBtn">Backup exportieren</button>
-
       <label class="small">
         Backup importieren
         <input id="importFile" type="file" accept=".enc">
       </label>
-
+      <button id="settingsBtn">Privatsphäre & Einstellungen</button>
       <button id="logoutBtn">Von GitHub abmelden</button>
     </div>
   </aside>
@@ -147,8 +229,24 @@ h1{font-size:32px;margin:0 0 8px}
       <button id="deleteBtn">Löschen</button>
     </div>
 
-    <input id="entryTitle" class="title-input"
-      placeholder="Titel deines Eintrags">
+    <input id="entryTitle" class="title-input" placeholder="Titel deines Eintrags">
+
+    <div class="privacy-panel">
+      <div class="row">
+        <div>
+          <div class="small">Aktuelle Privatsphäre-Stufe</div>
+          <strong id="privacyName">Offen</strong>
+        </div>
+        <select id="privacySelect" style="max-width:220px"></select>
+      </div>
+      <div class="small" id="privacyDescription" style="margin-top:7px"></div>
+    </div>
+
+    <div class="row" style="margin:12px 0">
+      <button id="showOriginalBtn">Original</button>
+      <button id="showSemanticBtn">Semantische Ansicht</button>
+      <span class="pill" id="viewLabel">Original</span>
+    </div>
 
     <div class="toolbar" id="toolbar">
       <button data-cmd="bold"><b>B</b></button>
@@ -161,22 +259,100 @@ h1{font-size:32px;margin:0 0 8px}
       <button data-cmd="insertOrderedList">1. Liste</button>
       <button id="linkBtn">Link</button>
       <button id="imageBtn">Bild</button>
+      <button id="markPrivateBtn">🔒 Privat markieren</button>
       <input id="imageFile" type="file" accept="image/*" hidden>
     </div>
 
-    <div id="editor" class="editor"
-      contenteditable="true" spellcheck="true"></div>
+    <div id="editor" class="editor" contenteditable="true" spellcheck="true"></div>
+
+    <div id="semanticEditor" class="editor hidden" contenteditable="true"
+      spellcheck="true"></div>
 
     <div class="actions">
       <button id="saveBtn" class="primary">Jetzt speichern</button>
+      <button id="generateSemanticBtn">✨ Semantisch umschreiben</button>
       <span id="saveStatus" class="status">Bereit</span>
     </div>
 
-    <p class="small" style="margin-top:25px">
-      Änderungen werden lokal verschlüsselt zwischengespeichert
-      und automatisch zur Cloud übertragen.
+    <p class="small" style="margin-top:20px">
+      Original und semantische Fassung werden getrennt verschlüsselt gespeichert.
     </p>
   </main>
+</div>
+
+<div id="settingsModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <div class="row">
+      <h2>Einstellungen</h2>
+      <button id="closeSettingsBtn" style="flex:0">Schließen</button>
+    </div>
+
+    <div class="section">
+      <h3>Privatsphäre-Stufen</h3>
+      <p class="small">
+        Höhere Stufen verbergen mehr markierte Passagen.
+        Zum Herunterstufen ist dein Tagebuchpasswort erforderlich.
+      </p>
+      <div id="levelsList"></div>
+
+      <div class="card stack">
+        <strong>Neue Stufe hinzufügen</strong>
+        <input id="newLevelName" placeholder="Name, z. B. Sehr privat">
+        <textarea id="newLevelDescription" placeholder="Beschreibung der Stufe"></textarea>
+        <button id="addLevelBtn">Stufe hinzufügen</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Tagebuchpasswort ändern</h3>
+      <p class="small">
+        Alle Einträge werden mit dem neuen Schlüssel neu verschlüsselt.
+        Das alte Passwort kann danach nicht mehr zum Entsperren verwendet werden.
+      </p>
+      <div class="stack">
+        <input id="oldPassword" type="password" placeholder="Altes Passwort">
+        <input id="newPassword" type="password" placeholder="Neues Passwort">
+        <input id="newPasswordConfirm" type="password" placeholder="Neues Passwort wiederholen">
+        <button id="changePasswordBtn" class="primary">Passwort ändern</button>
+        <p id="passwordChangeStatus" class="small"></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Lokale KI</h3>
+      <p class="small">
+        WebLLM lädt ein Sprachmodell herunter und führt es lokal auf deinem Gerät aus.
+        Deine Tagebuchtexte werden nicht an einen KI-Anbieter gesendet.
+      </p>
+      <div class="stack">
+        <select id="modelSelect">
+          <option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC">
+            Qwen 1.5B – kleiner und schneller
+          </option>
+          <option value="Qwen2.5-3B-Instruct-q4f16_1-MLC">
+            Qwen 3B – bessere Textqualität
+          </option>
+        </select>
+        <button id="loadAIButton">Lokale KI laden</button>
+        <div class="progress"><div id="aiProgress"></div></div>
+        <p id="aiStatus" class="small">Noch nicht geladen</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Codewort-System</h3>
+      <p class="small">
+        Hier kannst du persönliche Codewörter definieren.
+        Sie werden nur innerhalb deines verschlüsselten Tagebuchs gespeichert.
+      </p>
+      <div id="codebookList"></div>
+      <div class="stack">
+        <input id="codeOriginal" placeholder="Private Information / Begriff">
+        <input id="codeReplacement" placeholder="Metapher oder Codewort">
+        <button id="addCodeBtn">Codewort hinzufügen</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -191,81 +367,75 @@ const WORKER =
 
 const CACHE_KEY = "private-journal-cache-v2";
 
-let sessionId = null;
-let key = null;
-let salt = null;
-let entries = [];
-let activeId = null;
-let remoteSha = null;
-let dirty = false;
-let saveTimer = null;
-let syncTimer = null;
-let saving = false;
+let sessionId=null;
+let key=null;
+let salt=null;
+let entries=[];
+let activeId=null;
+let remoteSha=null;
+let dirty=false;
+let saveTimer=null;
+let syncTimer=null;
+let saving=false;
+let viewMode="original";
+let privacyLevel=0;
+let privacyLevels=[
+  {id:0,name:"Offen",description:"Alle Inhalte sichtbar."},
+  {id:1,name:"Diskret",description:"Privat markierte Passagen der Stufe 1 und höher verbergen."},
+  {id:2,name:"Vertraulich",description:"Zusätzlich stärker geschützte Passagen verbergen."},
+  {id:3,name:"Maximum",description:"Alle markierten Passagen verbergen."}
+];
+let codebook={};
+let aiEngine=null;
+let aiLoading=false;
 
-function show(id) {
-  ["loginScreen","unlockScreen","app"].forEach(x =>
+function show(id){
+  ["loginScreen","unlockScreen","app"].forEach(x=>
     $(x).classList.toggle("hidden",x!==id)
   );
 }
 
-function setCloud(text,good=false) {
-  $("cloudState").textContent = text;
-  $("cloudState").style.color =
-    good ? "var(--good)" : "var(--muted)";
+function setCloud(text,good=false){
+  $("cloudState").textContent=text;
+  $("cloudState").style.color=good?"var(--good)":"var(--muted)";
 }
 
-function setStatus(text,type="") {
-  $("saveStatus").textContent = text;
-  $("saveStatus").className = "status " + type;
+function setStatus(text,type=""){
+  $("saveStatus").textContent=text;
+  $("saveStatus").className="status "+type;
 }
 
-function uuid() {
-  return crypto.randomUUID();
-}
+function uuid(){return crypto.randomUUID()}
 
-function b64(bytes) {
+function b64(bytes){
   let s="";
   const a=new Uint8Array(bytes);
-  for(let i=0;i<a.length;i+=0x8000) {
+  for(let i=0;i<a.length;i+=0x8000){
     s+=String.fromCharCode(...a.subarray(i,i+0x8000));
   }
   return btoa(s);
 }
 
-function unb64(s) {
+function unb64(s){
   return Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 }
 
-/* ---------- Verschlüsselung ---------- */
+/* ---------------- Verschlüsselung ---------------- */
 
-async function deriveKey(password,saltBytes) {
+async function deriveKey(password,saltBytes){
   const material=await crypto.subtle.importKey(
     "raw",enc.encode(password),"PBKDF2",false,["deriveKey"]
   );
-
-  return crypto.subtle.deriveKey(
-    {
-      name:"PBKDF2",
-      salt:saltBytes,
-      iterations:600000,
-      hash:"SHA-256"
-    },
-    material,
-    {name:"AES-GCM",length:256},
-    false,
-    ["encrypt","decrypt"]
-  );
+  return crypto.subtle.deriveKey({
+    name:"PBKDF2",salt:saltBytes,iterations:600000,hash:"SHA-256"
+  },material,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
 }
 
-async function encryptData(data) {
+async function encryptData(data){
   const iv=crypto.getRandomValues(new Uint8Array(12));
-
   const ciphertext=await crypto.subtle.encrypt(
-    {name:"AES-GCM",iv},
-    key,
-    enc.encode(JSON.stringify(data))
+    {name:"AES-GCM",iv},key,enc.encode(JSON.stringify(data))
   );
-
   return {
     version:1,
     kdf:"PBKDF2-SHA-256",
@@ -276,43 +446,33 @@ async function encryptData(data) {
   };
 }
 
-async function decryptData(blob) {
-  if(blob.version!==1) throw new Error("Unbekanntes Datenformat.");
-
+async function decryptData(blob){
+  if(blob.version!==1)throw new Error("Unbekanntes Datenformat.");
   const savedSalt=unb64(blob.salt);
-  const iv=unb64(blob.iv);
-
   const plaintext=await crypto.subtle.decrypt(
-    {name:"AES-GCM",iv},
-    key,
-    unb64(blob.ciphertext)
+    {name:"AES-GCM",iv:unb64(blob.iv)},
+    key,unb64(blob.ciphertext)
   );
-
   salt=savedSalt;
   return JSON.parse(dec.decode(plaintext));
 }
 
-/* ---------- Lokaler verschlüsselter Speicher ---------- */
+/* ---------------- Lokaler Speicher ---------------- */
 
-function openDatabase() {
+function openDatabase(){
   return new Promise((resolve,reject)=>{
     const request=indexedDB.open("PrivateJournalDB",1);
-
     request.onupgradeneeded=()=>{
-      const db=request.result;
-      if(!db.objectStoreNames.contains("cache")) {
-        db.createObjectStore("cache");
-      }
+      if(!request.result.objectStoreNames.contains("cache"))
+        request.result.createObjectStore("cache");
     };
-
     request.onsuccess=()=>resolve(request.result);
     request.onerror=()=>reject(request.error);
   });
 }
 
-async function cachePut(value) {
+async function cachePut(value){
   const db=await openDatabase();
-
   return new Promise((resolve,reject)=>{
     const tx=db.transaction("cache","readwrite");
     tx.objectStore("cache").put(value,CACHE_KEY);
@@ -321,525 +481,845 @@ async function cachePut(value) {
   });
 }
 
-async function cacheGet() {
+async function cacheGet(){
   const db=await openDatabase();
-
   return new Promise((resolve,reject)=>{
     const tx=db.transaction("cache","readonly");
-    const request=tx.objectStore("cache").get(CACHE_KEY);
-    request.onsuccess=()=>{db.close();resolve(request.result||null)};
-    request.onerror=()=>{db.close();reject(request.error)};
+    const req=tx.objectStore("cache").get(CACHE_KEY);
+    req.onsuccess=()=>{db.close();resolve(req.result||null)};
+    req.onerror=()=>{db.close();reject(req.error)};
   });
 }
 
-async function saveEncryptedCache() {
+async function saveEncryptedCache(){
   const envelope=await encryptData({
-    entries,
+    entries,privacyLevels,codebook,privacyLevel,
     updatedAt:new Date().toISOString()
   });
-
   await cachePut(envelope);
   return envelope;
 }
 
-/* ---------- Cloudflare Worker API ---------- */
+/* ---------------- Cloud API ---------------- */
 
-async function workerRequest(path,options={}) {
+async function workerRequest(path,options={}){
   const response=await fetch(WORKER+path,{
     ...options,
-    headers:{
-      ...(options.headers||{}),
-      Authorization:"Bearer "+sessionId
-    }
+    headers:{...(options.headers||{}),Authorization:"Bearer "+sessionId}
   });
-
   const result=await response.json().catch(()=>({}));
 
-  if(response.status===401) {
+  if(response.status===401){
     sessionId=null;
     sessionStorage.removeItem("pj-session");
     show("loginScreen");
-    setCloud("Erneute Anmeldung erforderlich");
     throw new Error(result.error||"Sitzung abgelaufen.");
   }
-
-  if(!response.ok) {
+  if(!response.ok)
     throw new Error(result.message||result.error||"Serverfehler "+response.status);
-  }
-
   return result;
 }
 
-async function getRemote() {
-  const response = await fetch(WORKER + "/api/file", {
-    headers: { Authorization: "Bearer " + sessionId }
+async function getRemote(){
+  const response=await fetch(WORKER+"/api/file",{
+    headers:{Authorization:"Bearer "+sessionId}
   });
 
-  if (response.status === 404) {
-    remoteSha = null;
-    return null;
-  }
+  if(response.status===404){remoteSha=null;return null;}
 
-  const text = await response.text();
-
-  if (response.status === 401) {
-    sessionId = null;
+  const text=await response.text();
+  if(response.status===401){
+    sessionId=null;
     sessionStorage.removeItem("pj-session");
     show("loginScreen");
-    setCloud("Erneute Anmeldung erforderlich");
     throw new Error("Sitzung abgelaufen. Bitte erneut anmelden.");
   }
-
-  if (!response.ok) {
+  if(!response.ok)
     throw new Error(`Cloud-Lesefehler (HTTP ${response.status}): ${text}`);
-  }
 
-  let result;
-  try {
-    result = JSON.parse(text);
-  } catch {
-    throw new Error("Ungültige Serverantwort: " + text);
-  }
+  const result=JSON.parse(text);
+  if(!result.envelope||!result.sha)
+    throw new Error("Ungültige Cloud-Antwort.");
 
-  if (!result.envelope || !result.sha) {
-    throw new Error("Die Cloud-Antwort enthält keine gültigen Tagebuchdaten.");
-  }
-
-  remoteSha = result.sha;
+  remoteSha=result.sha;
   return result.envelope;
 }
 
-async function pushRemote(envelope) {
-  const check = await fetch(WORKER + "/api/file", {
-    headers: { Authorization: "Bearer " + sessionId }
+async function pushRemote(envelope){
+  const check=await fetch(WORKER+"/api/file",{
+    headers:{Authorization:"Bearer "+sessionId}
   });
 
-  let latestSha = null;
+  let latestSha=null;
 
-  if (check.status === 404) {
-    latestSha = null;
-  } else {
-    const text = await check.text();
-
-    if (check.status === 401) {
-      sessionId = null;
-      sessionStorage.removeItem("pj-session");
-      show("loginScreen");
-      setCloud("Erneute Anmeldung erforderlich");
-      throw new Error("Sitzung abgelaufen. Bitte erneut anmelden.");
-    }
-
-    let latest;
-    try {
-      latest = JSON.parse(text);
-    } catch {
-      throw new Error("Ungültige Antwort bei der Cloud-Prüfung: " + text);
-    }
-
-    if (!check.ok) {
-      throw new Error(latest.message || latest.error || "Cloud-Prüfung fehlgeschlagen.");
-    }
-
-    latestSha = latest.sha;
+  if(check.status!==404){
+    const text=await check.text();
+    if(check.status===401)throw new Error("Sitzung abgelaufen.");
+    const latest=JSON.parse(text);
+    if(!check.ok)throw new Error(latest.message||latest.error||"Cloud-Prüfung fehlgeschlagen.");
+    latestSha=latest.sha;
   }
 
-  if (latestSha !== remoteSha) {
-    throw new Error(
-      "Synchronisierungskonflikt: Die Cloud wurde zwischenzeitlich " +
-      "auf einem anderen Gerät verändert. Bitte nicht überschreiben."
-    );
-  }
+  if(latestSha!==remoteSha)
+    throw new Error("Synchronisierungskonflikt: Die Cloud wurde zwischenzeitlich verändert.");
 
-  const raw = enc.encode(JSON.stringify(envelope));
-  if (raw.length > 650000) {
-    throw new Error(
-      "Das Tagebuch ist zu groß für den aktuellen Cloud-Speicher. " +
-      "Bitte Bilder verkleinern oder Einträge exportieren."
-    );
-  }
+  const raw=enc.encode(JSON.stringify(envelope));
+  if(raw.length>650000)
+    throw new Error("Tagebuch zu groß für den aktuellen Cloud-Speicher.");
 
-  const body = {
-    message: "Save encrypted journal",
-    content: b64(raw)
-  };
+  const body={message:"Save encrypted journal",content:b64(raw)};
+  if(remoteSha)body.sha=remoteSha;
 
-  if (remoteSha) body.sha = remoteSha;
-
-  const result = await workerRequest("/api/file", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
+  const result=await workerRequest("/api/file",{
+    method:"PUT",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(body)
   });
 
-  if (!result.content || !result.content.sha) {
+  if(!result.content?.sha)
     throw new Error("GitHub hat keinen neuen Datei-SHA zurückgegeben.");
-  }
 
-  remoteSha = result.content.sha;
-  setCloud("Cloud synchronisiert", true);
+  remoteSha=result.content.sha;
+  setCloud("Cloud synchronisiert",true);
 }
 
-/* ---------- HTML bereinigen ---------- */
+/* ---------------- Datenmodell ---------------- */
 
-function cleanHTML(html) {
-  const doc=new DOMParser().parseFromString(html,"text/html");
-
-  const allowed=new Set([
-    "P","BR","B","STRONG","I","EM","U","S",
-    "H2","H3","BLOCKQUOTE","UL","OL","LI",
-    "A","IMG","DIV","SPAN","PRE","CODE"
-  ]);
-
-  doc.body.querySelectorAll("*").forEach(el=>{
-    if(!allowed.has(el.tagName)) {
-      el.replaceWith(...el.childNodes);
-      return;
-    }
-
-    [...el.attributes].forEach(attr=>{
-      if(el.tagName==="A" && attr.name==="href") {
-        try {
-          const u=new URL(attr.value);
-          if(!["https:","http:"].includes(u.protocol)) {
-            el.removeAttribute("href");
-          }
-        } catch {
-          el.removeAttribute("href");
-        }
-      } else if(el.tagName==="IMG" && attr.name==="src") {
-        if(!attr.value.startsWith("data:image/")) {
-          el.removeAttribute("src");
-        }
-      } else if(!(el.tagName==="IMG" && attr.name==="alt")) {
-        el.removeAttribute(attr.name);
-      }
-    });
-  });
-
-  return doc.body.innerHTML;
-}
-
-/* ---------- Einträge ---------- */
-
-function currentEntry() {
+function defaultEntry(){
   return {
-    id:activeId,
-    title:$("entryTitle").value,
-    html:cleanHTML($("editor").innerHTML),
+    id:uuid(),
+    title:"",
+    html:"",
+    semanticHtml:"",
+    codeMappings:{},
     updatedAt:new Date().toISOString()
   };
 }
 
-function saveCurrent() {
-  if(!activeId) return;
+function currentEntry(){
+  const entry=entries.find(e=>e.id===activeId);
+  if(!entry)return null;
 
-  const entry=currentEntry();
-  const index=entries.findIndex(e=>e.id===activeId);
+  if(viewMode==="original"){
+    entry.title=$("entryTitle").value;
+    entry.html=cleanHTML($("editor").innerHTML);
+  }else{
+    entry.semanticHtml=cleanHTML($("semanticEditor").innerHTML);
+  }
+  entry.updatedAt=new Date().toISOString();
+  return entry;
+}
 
-  if(index<0) entries.unshift(entry);
-  else entries[index]=entry;
-
+function saveCurrent(){
+  currentEntry();
   renderList();
 }
 
-function renderList() {
+function renderList(){
   const host=$("entries");
   host.replaceChildren();
 
-  [...entries]
-    .sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))
+  [...entries].sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))
     .forEach(entry=>{
       const button=document.createElement("button");
       button.className="entry-item"+(entry.id===activeId?" active":"");
-
       const title=document.createElement("strong");
       title.textContent=entry.title||"Ohne Titel";
-
       const date=document.createElement("small");
-      date.textContent=new Date(entry.updatedAt)
-        .toLocaleString("de-DE");
-
+      date.textContent=new Date(entry.updatedAt).toLocaleString("de-DE");
       button.append(title,date);
       button.onclick=()=>selectEntry(entry.id);
       host.append(button);
     });
 }
 
-function selectEntry(id) {
+function selectEntry(id){
   saveCurrent();
-
   activeId=id;
   const entry=entries.find(e=>e.id===id);
-
   $("entryTitle").value=entry?.title||"";
   $("editor").innerHTML=entry?.html||"";
-  $("dateLabel").textContent=entry
-    ?new Date(entry.updatedAt).toLocaleString("de-DE"):"";
-
-  renderList();
+  $("semanticEditor").innerHTML=entry?.semanticHtml||"";
+  $("dateLabel").textContent=entry?
+    new Date(entry.updatedAt).toLocaleString("de-DE"):"";
   dirty=false;
+  renderList();
+  applyPrivacyView();
 }
 
-function newEntry() {
+function newEntry(){
   saveCurrent();
-
-  const entry={
-    id:uuid(),
-    title:"",
-    html:"",
-    updatedAt:new Date().toISOString()
-  };
-
+  const entry=defaultEntry();
   entries.unshift(entry);
   activeId=entry.id;
-
   $("entryTitle").value="";
   $("editor").innerHTML="";
+  $("semanticEditor").innerHTML="";
   $("dateLabel").textContent=new Date().toLocaleString("de-DE");
-
+  viewMode="original";
+  setViewMode();
   renderList();
   dirty=true;
   scheduleSave();
-  $("entryTitle").focus();
 }
 
-/* ---------- Automatisches Speichern ---------- */
+/* ---------------- HTML-Sicherheit ---------------- */
 
-function scheduleSave() {
+function cleanHTML(html){
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  const allowed=new Set([
+    "P","BR","B","STRONG","I","EM","U","S","H2","H3",
+    "BLOCKQUOTE","UL","OL","LI","A","IMG","DIV","SPAN","PRE","CODE"
+  ]);
+
+  doc.body.querySelectorAll("*").forEach(el=>{
+    if(!allowed.has(el.tagName)){
+      el.replaceWith(...el.childNodes);
+      return;
+    }
+
+    [...el.attributes].forEach(attr=>{
+      if(el.tagName==="A"&&attr.name==="href"){
+        try{
+          const u=new URL(attr.value);
+          if(!["https:","http:"].includes(u.protocol))el.removeAttribute("href");
+        }catch{el.removeAttribute("href")}
+      }else if(el.tagName==="IMG"&&attr.name==="src"){
+        if(!attr.value.startsWith("data:image/"))el.removeAttribute("src");
+      }else if(el.tagName==="SPAN"&&attr.name==="data-private-level"){
+        const n=Number(attr.value);
+        if(!Number.isInteger(n)||n<1||n>20)el.removeAttribute(attr.name);
+      }else if(!(el.tagName==="IMG"&&attr.name==="alt")){
+        el.removeAttribute(attr.name);
+      }
+    });
+  });
+  return doc.body.innerHTML;
+}
+
+/* ---------------- Privatsphäre ---------------- */
+
+function sortedLevels(){
+  return [...privacyLevels].sort((a,b)=>a.id-b.id);
+}
+
+function renderPrivacyLevels(){
+  const select=$("privacySelect");
+  select.replaceChildren();
+
+  sortedLevels().forEach(level=>{
+    const option=document.createElement("option");
+    option.value=level.id;
+    option.textContent=level.name;
+    select.append(option);
+  });
+
+  select.value=privacyLevel;
+  updatePrivacyInfo();
+
+  const list=$("levelsList");
+  list.replaceChildren();
+
+  sortedLevels().forEach(level=>{
+    const row=document.createElement("div");
+    row.className="level-row";
+
+    const info=document.createElement("div");
+    const name=document.createElement("strong");
+    name.textContent=level.id+" · "+level.name;
+    const desc=document.createElement("div");
+    desc.className="small";
+    desc.textContent=level.description||"Keine Beschreibung";
+    info.append(name,desc);
+
+    const remove=document.createElement("button");
+    remove.textContent="Entfernen";
+    remove.disabled=level.id<=3;
+    remove.onclick=()=>{
+      if(!confirm("Diese Stufe entfernen?"))return;
+      privacyLevels=privacyLevels.filter(x=>x.id!==level.id);
+      renderPrivacyLevels();
+      scheduleSave();
+    };
+
+    row.append(info,remove);
+    list.append(row);
+  });
+}
+
+function updatePrivacyInfo(){
+  const level=privacyLevels.find(x=>x.id===privacyLevel);
+  $("privacyName").textContent=level?.name||"Unbekannt";
+  $("privacyDescription").textContent=level?.description||"";
+}
+
+async function changePrivacyLevel(next){
+  next=Number(next);
+
+  if(next<privacyLevel){
+    const password=prompt("Zum Herunterstufen bitte dein Tagebuchpasswort eingeben:");
+    if(password===null)return;
+
+    try{
+      const test=await deriveKey(password,salt);
+      const envelope=await getRemote();
+
+      if(envelope){
+        const oldKey=key;
+        key=test;
+        try{await decryptData(envelope)}
+        catch{
+          key=oldKey;
+          throw new Error("Falsches Passwort.");
+        }
+        key=oldKey;
+      }else{
+        const oldKey=key;
+        key=test;
+        try{await decryptData(await cacheGet())}
+        catch{
+          key=oldKey;
+          throw new Error("Falsches Passwort.");
+        }
+        key=oldKey;
+      }
+    }catch(error){
+      alert(error.message);
+      renderPrivacyLevels();
+      return;
+    }
+  }
+
+  privacyLevel=next;
+  renderPrivacyLevels();
+  applyPrivacyView();
+  scheduleSave();
+}
+
+function applyPrivacyView(){
+  const root=viewMode==="original"?$("editor"):$("semanticEditor");
+
+  root.querySelectorAll("[data-private-level]").forEach(el=>{
+    const threshold=Number(el.dataset.privateLevel);
+    const hidden=privacyLevel>=threshold;
+
+    if(hidden){
+      if(!el.dataset.originalText)el.dataset.originalText=el.textContent;
+      el.textContent="████████████";
+      el.classList.add("private-hidden");
+      el.setAttribute("contenteditable","false");
+    }else{
+      if(el.dataset.originalText){
+        el.textContent=el.dataset.originalText;
+        delete el.dataset.originalText;
+      }
+      el.classList.remove("private-hidden");
+      el.removeAttribute("contenteditable");
+    }
+  });
+}
+
+function markSelectionPrivate(){
+  if(viewMode!=="original"){
+    alert("Private Passagen bitte im Original markieren.");
+    return;
+  }
+
+  const selection=window.getSelection();
+  if(!selection||selection.isCollapsed){
+    alert("Markiere zuerst einen Textabschnitt.");
+    return;
+  }
+
+  const levelText=prompt(
+    "Ab welcher Privatsphäre-Stufe soll diese Passage verborgen werden?",
+    "1"
+  );
+
+  if(levelText===null)return;
+  const level=Number(levelText);
+
+  if(!Number.isInteger(level)||level<1){
+    alert("Bitte eine gültige Stufe ab 1 eingeben.");
+    return;
+  }
+
+  const range=selection.getRangeAt(0);
+  const span=document.createElement("span");
+  span.dataset.privateLevel=String(level);
+
+  try{
+    range.surroundContents(span);
+  }catch{
+    const fragment=range.extractContents();
+    span.append(fragment);
+    range.insertNode(span);
+  }
+
+  selection.removeAllRanges();
+  scheduleSave();
+  applyPrivacyView();
+}
+
+/* ---------------- Ansichten ---------------- */
+
+function setViewMode(){
+  $("editor").classList.toggle("hidden",viewMode!=="original");
+  $("semanticEditor").classList.toggle("hidden",viewMode!=="semantic");
+  $("entryTitle").classList.toggle("hidden",viewMode!=="original");
+  $("toolbar").classList.toggle("hidden",viewMode!=="original");
+  $("viewLabel").textContent=viewMode==="original"?"Original":"Semantisch";
+  applyPrivacyView();
+}
+
+function switchView(mode){
+  if(mode===viewMode)return;
+  saveCurrent();
+  viewMode=mode;
+  setViewMode();
+}
+
+/* ---------------- Lokale KI / WebLLM ---------------- */
+
+async function loadLocalAI(){
+  if(aiEngine)return aiEngine;
+  if(aiLoading)throw new Error("Die KI wird bereits geladen.");
+
+  if(!navigator.gpu){
+    throw new Error("WebGPU wird in diesem Browser nicht unterstützt. Bitte Chrome oder Edge aktualisieren und GPU-Unterstützung prüfen.");
+  }
+
+  aiLoading=true;
+  $("aiStatus").textContent="WebLLM wird geladen…";
+
+  try{
+    const module=await import("https://esm.run/@mlc-ai/web-llm");
+    const model=$("modelSelect").value;
+
+    aiEngine=await module.CreateMLCEngine(model,{
+      initProgressCallback:progress=>{
+        const pct=Math.max(0,Math.min(100,Math.round((progress.progress||0)*100)));
+        $("aiProgress").style.width=pct+"%";
+        $("aiStatus").textContent=progress.text||"Modell wird vorbereitet…";
+      }
+    });
+
+    $("aiStatus").textContent="Lokale KI bereit.";
+    return aiEngine;
+  }catch(error){
+    aiEngine=null;
+    $("aiStatus").textContent="Fehler: "+error.message;
+    throw error;
+  }finally{
+    aiLoading=false;
+  }
+}
+
+function plainText(html){
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  return doc.body.innerText||doc.body.textContent||"";
+}
+
+function textWithPrivateMarkers(html){
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  let index=0;
+  const privateItems=[];
+
+  doc.body.querySelectorAll("[data-private-level]").forEach(el=>{
+    index++;
+    const token="⟦PRIVATE_"+index+"⟧";
+    privateItems.push({
+      token,
+      text:el.textContent,
+      level:Number(el.dataset.privateLevel)
+    });
+    el.replaceWith(doc.createTextNode(token));
+  });
+
+  return {
+    text:doc.body.innerText||doc.body.textContent||"",
+    privateItems
+  };
+}
+
+function parseAIJSON(text){
+  const cleaned=text.replace(/```json/gi,"").replace(/```/g,"").trim();
+  const start=cleaned.indexOf("{");
+  const end=cleaned.lastIndexOf("}");
+  if(start<0||end<0)throw new Error("Die KI hat kein gültiges JSON geliefert.");
+  return JSON.parse(cleaned.slice(start,end+1));
+}
+
+async function generateSemantic(){
+  const entry=entries.find(e=>e.id===activeId);
+  if(!entry)return;
+
+  if(!confirm(
+    "Die KI wird den Originaleintrag lokal auf deinem Gerät analysieren " +
+    "und eine semantische Fassung erstellen. Das Original bleibt erhalten. Fortfahren?"
+  ))return;
+
+  $("generateSemanticBtn").disabled=true;
+  setStatus("KI arbeitet…");
+
+  try{
+    const engine=await loadLocalAI();
+    saveCurrent();
+
+    const source=textWithPrivateMarkers(entry.html);
+    const codebookText=Object.entries(codebook)
+      .map(([a,b])=>`${a} => ${b}`).join("\n");
+
+    const prompt=`
+Du bist ein sorgfältiger semantischer Verschleierungsassistent für ein privates Tagebuch.
+
+AUFGABE:
+Erstelle eine semantische Tarnfassung des gesamten Tagebucheintrags.
+
+ZIEL:
+Der Autor soll beim Lesen die ursprüngliche Situation und Gedanken wiedererkennen.
+Eine außenstehende Person soll dagegen keine konkreten privaten Beziehungen,
+Identitäten oder sensiblen Einzelheiten erkennen können.
+
+WICHTIGE REGELN:
+1. Abstrahiere persönliche Beziehungen, Gefühle, Konflikte, Absichten,
+   Unsicherheiten, intime Erlebnisse und identifizierende Details.
+2. Alltägliche, harmlose Informationen sollen möglichst konkret bleiben:
+   Wetter, Essen, gewöhnliche Aktivitäten, neutrale Beobachtungen,
+   sachliche Tagesabläufe und unkritische Fakten.
+3. Verändere nicht pauschal jeden Satz. Abstrahiere nur dort, wo es
+   tatsächlich einen Privatsphäregewinn bringt.
+4. Bewahre die gedankliche Reihenfolge, die emotionale Dynamik und
+   die logischen Zusammenhänge.
+5. Erfinde keine Ereignisse, Personen oder Gefühle.
+6. Ersetze die markierten PRIVATE-TOKEN durch passende Metaphern
+   oder Codewörter. Verwende bevorzugt bereits definierte Codewörter.
+7. Die PRIVATE-TOKEN dürfen im Ergebnis nicht mehr vorkommen.
+8. Erzeuge ein zusammenhängendes Tagebuch, keinen Bericht über die Aufgabe.
+9. Gib keine Erläuterung und keine Analyse aus.
+
+BEISPIELE:
+Original: "Ich vermisse eine bestimmte Person und weiß nicht, ob sie an mich denkt."
+Semantisch: "Mich beschäftigt, welchen Platz man im Leben eines anderen einnimmt."
+
+Original: "Wir haben Nudeln gekocht und danach einen Film gesehen."
+Semantisch: "Wir haben Nudeln gekocht und danach einen Film gesehen."
+
+PRIVATE-PASSAGEN:
+${JSON.stringify(source.privateItems)}
+
+VORHANDENE CODEWÖRTER:
+${codebookText||"(Keine definiert)"}
+
+ORIGINALTEXT:
+${source.text}
+
+ANTWORTFORMAT:
+Gib ausschließlich gültiges JSON zurück:
+{
+ "semanticText": "Der vollständige semantische Tagebucheintrag",
+ "codeMappings": {
+   "PRIVATE_1": "verwendete Metapher oder Codewort"
+ }
+}
+`;
+
+    const response=await engine.chat.completions.create({
+      messages:[
+        {role:"system",content:"Du bist ein präziser, datenschutzorientierter Texttransformator. Halte dich exakt an das JSON-Ausgabeformat."},
+        {role:"user",content:prompt}
+      ],
+      temperature:0.45,
+      max_tokens:1800
+    });
+
+    const result=parseAIJSON(response.choices[0].message.content);
+
+    if(typeof result.semanticText!=="string"||!result.semanticText.trim())
+      throw new Error("Die KI hat keinen semantischen Text erstellt.");
+
+    entry.semanticHtml=result.semanticText
+      .split(/\n{2,}/)
+      .map(p=>"<p>"+escapeHTML(p).replace(/\n/g,"<br>")+"</p>")
+      .join("");
+
+    entry.codeMappings=result.codeMappings||{};
+
+    viewMode="semantic";
+    setViewMode();
+    $("semanticEditor").innerHTML=entry.semanticHtml;
+    applyPrivacyView();
+
+    dirty=true;
+    await saveAndSync();
+
+    setStatus("Semantische Fassung erstellt","good");
+
+  }catch(error){
+    alert("KI-Umformulierung fehlgeschlagen: "+error.message);
+    setStatus(error.message,"bad");
+  }finally{
+    $("generateSemanticBtn").disabled=false;
+  }
+}
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+/* ---------------- Codewörter ---------------- */
+
+function renderCodebook(){
+  const host=$("codebookList");
+  host.replaceChildren();
+
+  Object.entries(codebook).forEach(([original,replacement])=>{
+    const row=document.createElement("div");
+    row.className="level-row";
+
+    const info=document.createElement("div");
+    const a=document.createElement("strong");
+    a.textContent=original;
+    const b=document.createElement("div");
+    b.className="small";
+    b.textContent="→ "+replacement;
+    info.append(a,b);
+
+    const remove=document.createElement("button");
+    remove.textContent="Entfernen";
+    remove.onclick=()=>{
+      delete codebook[original];
+      renderCodebook();
+      scheduleSave();
+    };
+
+    row.append(info,remove);
+    host.append(row);
+  });
+}
+
+/* ---------------- Speichern ---------------- */
+
+function scheduleSave(){
   dirty=true;
   setStatus("Änderungen erkannt…");
-
   clearTimeout(saveTimer);
   clearTimeout(syncTimer);
 
   saveTimer=setTimeout(async()=>{
     saveCurrent();
-
-    try {
+    try{
       await saveEncryptedCache();
       setStatus("Lokal verschlüsselt gespeichert","good");
-    } catch(error) {
+    }catch(error){
       setStatus("Lokaler Speicherfehler: "+error.message,"bad");
     }
   },900);
 
-  syncTimer=setTimeout(async()=>{
-    await saveAndSync();
-  },5000);
+  syncTimer=setTimeout(()=>saveAndSync(),5000);
 }
 
-async function saveAndSync() {
-  if(saving || !key || !sessionId) return;
-
+async function saveAndSync(){
+  if(saving||!key||!sessionId)return;
   saving=true;
   clearTimeout(saveTimer);
   clearTimeout(syncTimer);
 
-  try {
+  try{
     saveCurrent();
-
     const envelope=await saveEncryptedCache();
     setStatus("Synchronisiere…");
-
     await pushRemote(envelope);
-
     dirty=false;
     setStatus("Verschlüsselt gespeichert","good");
-  } catch(error) {
+  }catch(error){
     setStatus(error.message,"bad");
-  } finally {
+  }finally{
     saving=false;
   }
 }
 
-/* ---------- Entsperren ---------- */
+/* ---------------- Passwort ändern ---------------- */
 
-async function unlock() {
+async function changePassword(){
+  const oldPassword=$("oldPassword").value;
+  const newPassword=$("newPassword").value;
+  const confirmPassword=$("newPasswordConfirm").value;
+  const status=$("passwordChangeStatus");
+
+  if(newPassword.length<12){
+    status.textContent="Das neue Passwort muss mindestens 12 Zeichen lang sein.";
+    return;
+  }
+  if(newPassword!==confirmPassword){
+    status.textContent="Die neuen Passwörter stimmen nicht überein.";
+    return;
+  }
+
+  status.textContent="Prüfe altes Passwort…";
+
+  try{
+    const oldSalt=salt;
+    const oldKey=key;
+    const testKey=await deriveKey(oldPassword,oldSalt);
+
+    const oldEnvelope=await getRemote();
+    if(oldEnvelope){
+      key=testKey;
+      await decryptData(oldEnvelope);
+    }else{
+      key=testKey;
+      const cached=await cacheGet();
+      if(cached)await decryptData(cached);
+    }
+
+    const newSalt=crypto.getRandomValues(new Uint8Array(16));
+    const newKey=await deriveKey(newPassword,newSalt);
+
+    key=newKey;
+    salt=newSalt;
+
+    try{
+      const envelope=await encryptData({
+        entries,privacyLevels,codebook,privacyLevel,
+        updatedAt:new Date().toISOString()
+      });
+      await pushRemote(envelope);
+      await cachePut(envelope);
+      dirty=false;
+      status.textContent="Passwort erfolgreich geändert.";
+      $("oldPassword").value="";
+      $("newPassword").value="";
+      $("newPasswordConfirm").value="";
+    }catch(error){
+      key=oldKey;
+      salt=oldSalt;
+      throw error;
+    }
+  }catch(error){
+    status.textContent="Passwortänderung fehlgeschlagen: "+error.message;
+  }
+}
+
+/* ---------------- Entsperren ---------------- */
+
+async function unlock(){
   const password=$("password").value;
-
-  if(password.length<12) {
-    $("unlockMsg").textContent=
-      "Bitte ein langes Passwort mit mindestens 12 Zeichen verwenden.";
+  if(password.length<12){
+    $("unlockMsg").textContent="Bitte ein Passwort mit mindestens 12 Zeichen verwenden.";
     return;
   }
 
   $("unlockMsg").textContent="Daten werden geladen…";
 
-  try {
+  try{
     const remote=await getRemote();
+    let data;
 
-    if(remote) {
+    if(remote){
       salt=unb64(remote.salt);
       key=await deriveKey(password,salt);
-
-      const data=await decryptData(remote);
-      entries=Array.isArray(data.entries)?data.entries:[];
-
-    } else {
+      data=await decryptData(remote);
+    }else{
       const cached=await cacheGet();
-
-      if(cached) {
+      if(cached){
         salt=unb64(cached.salt);
         key=await deriveKey(password,salt);
-
-        const data=await decryptData(cached);
-
-        if(confirm(
-          "Es gibt noch keine Cloud-Datei, aber einen lokalen " +
-          "verschlüsselten Datenstand. Möchtest du ihn laden?"
-        )) {
-          entries=Array.isArray(data.entries)?data.entries:[];
-        } else {
-          salt=crypto.getRandomValues(new Uint8Array(16));
-          key=await deriveKey(password,salt);
-          entries=[];
-        }
-      } else {
+        data=await decryptData(cached);
+      }else{
         salt=crypto.getRandomValues(new Uint8Array(16));
         key=await deriveKey(password,salt);
-        entries=[];
+        data={entries:[],privacyLevels,codebook,privacyLevel:0};
       }
     }
 
+    entries=Array.isArray(data.entries)?data.entries:[];
+    privacyLevels=Array.isArray(data.privacyLevels)&&data.privacyLevels.length?
+      data.privacyLevels:privacyLevels;
+    codebook=data.codebook||{};
+    privacyLevel=Number(data.privacyLevel)||0;
+
     $("password").value="";
     $("unlockMsg").textContent="";
-
     show("app");
     $("lockBtn").classList.remove("hidden");
 
+    renderPrivacyLevels();
+    renderCodebook();
     renderList();
 
-    if(entries.length) {
+    if(entries.length){
       const latest=[...entries].sort((a,b)=>
         b.updatedAt.localeCompare(a.updatedAt)
       )[0];
       selectEntry(latest.id);
-    } else {
+    }else{
       newEntry();
     }
 
     setCloud("Tagebuch entsperrt",true);
 
-  } catch(error) {
+  }catch(error){
     key=null;
-    $("unlockMsg").textContent=
-      "Entsperren fehlgeschlagen: "+error.message;
+    $("unlockMsg").textContent="Entsperren fehlgeschlagen: "+error.message;
   }
 }
 
-/* ---------- Login / Logout ---------- */
+/* ---------------- Login und Logout ---------------- */
 
-$("loginBtn").onclick=()=>{
-  location.href=WORKER+"/login";
-};
-
+$("loginBtn").onclick=()=>location.href=WORKER+"/login";
 $("unlockBtn").onclick=unlock;
 
 $("logoutBtn").onclick=async()=>{
-  if(dirty) {
-    if(!confirm("Es gibt möglicherweise ungespeicherte Änderungen. Trotzdem abmelden?")) {
-      return;
-    }
-  }
+  if(dirty&&!confirm("Es gibt möglicherweise ungespeicherte Änderungen. Trotzdem abmelden?"))
+    return;
 
-  try {
-    await workerRequest("/logout",{method:"POST"});
-  } catch(error) {
-    console.warn(error);
-  }
+  try{await workerRequest("/logout",{method:"POST"})}catch(error){console.warn(error)}
 
   sessionId=null;
   sessionStorage.removeItem("pj-session");
-  key=null;
-  entries=[];
-  activeId=null;
-
+  key=null;entries=[];activeId=null;
   show("loginScreen");
   $("lockBtn").classList.add("hidden");
   setCloud("Abgemeldet");
 };
 
 $("lockBtn").onclick=async()=>{
-  if(dirty) await saveAndSync();
-
-  key=null;
-  entries=[];
-  activeId=null;
-
+  if(dirty)await saveAndSync();
+  key=null;entries=[];activeId=null;
   show("unlockScreen");
   $("lockBtn").classList.add("hidden");
   setCloud("Gesperrt");
 };
 
-/* ---------- Bedienung ---------- */
+/* ---------------- Editor ---------------- */
 
 $("newBtn").onclick=newEntry;
 $("saveBtn").onclick=saveAndSync;
 
 $("deleteBtn").onclick=()=>{
-  if(!activeId || !confirm("Eintrag wirklich löschen?")) return;
-
+  if(!activeId||!confirm("Eintrag wirklich löschen?"))return;
   entries=entries.filter(e=>e.id!==activeId);
   activeId=null;
-
-  if(entries.length) selectEntry(entries[0].id);
+  if(entries.length)selectEntry(entries[0].id);
   else newEntry();
-
   dirty=true;
   scheduleSave();
 };
 
-$("syncBtn").onclick=async()=>{
-  if(dirty) {
-    alert(
-      "Du hast noch lokale Änderungen. Speichere diese zuerst, " +
-      "bevor du die Cloud neu lädst."
-    );
-    return;
-  }
-
-  try {
-    const remote=await getRemote();
-
-    if(!remote) {
-      alert("In der Cloud gibt es noch keine Datei.");
-      return;
-    }
-
-    const data=await decryptData(remote);
-    entries=Array.isArray(data.entries)?data.entries:[];
-
-    renderList();
-
-    if(entries.length) selectEntry(entries[0].id);
-    setStatus("Cloud-Daten geladen","good");
-
-  } catch(error) {
-    setStatus(error.message,"bad");
-  }
-};
-
-/* ---------- Editor ---------- */
-
 $("toolbar").addEventListener("click",event=>{
   const button=event.target.closest("button");
-  if(!button) return;
-
-  if(button.dataset.cmd) {
-    document.execCommand(button.dataset.cmd,false,null);
-  }
-
-  if(button.dataset.block) {
-    document.execCommand("formatBlock",false,button.dataset.block);
-  }
-
+  if(!button)return;
+  if(button.dataset.cmd)document.execCommand(button.dataset.cmd,false,null);
+  if(button.dataset.block)document.execCommand("formatBlock",false,button.dataset.block);
   scheduleSave();
 });
 
 $("linkBtn").onclick=()=>{
   const url=prompt("HTTPS-Link eingeben:");
-
-  if(url && /^https?:\/\//i.test(url)) {
+  if(url&&/^https?:\/\//i.test(url)){
     document.execCommand("createLink",false,url);
     scheduleSave();
   }
@@ -847,156 +1327,203 @@ $("linkBtn").onclick=()=>{
 
 $("entryTitle").addEventListener("input",scheduleSave);
 $("editor").addEventListener("input",scheduleSave);
+$("semanticEditor").addEventListener("input",scheduleSave);
 
-/* ---------- Bilder ---------- */
+$("markPrivateBtn").onclick=markSelectionPrivate;
+$("showOriginalBtn").onclick=()=>switchView("original");
+$("showSemanticBtn").onclick=()=>switchView("semantic");
+$("generateSemanticBtn").onclick=generateSemantic;
+
+/* ---------------- Bilder ---------------- */
 
 $("imageBtn").onclick=()=>$("imageFile").click();
 
 $("imageFile").onchange=event=>{
   const file=event.target.files[0];
-  if(!file) return;
-
-  if(!file.type.startsWith("image/")) {
-    alert("Bitte eine Bilddatei auswählen.");
-    return;
+  if(!file)return;
+  if(!file.type.startsWith("image/")){
+    alert("Bitte eine Bilddatei auswählen.");return;
   }
-
-  if(file.size>5*1024*1024) {
-    alert("Bitte zunächst ein Bild unter 5 MB auswählen.");
-    return;
+  if(file.size>5*1024*1024){
+    alert("Bitte zunächst ein Bild unter 5 MB auswählen.");return;
   }
 
   const reader=new FileReader();
-
   reader.onload=()=>{
     const img=new Image();
-
     img.onload=()=>{
       const scale=Math.min(1,1200/img.width,1200/img.height);
       const canvas=document.createElement("canvas");
-
       canvas.width=Math.round(img.width*scale);
       canvas.height=Math.round(img.height*scale);
-
-      canvas.getContext("2d").drawImage(
-        img,0,0,canvas.width,canvas.height
-      );
-
+      canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);
       const data=canvas.toDataURL("image/webp",0.65);
-
-      document.execCommand(
-        "insertHTML",
-        false,
-        `<p><img src="${data}" alt="Bild"></p>`
-      );
-
+      document.execCommand("insertHTML",false,
+        `<p><img src="${data}" alt="Bild"></p>`);
       scheduleSave();
     };
-
     img.src=reader.result;
   };
-
   reader.readAsDataURL(file);
   event.target.value="";
 };
 
-/* ---------- Backup ---------- */
+/* ---------------- Synchronisieren ---------------- */
+
+$("syncBtn").onclick=async()=>{
+  if(dirty){
+    alert("Speichere zunächst deine lokalen Änderungen.");
+    return;
+  }
+  try{
+    const remote=await getRemote();
+    if(!remote){alert("In der Cloud gibt es noch keine Datei.");return;}
+    const data=await decryptData(remote);
+    entries=data.entries||[];
+    privacyLevels=data.privacyLevels||privacyLevels;
+    codebook=data.codebook||{};
+    privacyLevel=data.privacyLevel||0;
+    renderPrivacyLevels();
+    renderCodebook();
+    renderList();
+    if(entries.length)selectEntry(entries[0].id);
+    setStatus("Cloud-Daten geladen","good");
+  }catch(error){
+    setStatus(error.message,"bad");
+  }
+};
+
+/* ---------------- Backup ---------------- */
 
 $("exportBtn").onclick=async()=>{
-  try {
+  try{
     saveCurrent();
-
     const envelope=await encryptData({
-      entries,
+      entries,privacyLevels,codebook,privacyLevel,
       updatedAt:new Date().toISOString()
     });
-
-    const file=new Blob(
-      [JSON.stringify(envelope)],
-      {type:"application/octet-stream"}
-    );
-
+    const file=new Blob([JSON.stringify(envelope)],{type:"application/octet-stream"});
     const url=URL.createObjectURL(file);
     const a=document.createElement("a");
-
-    a.href=url;
-    a.download="tagebuch-backup.enc";
-    a.click();
-
+    a.href=url;a.download="tagebuch-backup.enc";a.click();
     URL.revokeObjectURL(url);
-
-  } catch(error) {
-    alert("Backup fehlgeschlagen: "+error.message);
-  }
+  }catch(error){alert("Backup fehlgeschlagen: "+error.message)}
 };
 
 $("importFile").onchange=async event=>{
   const file=event.target.files[0];
-  if(!file) return;
+  if(!file)return;
 
-  try {
+  try{
     const envelope=JSON.parse(await file.text());
+    const password=prompt("Passwort des Backups eingeben:");
+    if(!password)return;
 
-    salt=unb64(envelope.salt);
+    const backupSalt=unb64(envelope.salt);
+    const backupKey=await deriveKey(password,backupSalt);
+    const previousKey=key;
+    const previousSalt=salt;
+    key=backupKey;salt=backupSalt;
 
-    const password=prompt(
-      "Gib das Passwort des Backups ein:"
+    const plaintext=await crypto.subtle.decrypt(
+      {name:"AES-GCM",iv:unb64(envelope.iv)},
+      key,unb64(envelope.ciphertext)
     );
+    const data=JSON.parse(dec.decode(plaintext));
 
-    if(!password) return;
-
-    key=await deriveKey(password,salt);
-
-    const data=await decryptData(envelope);
-
-    if(!Array.isArray(data.entries)) {
-      throw new Error("Das Backup enthält keine Einträge.");
-    }
-
-    if(!confirm("Aktuelle Einträge durch das Backup ersetzen?")) {
-      return;
+    if(!Array.isArray(data.entries))throw new Error("Backup enthält keine Einträge.");
+    if(!confirm("Aktuelle Einträge durch das Backup ersetzen?")){
+      key=previousKey;salt=previousSalt;return;
     }
 
     entries=data.entries;
+    privacyLevels=data.privacyLevels||privacyLevels;
+    codebook=data.codebook||{};
+    privacyLevel=data.privacyLevel||0;
     activeId=null;
+    renderPrivacyLevels();
+    renderCodebook();
     renderList();
-
-    if(entries.length) selectEntry(entries[0].id);
-    else newEntry();
-
+    if(entries.length)selectEntry(entries[0].id);
     dirty=true;
     await saveAndSync();
 
-  } catch(error) {
+  }catch(error){
     alert("Backup konnte nicht geladen werden: "+error.message);
-  } finally {
+  }finally{
     event.target.value="";
   }
 };
 
-/* ---------- Start ---------- */
+/* ---------------- Einstellungen ---------------- */
+
+$("settingsBtn").onclick=()=>{
+  $("settingsModal").classList.remove("hidden");
+  renderPrivacyLevels();
+  renderCodebook();
+};
+
+$("closeSettingsBtn").onclick=()=>{
+  $("settingsModal").classList.add("hidden");
+};
+
+$("privacySelect").onchange=event=>changePrivacyLevel(event.target.value);
+
+$("addLevelBtn").onclick=()=>{
+  const name=$("newLevelName").value.trim();
+  const description=$("newLevelDescription").value.trim();
+
+  if(!name){alert("Bitte einen Namen eingeben.");return;}
+
+  const nextId=Math.max(...privacyLevels.map(x=>x.id))+1;
+  privacyLevels.push({id:nextId,name,description});
+  $("newLevelName").value="";
+  $("newLevelDescription").value="";
+  renderPrivacyLevels();
+  scheduleSave();
+};
+
+$("addCodeBtn").onclick=()=>{
+  const original=$("codeOriginal").value.trim();
+  const replacement=$("codeReplacement").value.trim();
+
+  if(!original||!replacement){
+    alert("Bitte beide Felder ausfüllen.");return;
+  }
+
+  codebook[original]=replacement;
+  $("codeOriginal").value="";
+  $("codeReplacement").value="";
+  renderCodebook();
+  scheduleSave();
+};
+
+$("changePasswordBtn").onclick=changePassword;
+$("loadAIButton").onclick=async()=>{
+  $("loadAIButton").disabled=true;
+  try{await loadLocalAI()}
+  catch(error){alert(error.message)}
+  finally{$("loadAIButton").disabled=false}
+};
+
+/* ---------------- Start ---------------- */
 
 window.addEventListener("DOMContentLoaded",()=>{
   const params=new URLSearchParams(location.hash.slice(1));
   const returnedSession=params.get("session_id");
 
-  if(returnedSession) {
+  if(returnedSession){
     sessionId=returnedSession;
     sessionStorage.setItem("pj-session",sessionId);
-
-    history.replaceState(
-      null,
-      "",
-      location.pathname+location.search
-    );
-  } else {
+    history.replaceState(null,"",location.pathname+location.search);
+  }else{
     sessionId=sessionStorage.getItem("pj-session");
   }
 
-  if(sessionId) {
+  if(sessionId){
     show("unlockScreen");
     setCloud("GitHub angemeldet",true);
-  } else {
+  }else{
     show("loginScreen");
   }
 });
